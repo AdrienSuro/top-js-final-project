@@ -16,7 +16,7 @@ UX/UI :
 
 Back-end :
 
-- Firebase for data hosting
+- Firebase
 
 Testing :
 

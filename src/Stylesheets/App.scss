@@ -1,0 +1,10 @@
+$font-stack: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+$primary-blue: #1DA1F2;
+
+.App {
+    .tweet {
+        border: $primary-blue 2px solid;
+        width: 300px;
+        height: 100px;
+    }
+}

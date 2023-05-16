@@ -5,6 +5,11 @@ $primary-font-color : #0F1419;
 $secondary-font-color: #536471;
 $border-light-grey: #EFF3F4;
 
+@mixin roundImage($size: 48px) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+}
 
 body {
     font-family: $font-stack;
@@ -21,12 +26,61 @@ body {
 
 .mainColumn {
     width: 598px;
-    border-left: $secondary-font-color 1px solid;
-    border-right: $secondary-font-color 1px solid;
+    border-left: $border-light-grey 1px solid;
+    border-right: $border-light-grey 1px solid;
+    padding: 4px;
 }
 
 .rightColumn {
     width: 348px;
+}
+
+.chooseTimeline {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    border-bottom: 1px $border-light-grey solid;
+}
+
+.writeTweetBox {
+    display: grid;
+    grid-template-rows: 1fr 50px;
+    grid-template-columns: 50px 1fr;
+    padding: 4px;
+    img {
+        @include roundImage;
+        grid-row: 1/3;
+        grid-column: 1/2;
+    }
+    textarea {
+        grid-row: 1/2;
+        grid-column: 2/3;
+        border: none;
+        &:focus {
+            border: none
+        }
+    }
+    .tweetOptions {
+        grid-row: 2/3;
+        grid-column: 2/3;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        .tweetOptionsIcon {
+            @include roundImage($size: 34px);
+            &:hover {
+                background-color: $secondary-font-color;
+            }
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .tweetBtn {
+            background-color: $primary-blue;
+            justify-self: right;
+        }
+    }
 }
 
 .tweet {
@@ -38,9 +92,7 @@ body {
     }
 
     img {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+        @include roundImage
     }
 }
 

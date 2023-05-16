@@ -1,7 +1,96 @@
-.App .tweet {
-  border: #1DA1F2 2px solid;
-  width: 300px;
-  height: 100px;
+body {
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  color: #0F1419;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  gap: 10px 30px;
+}
+
+.leftColumn {
+  width: 275px;
+}
+
+.mainColumn {
+  width: 598px;
+  border-left: #EFF3F4 1px solid;
+  border-right: #EFF3F4 1px solid;
+  padding: 4px;
+}
+
+.rightColumn {
+  width: 348px;
+}
+
+.chooseTimeline {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  border-bottom: 1px #EFF3F4 solid;
+}
+
+.writeTweetBox {
+  display: grid;
+  grid-template-rows: 1fr 50px;
+  grid-template-columns: 50px 1fr;
+  padding: 4px;
+}
+.writeTweetBox img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  grid-row: 1/3;
+  grid-column: 1/2;
+}
+.writeTweetBox textarea {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  border: none;
+}
+.writeTweetBox textarea:focus {
+  border: none;
+}
+.writeTweetBox .tweetOptions {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.writeTweetBox .tweetOptions .tweetOptionsIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+.writeTweetBox .tweetOptions .tweetOptionsIcon:hover {
+  background-color: #536471;
+}
+.writeTweetBox .tweetOptions .tweetOptionsIcon img {
+  width: 20px;
+  height: 20px;
+}
+.writeTweetBox .tweetOptions .tweetBtn {
+  background-color: #1D9BF0;
+  justify-self: right;
+}
+
+.tweet {
+  border: #1D9BF0 2px solid;
+  height: 150px;
+}
+.tweet:hover {
+  background-color: rgb(247, 247, 247);
+}
+.tweet img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.profile-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 25%;
 }
 
 /*# sourceMappingURL=App.css.map */

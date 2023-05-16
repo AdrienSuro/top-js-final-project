@@ -1,6 +1,7 @@
 import "../Stylesheets/App.scss";
 import rushdie from "../img/rushdie.jpg";
 import myProfilePicture from "../img/me.png";
+import imageIcon from "../icons/image-icon.png";
 import "../Stylesheets/normalize.scss";
 
 function App() {
@@ -10,13 +11,19 @@ function App() {
         <div className="leftColumn"></div>
         <div className="mainColumn">
           <h1>Home</h1>
-          <div>
+          <div className="chooseTimeline">
             <h3>For you</h3>
             <h3>Following</h3>
           </div>
           <div className="writeTweetBox">
-            <img src={myProfilePicture}></img>
-            <p>What is happening?!</p>
+            <div className="tweetOptionsIcon">
+              <img src={myProfilePicture} alt="userProfilePicture"></img>
+            </div>
+            <textarea placeholder="What is happening?!"></textarea>
+            <div className="tweetOptions">
+              <img src={imageIcon}></img>
+              <button className="tweetBtn">Tweet</button>
+            </div>
           </div>
           <div className="tweet">
             <h3>Author Name</h3>

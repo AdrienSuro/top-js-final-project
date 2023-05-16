@@ -1,5 +1,6 @@
 import "../Stylesheets/App.scss";
 import rushdie from "../img/rushdie.jpg";
+import myProfilePicture from "../img/me.png";
 import "../Stylesheets/normalize.scss";
 
 function App() {
@@ -8,8 +9,15 @@ function App() {
       <body>
         <div className="leftColumn"></div>
         <div className="mainColumn">
-          <h1>Twitter Mockup by Adrien Surowiec</h1>
-          <h2>Following this is a div that should become a tweet someday</h2>
+          <h1>Home</h1>
+          <div>
+            <h3>For you</h3>
+            <h3>Following</h3>
+          </div>
+          <div className="writeTweetBox">
+            <img src={myProfilePicture}></img>
+            <p>What is happening?!</p>
+          </div>
           <div className="tweet">
             <h3>Author Name</h3>
             <p>@authorname</p>

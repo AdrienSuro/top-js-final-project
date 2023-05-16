@@ -16,20 +16,21 @@ body {
 }
 
 .leftColumn {
-    width: 300px;
+    width: 275px;
 }
 
 .mainColumn {
-    width: 600px;
+    width: 598px;
+    border-left: $secondary-font-color 1px solid;
+    border-right: $secondary-font-color 1px solid;
 }
 
 .rightColumn {
-    width: 300px;
+    width: 348px;
 }
 
 .tweet {
     border: $primary-blue 2px solid;
-    width: 500px;
     height: 150px;
 
     &:hover {

@@ -61,21 +61,32 @@ body {
   width: 34px;
   height: 34px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .writeTweetBox .tweetOptions .tweetOptionsIcon:hover {
-  background-color: #536471;
+  background-color: #ebf5fe;
 }
 .writeTweetBox .tweetOptions .tweetOptionsIcon img {
   width: 20px;
   height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0;
 }
 .writeTweetBox .tweetOptions .tweetBtn {
   background-color: #1D9BF0;
   justify-self: right;
+  width: 76px;
+  height: 34px;
+  border-radius: 9999px;
+  border: none;
+  color: white;
 }
 
 .tweet {
-  border: #1D9BF0 2px solid;
+  border-top: #EFF3F4 1px solid;
   height: 150px;
 }
 .tweet:hover {

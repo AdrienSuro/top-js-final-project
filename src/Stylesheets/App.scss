@@ -1,6 +1,7 @@
 $font-stack: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 $primary-blue: #1D9BF0;
-$shadow-color : rgb(247, 247, 247);
+$light-blue: #ebf5fe;
+$shadow-color: rgb(247, 247, 247);
 $primary-font-color : #0F1419;
 $secondary-font-color: #536471;
 $border-light-grey: #EFF3F4;
@@ -68,23 +69,34 @@ body {
         justify-content: space-between;
         .tweetOptionsIcon {
             @include roundImage($size: 34px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:hover {
-                background-color: $secondary-font-color;
+                background-color: $light-blue;
             }
             img {
                 width: 20px;
                 height: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 0;
             }
         }
         .tweetBtn {
             background-color: $primary-blue;
             justify-self: right;
+            width: 76px;
+            height: 34px;
+            border-radius: 9999px;
+            border: none;
+            color: white;
         }
     }
 }
 
 .tweet {
-    border: $primary-blue 2px solid;
+    border-top: $border-light-grey 1px solid;
     height: 150px;
 
     &:hover {

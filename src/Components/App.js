@@ -16,12 +16,12 @@ function App() {
             <h3>Following</h3>
           </div>
           <div className="writeTweetBox">
-            <div className="tweetOptionsIcon">
-              <img src={myProfilePicture} alt="userProfilePicture"></img>
-            </div>
+            <img src={myProfilePicture} alt="userProfilePicture"></img>
             <textarea placeholder="What is happening?!"></textarea>
             <div className="tweetOptions">
-              <img src={imageIcon}></img>
+              <div className="tweetOptionsIcon">
+                <img src={imageIcon}></img>
+              </div>
               <button className="tweetBtn">Tweet</button>
             </div>
           </div>

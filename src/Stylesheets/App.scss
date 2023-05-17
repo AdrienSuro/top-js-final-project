@@ -30,6 +30,9 @@ body {
     border-left: $border-light-grey 1px solid;
     border-right: $border-light-grey 1px solid;
     padding: 4px;
+    div {
+        padding: 4px;
+    }
 }
 
 .rightColumn {
@@ -98,13 +101,45 @@ body {
 .tweet {
     border-top: $border-light-grey 1px solid;
     height: 150px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: 20px 1fr 32px;
 
     &:hover {
         background-color: rgb(247, 247, 247);
     }
 
     img {
-        @include roundImage
+        @include roundImage;
+        grid-column: 1/2;
+    }
+
+    .tweetAuthor {
+        grid-row: 1/2;
+        grid-column: 2/3;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: left;
+    }
+
+    .tweetContent {
+        grid-row: 2/3;
+        grid-column: 2/3;
+    }
+
+    .tweetDetails {
+        grid-row: 3/4;
+        grid-column: 2/3;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: left;
+        img {
+            @include roundImage($size: 19px);
+            margin-right: 10px;
+        }
+        span {
+            margin-right: 30px;
+        }
     }
 }
 

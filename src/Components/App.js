@@ -2,6 +2,10 @@ import "../Stylesheets/App.scss";
 import rushdie from "../img/rushdie.jpg";
 import myProfilePicture from "../img/me.png";
 import imageIcon from "../icons/image-icon.png";
+import comment from "../icons/comment.png";
+import retweet from "../icons/retweet.png";
+import stats from "../icons/stats.png";
+import heart from "../icons/heart.png";
 import "../Stylesheets/normalize.scss";
 
 function App() {
@@ -26,12 +30,27 @@ function App() {
             </div>
           </div>
           <div className="tweet">
-            <h3>Author Name</h3>
-            <p>@authorname</p>
-            <p>
-              This is his tweet that shouldn't be longer than 140 characters. It
-              will say something that sounds clever.
-            </p>
+            <img src={rushdie}></img>
+            <div className="tweetAuthor">
+              <h3>Author Name</h3>
+              <p>@authorname</p>
+            </div>
+            <div className="tweetContent">
+              <p>
+                This is his tweet that shouldn't be longer than 140 characters.
+                It will say something that sounds clever.
+              </p>
+            </div>
+            <div className="tweetDetails">
+              <img src={comment}></img>
+              <span>23</span>
+              <img src={retweet}></img>
+              <span>55</span>
+              <img src={heart}></img>
+              <span>229</span>
+              <img src={stats}></img>
+              <span>1.3K</span>
+            </div>
           </div>
           <div className="tweet">
             <img src={rushdie}></img>

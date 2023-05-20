@@ -7,6 +7,8 @@ import retweet from "../icons/retweet.png";
 import stats from "../icons/stats.png";
 import heart from "../icons/heart.png";
 import "../Stylesheets/normalize.scss";
+import { ReactSVG } from "react-svg";
+import { ReactComponent as CommentSVG } from "../icons/comment.svg";
 
 function App() {
   return (
@@ -42,7 +44,9 @@ function App() {
               </p>
             </div>
             <div className="tweetDetails">
-              <img src={comment}></img>
+              <div className="detailBackground">
+                <CommentSVG className="commentSVG" />
+              </div>
               <span>23</span>
               <img src={retweet}></img>
               <span>55</span>
@@ -70,6 +74,7 @@ function App() {
         </div>
         <div className="rightColumn"></div>
       </body>
+      <ReactSVG src="../icons/comment.svg" />
     </div>
   );
 }

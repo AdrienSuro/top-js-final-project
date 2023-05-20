@@ -138,4 +138,14 @@ body {
   border-radius: 25%;
 }
 
+.commentSVG {
+  width: 19px;
+  height: 19px;
+}
+
+.detailBackground {
+  width: 35px;
+  height: 35px;
+}
+
 /*# sourceMappingURL=App.css.map */

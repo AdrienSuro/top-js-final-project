@@ -15,7 +15,6 @@ body {
   width: 598px;
   border-left: #EFF3F4 1px solid;
   border-right: #EFF3F4 1px solid;
-  padding: 4px;
 }
 
 .rightColumn {
@@ -91,6 +90,8 @@ body {
   display: grid;
   grid-template-columns: 50px 1fr;
   grid-template-rows: 20px 1fr 32px;
+  padding: 10px;
+  gap: 10px;
 }
 .tweet:hover {
   background-color: rgb(247, 247, 247);
@@ -106,11 +107,27 @@ body {
   grid-column: 2/3;
   display: flex;
   flex-flow: row nowrap;
+  align-items: first baseline;
   justify-content: left;
+  margin-block-start: 0;
+}
+.tweet .tweetAuthor .authorName {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-block-start: 0;
+}
+.tweet .tweetAuthor .authorUsername, .tweet .tweetAuthor .tweetTime {
+  color: #536471;
+  margin-block-start: 0;
+  margin-left: 8px;
 }
 .tweet .tweetContent {
   grid-row: 2/3;
   grid-column: 2/3;
+}
+.tweet .tweetContent p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 .tweet .tweetDetails {
   grid-row: 3/4;
@@ -136,10 +153,30 @@ body {
   border-radius: 25%;
 }
 
-.commentSVG {
+#commentSVG {
   width: 19px;
   height: 19px;
-  position: aboslute;
+  top: 50%;
+  margin-top: 9.5px;
+}
+
+#retweetSVG {
+  width: 19px;
+  height: 19px;
+  top: 50%;
+  margin-top: 9.5px;
+}
+
+#heartSVG {
+  width: 19px;
+  height: 19px;
+  top: 50%;
+  margin-top: 9.5px;
+}
+
+#statsSVG {
+  width: 19px;
+  height: 19px;
   top: 50%;
   margin-top: 9.5px;
 }

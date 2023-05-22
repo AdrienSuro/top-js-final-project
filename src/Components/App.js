@@ -37,8 +37,9 @@ function App() {
           <div className="tweet">
             <img src={rushdie}></img>
             <div className="tweetAuthor">
-              <h3>Author Name</h3>
-              <p>@authorname</p>
+              <p className="authorName">Author Name</p>
+              <p className="authorUsername">@authorname</p>
+              <p className="tweetTime">· 10h</p>
             </div>
             <div className="tweetContent">
               <p>
@@ -48,21 +49,21 @@ function App() {
             </div>
             <div className="tweetDetails">
               <div id="commentIcon">
-                <CommentSVG className="commentSVG" />
+                <CommentSVG id="commentSVG" />
               </div>
-              <span>23</span>
+              <span id="commentSpan">23</span>
               <div id="retweetIcon">
-                <RetweetSVG className="commentSVG" />
+                <RetweetSVG id="retweetSVG" />
               </div>
-              <span>55</span>
+              <span id="retweetSpan">55</span>
               <div id="heartIcon">
-                <HeartSVG className="commentSVG" />
+                <HeartSVG id="heartSVG" />
               </div>
-              <span>229</span>
+              <span id="heartSpan">229</span>
               <div id="statsIcon">
-                <StatsSVG className="commentSVG" />
+                <StatsSVG id="statsSVG" />
               </div>
-              <span>1.3K</span>
+              <span id="statsSpan">1.3K</span>
             </div>
           </div>
           <div className="tweet">

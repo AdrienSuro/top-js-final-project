@@ -17,9 +17,6 @@ body {
   border-right: #EFF3F4 1px solid;
   padding: 4px;
 }
-.mainColumn div {
-  padding: 4px;
-}
 
 .rightColumn {
   width: 348px;
@@ -130,6 +127,7 @@ body {
 }
 .tweet .tweetDetails span {
   margin-right: 30px;
+  margin-top: 9.5px;
 }
 
 .profile-img {
@@ -141,11 +139,53 @@ body {
 .commentSVG {
   width: 19px;
   height: 19px;
+  position: aboslute;
+  top: 50%;
+  margin-top: 9.5px;
 }
 
-.detailBackground {
+#commentIcon {
   width: 35px;
   height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+}
+#commentIcon:hover {
+  background-color: #ebf5fe;
+}
+
+#retweetIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+}
+#retweetIcon:hover {
+  background-color: #E3F1EA;
+}
+
+#heartIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+}
+#heartIcon:hover {
+  background-color: #F8E3EB;
+}
+
+#statsIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+}
+#statsIcon:hover {
+  background-color: #ebf5fe;
 }
 
 /*# sourceMappingURL=App.css.map */

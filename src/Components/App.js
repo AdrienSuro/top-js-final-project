@@ -9,6 +9,9 @@ import heart from "../icons/heart.png";
 import "../Stylesheets/normalize.scss";
 import { ReactSVG } from "react-svg";
 import { ReactComponent as CommentSVG } from "../icons/comment.svg";
+import { ReactComponent as RetweetSVG } from "../icons/retweet.svg";
+import { ReactComponent as HeartSVG } from "../icons/heart.svg";
+import { ReactComponent as StatsSVG } from "../icons/stats.svg";
 
 function App() {
   return (
@@ -44,15 +47,21 @@ function App() {
               </p>
             </div>
             <div className="tweetDetails">
-              <div className="detailBackground">
+              <div id="commentIcon">
                 <CommentSVG className="commentSVG" />
               </div>
               <span>23</span>
-              <img src={retweet}></img>
+              <div id="retweetIcon">
+                <RetweetSVG className="commentSVG" />
+              </div>
               <span>55</span>
-              <img src={heart}></img>
+              <div id="heartIcon">
+                <HeartSVG className="commentSVG" />
+              </div>
               <span>229</span>
-              <img src={stats}></img>
+              <div id="statsIcon">
+                <StatsSVG className="commentSVG" />
+              </div>
               <span>1.3K</span>
             </div>
           </div>

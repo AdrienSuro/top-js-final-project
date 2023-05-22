@@ -5,6 +5,10 @@ $shadow-color: rgb(247, 247, 247);
 $primary-font-color : #0F1419;
 $secondary-font-color: #536471;
 $border-light-grey: #EFF3F4;
+$light-green: #E3F1EA;
+$strong-green: #00BA7C;
+$light-pink: #F8E3EB;
+$strong-pink: #F9197F;
 
 @mixin roundImage($size: 48px) {
     width: $size;
@@ -30,9 +34,6 @@ body {
     border-left: $border-light-grey 1px solid;
     border-right: $border-light-grey 1px solid;
     padding: 4px;
-    div {
-        padding: 4px;
-    }
 }
 
 .rightColumn {
@@ -139,6 +140,7 @@ body {
         }
         span {
             margin-right: 30px;
+            margin-top: 9.5px;
         }
     }
 }
@@ -152,11 +154,36 @@ body {
 .commentSVG {
     width: 19px;
     height: 19px;
+    position: aboslute;
+    top: 50%;
+    margin-top: 9.5px;
 }
 
-.detailBackground {
+@mixin detailBackground($color) {
     width: 35px;
     height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    &:hover {
+        background-color: $color;
+    }
+}
+
+#commentIcon {
+    @include detailBackground($color: $light-blue)
+}
+
+#retweetIcon {
+    @include detailBackground($color: $light-green)
+}
+
+#heartIcon {
+    @include detailBackground($color: $light-pink)
+}
+
+#statsIcon {
+    @include detailBackground($color: $light-blue)
 }
 
 

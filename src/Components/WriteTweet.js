@@ -1,4 +1,13 @@
 import React from "react";
+import myProfilePicture from "../img/me.png";
+import imageIcon from "../icons/image-icon.png";
+import { tweetsCollection, db } from "./Firebase";
+
+import { doc, onSnapshot } from "firebase/firestore";
+
+const testFn = onSnapshot(doc(db, "tweets", "1NLk0be5rAnLrfDnSP9V"), (doc) => {
+  console.log("Current data: ", doc.data());
+});
 
 export default function WriteTweet() {
   return (

@@ -14,4 +14,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const q = query(collection(db, "tweets"));
+export const tweetsCollection = query(collection(db, "tweets"));

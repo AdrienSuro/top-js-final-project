@@ -1,8 +1,7 @@
 import "../Stylesheets/App.scss";
-import myProfilePicture from "../img/me.png";
-import imageIcon from "../icons/image-icon.png";
 import "../Stylesheets/normalize.scss";
 import Tweet from "./Tweet";
+import WriteTweet from "./WriteTweet";
 import tweetsCollection from "./Firebase";
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
             <h3>Following</h3>
           </div>
           <WriteTweet />
-
           <Tweet />
           <Tweet />
         </div>

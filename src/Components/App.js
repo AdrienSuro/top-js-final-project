@@ -15,16 +15,18 @@ import {
 } from "firebase/firestore";
 
 const App = () => {
+  const [allTweets, setAllTweets] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const allTweets = collection(db, "tweets");
       const q = query(allTweets, where("userName", "==", "adrien_surowiec"));
-
       const querySnapshot = await getDocs(q);
+      const tweets = [];
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.data());
+        tweets.push(doc.data());
       });
+      setAllTweets(tweets);
     };
     fetchData();
   }, []);
@@ -40,8 +42,9 @@ const App = () => {
             <h3>Following</h3>
           </div>
           <WriteTweet />
-          <Tweet />
-          <Tweet />
+          {allTweets.map((e) => (
+            <Tweet userName={e.userName} name={e.name} content={e.content} />
+          ))}
         </div>
         <div className="rightColumn"></div>
       </body>

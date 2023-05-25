@@ -13,6 +13,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [allTweets, setAllTweets] = useState([]);
@@ -43,7 +44,17 @@ const App = () => {
           </div>
           <WriteTweet />
           {allTweets.map((e) => (
-            <Tweet userName={e.userName} name={e.name} content={e.content} />
+            <Tweet
+              key={e.id}
+              userName={e.userName}
+              name={e.name}
+              content={e.content}
+              hearts={e.hearts}
+              retweets={e.retweets}
+              comments={e.comments}
+              stats={e.stats}
+              timestamp={e.timestamp}
+            />
           ))}
         </div>
         <div className="rightColumn"></div>

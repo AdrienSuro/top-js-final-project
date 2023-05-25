@@ -14,7 +14,6 @@ function Tweet(props) {
     let currentDate = new Date().getTime();
     let tweetDate = props.timestamp.toDate().getTime();
     let diff = currentDate - tweetDate;
-    console.log("inside getDate");
     if (diff < 1000) {
       return "0s";
     } else if (diff < 60000) {
@@ -34,9 +33,6 @@ function Tweet(props) {
 
   return (
     <div>
-      {/* {console.log(props.timestamp.toDate().getDate())}
-      {console.log(new Date())}
-      {console.log(props.timestamp.toDate().getDate() - new Date())} */}
       <div className="tweet">
         <img src={rushdie}></img>
         <div className="tweetAuthor">

@@ -34,12 +34,10 @@ export default function WriteTweet() {
   async function deleteTweets(besideThisUser) {
     const q = query(
       collection(db, "tweets"),
-      where("userName", "==", besideThisUser)
+      where("userName", "!=", besideThisUser)
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
-      console.log(typeof doc.ref);
-      console.log(doc.id, "=>", doc.ref);
       await deleteDoc(doc.ref);
     });
   }

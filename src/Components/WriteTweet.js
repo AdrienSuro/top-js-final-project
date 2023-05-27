@@ -21,19 +21,28 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function WriteTweet() {
   function uploadTweet() {
-    console.log("inside uploadTweet");
+    const tweetContentField = document.getElementById("tweetContentField");
     setDoc(doc(db, "tweets", uuidv4()), {
-      content: document.getElementById("tweetContentField").value,
+      content: tweetContentField.value,
       userName: "Charles_0001",
       name: "Call me Charly",
-      timestamp: new Date().toUTCString(),
+      timestamp: new Date(),
+      comments: getRandomNum(),
+      retweets: getRandomNum(),
+      likes: getRandomNum(),
+      stats: getRandomNum(),
     });
+    tweetContentField.value = "";
+  }
+
+  function getRandomNum() {
+    return Math.floor(Math.random() * 999);
   }
 
   async function deleteTweets(besideThisUser) {
     const q = query(
       collection(db, "tweets"),
-      where("userName", "!=", besideThisUser)
+      where("userName", "!=", "adrien_surowiec")
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {

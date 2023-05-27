@@ -21,8 +21,8 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const allTweets = collection(db, "tweets");
-      const q = query(allTweets, where("userName", "==", "adrien_surowiec"));
-      const querySnapshot = await getDocs(q);
+      // const q = query(allTweets, where("userName", "==", "adrien_surowiec"));
+      const querySnapshot = await getDocs(allTweets);
       const tweets = [];
       querySnapshot.forEach((doc) => {
         tweets.push(doc.data());
@@ -49,7 +49,7 @@ const App = () => {
               userName={e.userName}
               name={e.name}
               content={e.content}
-              hearts={e.hearts}
+              likes={e.likes}
               retweets={e.retweets}
               comments={e.comments}
               stats={e.stats}

@@ -23,8 +23,7 @@ export default function WriteTweet() {
   function uploadTweet() {
     console.log("inside uploadTweet");
     setDoc(doc(db, "tweets", uuidv4()), {
-      content:
-        "This is some test content that will be replace by the content of the text field",
+      content: document.getElementById("tweetContentField").value,
       userName: "Charles_0001",
       name: "Call me Charly",
       timestamp: new Date().toUTCString(),
@@ -46,15 +45,15 @@ export default function WriteTweet() {
     <div>
       <div className="writeTweetBox">
         <img src={myProfilePicture} alt="userProfilePicture"></img>
-        <textarea placeholder="What is happening?!"></textarea>
+        <textarea
+          placeholder="What is happening?!"
+          id="tweetContentField"
+        ></textarea>
         <div className="tweetOptions">
           <div className="tweetOptionsIcon">
             <img src={imageIcon}></img>
           </div>
-          <button
-            className="tweetBtn"
-            onClick={() => deleteTweets("adrien_surowiec")}
-          >
+          <button className="tweetBtn" onClick={uploadTweet}>
             Tweet
           </button>
         </div>

@@ -15,14 +15,6 @@ function Tweet(props) {
     let currentDate = new Date().getTime();
     let tweetDate = props.timestamp.toDate().getTime();
     let diff = currentDate - tweetDate;
-    console.log(
-      "diff is " +
-        diff +
-        " ; currentDate is " +
-        currentDate +
-        " tweetDate is " +
-        currentDate
-    );
     if (diff < 1000) {
       return "0s";
     } else if (diff < 60000) {
@@ -34,10 +26,6 @@ function Tweet(props) {
     } else {
       return props.timestamp.toDate().toLocaleString();
     }
-  }
-
-  function getRandomNum() {
-    return Math.floor(Math.random() * 999);
   }
 
   return (

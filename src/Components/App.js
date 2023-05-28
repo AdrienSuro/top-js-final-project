@@ -1,41 +1,10 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
-import Tweet from "./Tweet";
 import WriteTweet from "./WriteTweet";
-import { tweetsCollection, db } from "./Firebase";
-import {
-  doc,
-  onSnapshot,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
-import { v4 as uuidv4 } from "uuid";
+import TweetList from "./TweetList";
 
 const App = () => {
-  const [allTweets, setAllTweets] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const allTweets = collection(db, "tweets");
-      // const q = query(allTweets, where("userName", "==", "adrien_surowiec"));
-      const querySnapshot = await getDocs(allTweets);
-      const tweets = [];
-      querySnapshot.forEach((doc) => {
-        tweets.push(doc.data());
-      });
-      tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-      setAllTweets(tweets);
-    };
-    fetchData();
-
-    const interval = setInterval(() => fetchData(), 30000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="App">
       <body>
@@ -47,19 +16,7 @@ const App = () => {
             <h3>Following</h3>
           </div>
           <WriteTweet />
-          {allTweets.map((e) => (
-            <Tweet
-              key={e.id}
-              userName={e.userName}
-              name={e.name}
-              content={e.content}
-              likes={e.likes}
-              retweets={e.retweets}
-              comments={e.comments}
-              stats={e.stats}
-              timestamp={e.timestamp}
-            />
-          ))}
+          <TweetList />
         </div>
         <div className="rightColumn"></div>
       </body>

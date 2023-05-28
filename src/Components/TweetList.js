@@ -5,6 +5,7 @@ import {
   getDocs,
   doc,
   query,
+  where,
 } from "firebase/firestore";
 import Tweet from "./Tweet";
 import { tweetsCollection, db } from "./Firebase";
@@ -15,19 +16,17 @@ export default function TweetList() {
   useEffect(() => {
     const fetchData = async () => {
       const allTweets = collection(db, "tweets");
-      // const q = query(allTweets, where("userName", "==", "adrien_surowiec"));
-      const querySnapshot = await getDocs(allTweets);
-      const tweets = [];
-      querySnapshot.forEach((doc) => {
-        tweets.push(doc.data());
+      const q = query(allTweets, where("userName", "==", "Charles_0001"));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const tweets = [];
+        querySnapshot.forEach((doc) => {
+          tweets.push(doc.data());
+        });
+        tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
+        setAllTweets(tweets);
       });
-      tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-      setAllTweets(tweets);
     };
     fetchData();
-
-    const interval = setInterval(() => fetchData(), 30000);
-    return () => clearInterval(interval);
   }, []);
 
   return (

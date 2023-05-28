@@ -15,6 +15,14 @@ function Tweet(props) {
     let currentDate = new Date().getTime();
     let tweetDate = props.timestamp.toDate().getTime();
     let diff = currentDate - tweetDate;
+    console.log(
+      "diff is " +
+        diff +
+        " ; currentDate is " +
+        currentDate +
+        " tweetDate is " +
+        currentDate
+    );
     if (diff < 1000) {
       return "0s";
     } else if (diff < 60000) {
@@ -22,7 +30,7 @@ function Tweet(props) {
     } else if (diff < 3600000) {
       return parseInt(diff / 60000) + "m";
     } else if (diff < 86400000) {
-      return parseInt(diff / 360000) + "h";
+      return parseInt(diff / 3600000) + "h";
     } else {
       return props.timestamp.toDate().toLocaleString();
     }

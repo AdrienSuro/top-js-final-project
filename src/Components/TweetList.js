@@ -42,6 +42,7 @@ export default function TweetList() {
           comments={e.comments}
           stats={e.stats}
           timestamp={e.timestamp}
+          docId={e.docId}
         />
       ))}
     </div>

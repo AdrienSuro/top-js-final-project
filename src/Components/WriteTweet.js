@@ -22,7 +22,8 @@ import { v4 as uuidv4 } from "uuid";
 export default function WriteTweet() {
   function uploadTweet() {
     const tweetContentField = document.getElementById("tweetContentField");
-    setDoc(doc(db, "tweets", uuidv4()), {
+    let randomIdentifier = uuidv4();
+    setDoc(doc(db, "tweets", randomIdentifier), {
       content: tweetContentField.value,
       userName: "Charles_0001",
       name: "Call me Charly",
@@ -31,6 +32,7 @@ export default function WriteTweet() {
       retweets: getRandomNum(),
       likes: getRandomNum(),
       stats: getRandomNum(),
+      docId: randomIdentifier,
     });
     tweetContentField.value = "";
   }

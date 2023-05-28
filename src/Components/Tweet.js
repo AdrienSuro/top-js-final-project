@@ -8,7 +8,8 @@ import { ReactComponent as RetweetSVG } from "../icons/retweet.svg";
 import { ReactComponent as HeartSVG } from "../icons/heart.svg";
 import { ReactComponent as StatsSVG } from "../icons/stats.svg";
 import { v4 as uuidv4 } from "uuid";
-import { toDate } from "firebase/firestore";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "./Firebase";
 
 function Tweet(props) {
   function getDate() {
@@ -26,6 +27,14 @@ function Tweet(props) {
     } else {
       return props.timestamp.toDate().toLocaleString();
     }
+  }
+
+  function incrementLikes(docId) {
+    const ref = doc(db, "tweets", docId);
+    updateDoc(ref, {
+      likes: increment(1),
+    });
+    console.log(docId);
   }
 
   return (
@@ -50,7 +59,10 @@ function Tweet(props) {
           </div>
           <span id="retweetSpan">{props.retweets}</span>
           <div id="heartIcon">
-            <HeartSVG id="heartSVG" />
+            <HeartSVG
+              id="heartSVG"
+              onClick={() => incrementLikes(props.docId)}
+            />
           </div>
           <span id="heartSpan">{props.likes}</span>
           <div id="statsIcon">

@@ -27,6 +27,7 @@ const App = () => {
       querySnapshot.forEach((doc) => {
         tweets.push(doc.data());
       });
+      tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
       setAllTweets(tweets);
     };
     fetchData();

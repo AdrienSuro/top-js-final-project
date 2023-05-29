@@ -12,7 +12,7 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
-import { toggleIsLoggedIn, selectIsLoggedIn } from "./userSlice.js";
+import { toggleIsLoggedIn, selectIsLoggedIn, setName } from "./userSlice.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXfjM2GwVLeV0-6mh85hbMnZz9xBWIkOk",
@@ -26,23 +26,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
+export const auth = getAuth();
 
 // AFTER IMPLEMENTING REDUX TOOLKIT, use the share states to updated userName, userPic from here so that it gets updated in the App or User components
 
 export async function signIn() {
   var provider = new GoogleAuthProvider();
-  await signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      console.log("user signed in");
-      const dispatch = useDispatch();
-      const isLoggedIn = useSelector(selectIsLoggedIn);
-      dispatch(toggleIsLoggedIn());
-      getUserName();
-    })
-    .catch((error) => {
-      console.log("user sign in failed");
-    });
+  await signInWithPopup(auth, provider);
 }
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("onAuth check : userisSignedIn");
+    const uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log("onAuth check : user is Signed Out");
+  }
+});
 
 export function signOutUser() {
   signOut(getAuth());

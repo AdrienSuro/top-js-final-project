@@ -27,13 +27,18 @@ export const userSlice = createSlice({
     toggleIsLoggedIn: (state) => {
       state.isLoggedIn ? (state.isLoggedIn = false) : (state.isLoggedIn = true);
     },
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { incrementAge, addTweet, toggleIsLoggedIn } = userSlice.actions;
+export const { incrementAge, addTweet, toggleIsLoggedIn, setName } =
+  userSlice.actions;
 
 export const selectTweets = (state) => state.user.tweets;
 export const selectAge = (state) => state.user.age;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
+export const selectName = (state) => state.user.name;
 
 export default userSlice.reducer;

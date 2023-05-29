@@ -29,5 +29,6 @@ export const userSlice = createSlice({
 export const { incrementAge, addTweet } = userSlice.actions;
 
 export const selectTweets = (state) => state.user.tweets;
+export const selectAge = (state) => state.user.age;
 
 export default userSlice.reducer;

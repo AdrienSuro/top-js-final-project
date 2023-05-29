@@ -1,9 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectTweets } from "./userSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectTweets, selectAge, incrementAge } from "./userSlice.js";
 
 export default function User() {
   const tweets = useSelector(selectTweets);
+  const age = useSelector(selectAge);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -12,6 +15,8 @@ export default function User() {
           <li>{tweet}</li>
         ))}
       </ul>
+      {age}
+      <button onClick={() => dispatch(incrementAge())}>Increment Age</button>
     </div>
   );
 }

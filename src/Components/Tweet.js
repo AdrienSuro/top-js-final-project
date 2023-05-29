@@ -34,7 +34,13 @@ function Tweet(props) {
     updateDoc(ref, {
       likes: increment(1),
     });
-    console.log(docId);
+  }
+
+  function incrementRetweets(docId) {
+    const ref = doc(db, "tweets", docId);
+    updateDoc(ref, {
+      retweets: increment(1),
+    });
   }
 
   return (
@@ -55,7 +61,10 @@ function Tweet(props) {
           </div>
           <span id="commentSpan">{props.comments}</span>
           <div id="retweetIcon">
-            <RetweetSVG id="retweetSVG" />
+            <RetweetSVG
+              id="retweetSVG"
+              onClick={() => incrementRetweets(props.docId)}
+            />
           </div>
           <span id="retweetSpan">{props.retweets}</span>
           <div id="heartIcon">

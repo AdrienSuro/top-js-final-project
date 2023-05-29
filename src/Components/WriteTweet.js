@@ -16,7 +16,7 @@ import {
   docRef,
 } from "firebase/firestore";
 
-import { db } from "./Firebase";
+import { db, getUserName, getProfilePicUrl } from "./Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function WriteTweet() {
@@ -55,7 +55,7 @@ export default function WriteTweet() {
   return (
     <div>
       <div className="writeTweetBox">
-        <img src={myProfilePicture} alt="userProfilePicture"></img>
+        <img src={getProfilePicUrl()} alt="userProfilePicture"></img>
         <textarea
           placeholder="What is happening?!"
           id="tweetContentField"

@@ -4,6 +4,7 @@ import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
 import Counter from "./Counter";
+import User from "./User";
 import { getUserName, getProfilePicUrl, signIn, signOutUser } from "./Firebase";
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
           <button onClick={signIn}>SIGN IN</button>
           <button onClick={signOutUser}>SIGN OUT</button>
           <h2>My Name is {getUserName()}</h2>
-          <Counter />
+          <User />
         </div>
         <div className="mainColumn">
           <h1>Home</h1>

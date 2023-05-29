@@ -3,7 +3,6 @@ import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
-import Counter from "./Counter";
 import User from "./User";
 import { getUserName, getProfilePicUrl, signIn, signOutUser } from "./Firebase";
 

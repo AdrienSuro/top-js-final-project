@@ -1,3 +1,5 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { initializeApp, firebase } from "firebase/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -10,6 +12,7 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
+import { toggleIsLoggedIn, selectIsLoggedIn } from "./userSlice.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXfjM2GwVLeV0-6mh85hbMnZz9xBWIkOk",
@@ -31,7 +34,9 @@ export async function signIn() {
   await signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log("user signed in");
-      getProfilePicUrl();
+      const dispatch = useDispatch();
+      const isLoggedIn = useSelector(selectIsLoggedIn);
+      dispatch(toggleIsLoggedIn());
       getUserName();
     })
     .catch((error) => {

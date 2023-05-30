@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, myFunc } from "./Firebase.js";
 
 import {
-  selectTweets,
   selectIsLoggedIn,
   setName,
   selectName,
@@ -12,12 +11,6 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function User() {
-  //   useEffect(() => {
-  //     return () => {
-  //       signOut();
-  //     };
-  //   }, []);
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,7 +25,6 @@ export default function User() {
     });
   }, []);
 
-  const tweets = useSelector(selectTweets);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectName);
   const dispatch = useDispatch();
@@ -43,7 +35,7 @@ export default function User() {
         console.log("user signed in");
         const user = result.user;
         dispatch(setName(user.displayName));
-        dispatch(toggleIsLoggedIn());
+        dispatch(toggleIsLoggedIn(true));
       })
       .catch((error) => {
         console.log("user sign in failed");
@@ -53,7 +45,7 @@ export default function User() {
   function signOut() {
     signOutUser();
     dispatch(setName("random user"));
-    dispatch(toggleIsLoggedIn());
+    dispatch(toggleIsLoggedIn(false));
   }
 
   return (

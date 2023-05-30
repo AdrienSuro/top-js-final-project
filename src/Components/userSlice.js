@@ -26,14 +26,12 @@ export const userSlice = createSlice({
     },
     toggleIsLoggedIn: (state, action) => {
       console.log(state.isLoggedIn);
-      if (action.payload) {
+      if (action.payload === true) {
         state.isLoggedIn = true;
         return;
-      }
-      if (state.isLoggedIn === false) {
-        state.isLoggedIn = true;
-      } else if (state.isLoggedIn === true) {
+      } else if (action.payload === false) {
         state.isLoggedIn = false;
+        return;
       } else {
         throw new Error("isLoggedIn is invalid");
       }

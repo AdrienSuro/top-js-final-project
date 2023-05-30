@@ -24,7 +24,12 @@ export const userSlice = createSlice({
       console.log("adding tweet");
       state.tweets = [...state.tweets, action.payload];
     },
-    toggleIsLoggedIn: (state) => {
+    toggleIsLoggedIn: (state, action) => {
+      console.log(state.isLoggedIn);
+      if (action.payload) {
+        state.isLoggedIn = true;
+        return;
+      }
       if (state.isLoggedIn === false) {
         state.isLoggedIn = true;
       } else if (state.isLoggedIn === true) {

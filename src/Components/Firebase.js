@@ -28,7 +28,6 @@ export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
 
-// AFTER IMPLEMENTING REDUX TOOLKIT, use the share states to updated userName, userPic from here so that it gets updated in the App or User components
 export default function Firebase() {
   return <div></div>;
 }

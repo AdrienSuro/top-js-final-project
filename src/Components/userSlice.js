@@ -4,7 +4,7 @@ import imageIcon from "../icons/image-icon.png";
 const initialState = {
   isLoggedIn: false,
   name: "random user",
-  userName: "username",
+  userName: null,
   profilePic: imageIcon,
   description: "I'm a random user",
   age: 18,

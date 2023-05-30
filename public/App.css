@@ -225,4 +225,22 @@ body {
   background-color: #ebf5fe;
 }
 
+.sideNavbar {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-auto-flow: column;
+}
+.sideNavbar div {
+  border-radius: 25%;
+  display: flex;
+  flex-flow: row;
+}
+.sideNavbar div:hover {
+  background-color: rgb(247, 247, 247);
+}
+.sideNavbar div img {
+  width: 30px;
+  height: 30px;
+}
+
 /*# sourceMappingURL=App.css.map */

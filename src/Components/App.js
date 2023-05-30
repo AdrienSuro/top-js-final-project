@@ -5,6 +5,7 @@ import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
 import User from "./User";
 import Firebase from "./Firebase";
+import SideNavbar from "./SideNavbar";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <body>
         <div className="leftColumn">
           <User />
+          <SideNavbar />
         </div>
         <div className="mainColumn">
           <h1>Home</h1>

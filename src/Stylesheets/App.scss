@@ -222,3 +222,21 @@ body {
     @include detailBackground($color: $light-blue)
 }
 
+.sideNavbar {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-auto-flow: column;
+    div {
+        border-radius: 25%;
+        display: flex;
+        flex-flow: row;
+        &:hover {
+            background-color: $shadow-color;
+        }
+        img {
+            width : 30px;
+            height: 30px;
+        }
+    }
+}
+

@@ -14,6 +14,8 @@ export default function User() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user.toJSON());
+
         console.log("onAuth check : userisSignedIn");
         console.log(user.toJSON().displayName);
         dispatch(setName(user.toJSON().displayName));
@@ -44,7 +46,7 @@ export default function User() {
 
   function signOut() {
     signOutUser();
-    dispatch(setName("random user"));
+    dispatch(setName(null));
     dispatch(toggleIsLoggedIn(false));
   }
 

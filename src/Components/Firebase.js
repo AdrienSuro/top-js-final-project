@@ -35,14 +35,13 @@ export async function signIn() {
   await signInWithPopup(auth, provider);
 }
 
-onAuthStateChanged(auth, (user) => {
+export const myFunc = onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("onAuth check : userisSignedIn");
-    const uid = user.uid;
-    // ...
+    console.log(user.toJSON().displayName);
+    return user.toJSON().displayName;
   } else {
-    // User is signed out
-    // ...
+    return "NO USER";
     console.log("onAuth check : user is Signed Out");
   }
 });

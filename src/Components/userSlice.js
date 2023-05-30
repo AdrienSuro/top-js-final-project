@@ -25,7 +25,13 @@ export const userSlice = createSlice({
       state.tweets = [...state.tweets, action.payload];
     },
     toggleIsLoggedIn: (state) => {
-      state.isLoggedIn ? (state.isLoggedIn = false) : (state.isLoggedIn = true);
+      if (state.isLoggedIn === false) {
+        state.isLoggedIn = true;
+      } else if (state.isLoggedIn === true) {
+        state.isLoggedIn = false;
+      } else {
+        throw new Error("isLoggedIn is invalid");
+      }
     },
     setName: (state, action) => {
       state.name = action.payload;

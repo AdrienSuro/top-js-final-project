@@ -4,10 +4,12 @@ import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
 import User from "./User";
+import Firebase from "./Firebase";
 
 const App = () => {
   return (
     <div className="App">
+      <Firebase />
       <body>
         <div className="leftColumn">
           <User />

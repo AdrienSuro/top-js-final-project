@@ -9,6 +9,7 @@ import {
   selectName,
   toggleIsLoggedIn,
 } from "./userSlice.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function User() {
   //   useEffect(() => {
@@ -18,10 +19,17 @@ export default function User() {
   //   }, []);
 
   useEffect(() => {
-    myFunc();
-    dispatch(setName(myFunc()));
-
-    dispatch(toggleIsLoggedIn);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("onAuth check : userisSignedIn");
+        console.log(user.toJSON().displayName);
+        dispatch(setName(user.toJSON().displayName));
+        dispatch(toggleIsLoggedIn);
+      } else {
+        console.log("NO USER");
+        console.log("onAuth check : user is Signed Out");
+      }
+    });
   }, []);
 
   const tweets = useSelector(selectTweets);

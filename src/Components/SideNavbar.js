@@ -14,7 +14,7 @@ export default function SideNavbar() {
   return (
     <div>
       <div className="sideNavbar">
-        <div>
+        <div className="sideNavBarCat">
           <img src={mainLogoImg}></img>
           <p></p>
         </div>
@@ -23,22 +23,36 @@ export default function SideNavbar() {
           <img src={homeImg}></img>
           <p>Home</p>
         </div>
-        <div></div>
         <div>
           {" "}
           <img src={exploreImg}></img>
+          <p>Search</p>
         </div>
-        <div></div>
         <div>
           {" "}
           <img src={notificationsImg}></img>
+          <p>Notifications</p>
         </div>
-        <div></div>
         <div>
           {" "}
           <img src={messagesImg}></img>
+          <p>Messages</p>
         </div>
-        <div></div>
+        <div>
+          {" "}
+          <img src={listsImg}></img>
+          <p>Lists</p>
+        </div>
+        <div>
+          {" "}
+          <img src={bookmarksImg}></img>
+          <p>Bookmarks</p>
+        </div>
+        <div>
+          {" "}
+          <img src={profileImg}></img>
+          <p>Profile</p>
+        </div>
       </div>
     </div>
   );

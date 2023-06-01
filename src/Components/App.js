@@ -6,6 +6,9 @@ import TweetList from "./TweetList";
 import User from "./User";
 import Firebase from "./Firebase";
 import SideNavbar from "./SideNavbar";
+import Timeline from "./Timeline";
+import UserProfile from "./UserProfile";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const App = () => {
   return (
@@ -17,13 +20,16 @@ const App = () => {
           <SideNavbar />
         </div>
         <div className="mainColumn">
-          <h1>Home</h1>
-          <div className="chooseTimeline">
-            <h3>For you</h3>
-            <h3>Following</h3>
-          </div>
-          <WriteTweet />
-          <TweetList />
+          <BrowserRouter>
+            <Routes>
+              <Route exact path="/" element={<Timeline />}></Route>
+              <Route
+                exact
+                path="/userprofile"
+                element={<UserProfile />}
+              ></Route>
+            </Routes>
+          </BrowserRouter>
         </div>
         <div className="rightColumn"></div>
       </body>

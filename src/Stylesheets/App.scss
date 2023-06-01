@@ -9,6 +9,7 @@ $light-green: #E3F1EA;
 $strong-green: #00BA7C;
 $light-pink: #F8E3EB;
 $strong-pink: #F9197F;
+$main-column-width: 730px;
 
 @mixin roundImage($size: 48px) {
     width: $size;
@@ -30,10 +31,9 @@ body {
 }
 
 .mainColumn {
-    width: 598px;
+    width: $main-column-width;
     border-left: $border-light-grey 1px solid;
     border-right: $border-light-grey 1px solid;
-    // padding: 4px;
 }
 
 .rightColumn {
@@ -223,20 +223,78 @@ body {
 }
 
 .sideNavbar {
-    display: grid;
-    grid-template-rows: 100%;
-    grid-auto-flow: column;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items:baseline;
+    flex-flow: column nowrap;
     div {
-        border-radius: 25%;
+        border-radius: 35%;
+        height: 50px;
         display: flex;
         flex-flow: row;
+        align-items: center;
+        justify-items: flex-start;
+        margin-top: 9px;
+        padding: 13px;
+        padding-right: 40px;
+
         &:hover {
             background-color: $shadow-color;
         }
         img {
-            width : 30px;
-            height: 30px;
+            width : 37px;
+            height: 37px;
+            margin-right: 32px;
         }
+        p {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.header-header {
+    height: 80px;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 50px 30px;
+    grid-template-columns: 50px 1fr;
+    #header-backarrow {
+        grid-area : 1 / 1 / 3 / 2;
+        font-size: 2.1rem;
+        border-radius: 50%;
+        justify-self: center;
+        &:hover {
+            background-color: $shadow-color;
+        }
+    }
+    #header-userName {
+        font-size: 2rem;
+    }
+    #header-tweetCount {
+        font-size: 1rem;
+    }
+
+}
+
+.header-section {
+    height: 470px; 
+    background-color: palevioletred;
+    position: relative;
+    #header-coverPicture {
+        width: auto;
+        max-width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+    #header-profilePicture {
+        position: absolute;
+        top: 320px;
+        left: 20px;
+        height: 260px;
+        width: 260px;
+        border-radius: 50%;
+        border: solid 5px white;
     }
 }
 

@@ -10,7 +10,7 @@ import {
 import Tweet from "./Tweet";
 import { tweetsCollection, db } from "./Firebase";
 
-export default function TweetList() {
+export default function TweetList(user) {
   const [allTweets, setAllTweets] = useState([]);
 
   useEffect(() => {

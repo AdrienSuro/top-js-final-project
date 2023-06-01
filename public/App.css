@@ -12,7 +12,7 @@ body {
 }
 
 .mainColumn {
-  width: 730px;
+  width: 930px;
   border-left: #EFF3F4 1px solid;
   border-right: #EFF3F4 1px solid;
 }
@@ -233,7 +233,7 @@ body {
   flex-flow: column nowrap;
 }
 .sideNavbar div {
-  border-radius: 35%;
+  border-radius: 25px;
   height: 50px;
   display: flex;
   flex-flow: row;
@@ -255,6 +255,10 @@ body {
   font-size: 1.5rem;
 }
 
+.header-wrapper {
+  height: 670px;
+}
+
 .header-header {
   height: 80px;
   display: grid;
@@ -267,36 +271,114 @@ body {
   font-size: 2.1rem;
   border-radius: 50%;
   justify-self: center;
+  padding-left: 10px;
 }
 .header-header #header-backarrow:hover {
   background-color: rgb(247, 247, 247);
 }
 .header-header #header-userName {
   font-size: 2rem;
+  padding-left: 30px;
 }
 .header-header #header-tweetCount {
   font-size: 1rem;
+  padding-left: 30px;
 }
 
 .header-section {
-  height: 470px;
+  height: 420px;
   background-color: palevioletred;
   position: relative;
 }
 .header-section #header-coverPicture {
-  width: auto;
+  width: 100%;
   max-width: 100%;
-  height: 400px;
+  height: 100%;
   object-fit: cover;
 }
 .header-section #header-profilePicture {
   position: absolute;
-  top: 320px;
+  top: 290px;
   left: 20px;
   height: 260px;
   width: 260px;
   border-radius: 50%;
   border: solid 5px white;
+}
+.header-section #header-profilePicture:hover {
+  opacity: 0.7;
+}
+.header-section .header-buttons-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  height: 400px;
+}
+.header-section .header-buttons-section .header-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #EFF3F4;
+  padding: 10px;
+  margin-right: 20px;
+}
+.header-section .header-buttons-section .header-button:hover {
+  background-color: rgb(247, 247, 247);
+}
+.header-section .header-buttons-section #followingButton {
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 1.5rem;
+  border: 2px solid #EFF3F4;
+  margin-right: 20px;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-section .header-buttons-section #followingButton:hover {
+  background-color: rgb(247, 247, 247);
+}
+
+.header-main-wrapper #header-main-userName {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-left: 25px;
+}
+.header-main-wrapper #header-main-userId {
+  font-size: 1.3rem;
+  color: #536471;
+  margin-bottom: 30px;
+  margin-left: 25px;
+}
+.header-main-wrapper #header-description {
+  font-size: 1.3rem;
+  margin-left: 25px;
+}
+.header-main-wrapper #header-main-details {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+.header-main-wrapper #header-main-details div {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #536471;
+}
+.header-main-wrapper #header-followers-following {
+  margin-top: 20px;
+  margin-left: 25px;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+}
+.header-main-wrapper #header-followers-following div {
+  margin-right: 25px;
+  margin-bottom: 30px;
 }
 
 /*# sourceMappingURL=App.css.map */

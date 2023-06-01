@@ -14,13 +14,12 @@ const App = () => {
   return (
     <div className="App">
       <Firebase />
-      <body>
-        <div className="leftColumn">
-          <User />
-          <SideNavbar />
-        </div>
-        <div className="mainColumn">
-          <BrowserRouter>
+      <BrowserRouter>
+        <body>
+          <div className="leftColumn">
+            <SideNavbar />
+          </div>
+          <div className="mainColumn">
             <Routes>
               <Route exact path="/" element={<Timeline />}></Route>
               <Route
@@ -29,10 +28,12 @@ const App = () => {
                 element={<UserProfile />}
               ></Route>
             </Routes>
-          </BrowserRouter>
-        </div>
-        <div className="rightColumn"></div>
-      </body>
+          </div>
+          <div className="rightColumn">
+            <User />
+          </div>
+        </body>
+      </BrowserRouter>
     </div>
   );
 };

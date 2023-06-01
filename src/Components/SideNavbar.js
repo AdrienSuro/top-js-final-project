@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, BrowserRouter } from "react-router-dom";
 import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
 import mainLogoImg from "../icons/main-logo.png";
@@ -18,15 +19,20 @@ export default function SideNavbar() {
           <img src={mainLogoImg}></img>
           <p></p>
         </div>
+        <Link className="homeLink" to="/">
+          <div>
+            {" "}
+            <img src={homeImg}></img>
+            <p>Home</p>
+          </div>
+        </Link>
+
         <div>
-          {" "}
-          <img src={homeImg}></img>
-          <p>Home</p>
-        </div>
-        <div>
-          {" "}
-          <img src={exploreImg}></img>
-          <p>Search</p>
+          <Link className="homeLink" to="/userprofile">
+            {" "}
+            <img src={exploreImg}></img>
+            <p>Search</p>
+          </Link>
         </div>
         <div>
           {" "}
@@ -54,6 +60,7 @@ export default function SideNavbar() {
           <p>Profile</p>
         </div>
       </div>
+      ,
     </div>
   );
 }

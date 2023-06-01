@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, myFunc } from "./Firebase.js";
-
+import { db, getUserName, getProfilePicUrl } from "./Firebase";
 import {
   selectIsLoggedIn,
   setName,
@@ -58,6 +59,13 @@ export default function User() {
 
   return (
     <div>
+      <Link className="homeLink" to="/userprofile">
+        <img
+          id="userSmallProfilePic"
+          src={getProfilePicUrl()}
+          alt="userProfilePicture"
+        ></img>
+      </Link>
       <p>Username : {userName}</p>
       <button onClick={() => signInUser()}>Sign In</button>
       <button onClick={() => signOut()}>Sign Out</button>

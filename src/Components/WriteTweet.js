@@ -59,7 +59,11 @@ export default function WriteTweet() {
   return (
     <div>
       <div className="writeTweetBox">
-        <img src={getProfilePicUrl()} alt="userProfilePicture"></img>
+        <img
+          id="userSmallProfilePic"
+          src={getProfilePicUrl()}
+          alt="userProfilePicture"
+        ></img>
         <textarea
           placeholder="What is happening?!"
           id="tweetContentField"

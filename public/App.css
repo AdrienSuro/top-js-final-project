@@ -112,7 +112,7 @@ body {
   margin-block-start: 0;
 }
 .tweet .tweetAuthor .authorName {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 800;
   margin-block-start: 0;
 }
@@ -120,6 +120,7 @@ body {
   color: #536471;
   margin-block-start: 0;
   margin-left: 8px;
+  font-size: 1.3rem;
 }
 .tweet .tweetContent {
   grid-row: 2/3;
@@ -128,6 +129,7 @@ body {
 .tweet .tweetContent p {
   margin-block-start: 0;
   margin-block-end: 0;
+  font-size: 1.25rem;
 }
 .tweet .tweetDetails {
   grid-row: 3/4;
@@ -379,6 +381,13 @@ body {
 .header-main-wrapper #header-followers-following div {
   margin-right: 25px;
   margin-bottom: 30px;
+}
+
+#userSmallProfilePic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=App.css.map */

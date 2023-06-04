@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import coverPictureImg from "../img/testCover.jpg";
 import profilePicImg from "../img/me.png";
 import moreInfoIcon from "../icons/threedots.png";
@@ -6,9 +8,24 @@ import messagesIcon from "../icons/messages.png";
 import addNotificationsIcon from "../icons/activateNotifications.png";
 import TweetList from "./TweetList";
 import { useState } from "react";
+import {
+  selectIsLoggedIn,
+  selectUserName,
+  selectDisplayName,
+  selectDescription,
+  toggleIsLoggedIn,
+  checkLoggedIn,
+  setDisplayName,
+  setUserName,
+  setDescription,
+} from "./userSlice.js";
 
 export default function UserProfile() {
-  const [user, setUser] = useState("anonymous");
+  const dispatch = useDispatch();
+  const displayName = useSelector(selectDisplayName);
+  const userName = useSelector(selectUserName);
+  const userDescription = useSelector(selectDescription);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <div>
@@ -23,7 +40,11 @@ export default function UserProfile() {
           <img src={profilePicImg} id="header-profilePicture"></img>
           <div class="header-buttons-section">
             {" "}
-            <img class="header-button" src={moreInfoIcon}></img>
+            <img
+              class="header-button"
+              src={moreInfoIcon}
+              onClick={() => dispatch(setDescription())}
+            ></img>
             <img class="header-button" src={messagesIcon}></img>
             <img class="header-button" src={addNotificationsIcon}></img>
             <div id="followingButton">Following</div>
@@ -31,10 +52,11 @@ export default function UserProfile() {
         </div>
       </div>
       <div className="header-main-wrapper">
-        <div id="header-main-userName">Adrien Surowiec</div>
-        <div id="header-main-userId">@ad_sw</div>
+        <div id="header-main-userName">{displayName}</div>
+        <div id="header-main-userId">@{userName}</div>
         <div id="header-description">
-          On my way to become a Fullstack Developer #javascript #reactJS
+          {userDescription} + On my way to become a Fullstack Developer
+          #javascript #reactJS
         </div>
         <div id="header-main-details">
           <div>Science & Technology</div>
@@ -50,7 +72,7 @@ export default function UserProfile() {
           </div>
         </div>
       </div>
-      <TweetList user={user} />
+      <TweetList user={userName} />
     </div>
   );
 }

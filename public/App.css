@@ -311,7 +311,7 @@ body {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-  height: 400px;
+  height: 150px;
 }
 .header-section .header-buttons-section .header-button {
   width: 40px;

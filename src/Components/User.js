@@ -7,9 +7,12 @@ import { getFirestore, query, collection, getDocs } from "firebase/firestore";
 
 import {
   selectIsLoggedIn,
-  setName,
-  selectName,
+  selectUserName,
+  selectDisplayName,
   toggleIsLoggedIn,
+  setDisplayName,
+  setUserName,
+  setDescription,
 } from "./userSlice.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -27,7 +30,7 @@ export default function User() {
         console.log(user.toJSON());
         console.log("onAuth check : userisSignedIn");
         console.log(user.toJSON().displayName);
-        dispatch(setName(user.toJSON().displayName));
+        dispatch(setDisplayName(user.toJSON().displayName));
         dispatch(toggleIsLoggedIn(true));
       } else {
         console.log("NO USER");
@@ -37,7 +40,7 @@ export default function User() {
   }, []);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userName = useSelector(selectName);
+  const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
 
   async function signInUser() {
@@ -45,7 +48,9 @@ export default function User() {
       .then((result) => {
         console.log("user signed in");
         const user = result.user;
-        dispatch(setName(user.displayName));
+        dispatch(setDisplayName(user.displayName));
+        console.log(user);
+        dispatch(setUserName(user.uid));
         dispatch(toggleIsLoggedIn(true));
       })
       .catch((error) => {
@@ -55,21 +60,44 @@ export default function User() {
 
   function signOut() {
     signOutUser();
-    dispatch(setName(null));
+    dispatch(setDisplayName(null));
     dispatch(toggleIsLoggedIn(false));
   }
 
-  async function checkExistingUsername(name) {
+  async function checkExistingUser(id) {
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
       //   console.log(doc.id, " => ", doc.data());
-      if (doc.id === name) {
+      if (doc.id === id) {
         console.log("user already exists");
       } else {
         console.log("user id doesn't exist yet");
       }
     });
   }
+
+  //Input : userName/Id Output : TweetObjectsArray
+  function getUserTweets() {
+    return [];
+  }
+
+  //Update userName/Id Output : changes currentuser
+  function getUserInfo() {
+    return;
+  }
+
+  // Updates Firebase Information
+  function updateUserDescription(description) {
+    return;
+  }
+
+  // Updates Firebase Display Name
+  function updateDisplayName() {
+    return;
+  }
+
+  // Add Following to active User & Follower to target User
+  function addFollowing(userId) {}
 
   return (
     <div>
@@ -83,7 +111,7 @@ export default function User() {
       <p>Username : {userName}</p>
       <button onClick={() => signInUser()}>Sign In</button>
       <button onClick={() => signOut()}>Sign Out</button>
-      <button onClick={() => checkExistingUsername("2r8CtvoORnL3CQJbVs3K")}>
+      <button onClick={() => checkExistingUser("2r8CtvoORnL3CQJbVs3K")}>
         Check Username
       </button>
       <p>{isLoggedIn ? "signed in" : "signed out"}</p>

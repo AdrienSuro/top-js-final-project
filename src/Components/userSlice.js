@@ -3,12 +3,10 @@ import imageIcon from "../icons/image-icon.png";
 
 const initialState = {
   isLoggedIn: false,
-  name: "random user",
+  displayName: "random user",
   userName: null,
   profilePic: imageIcon,
   description: "I'm a random user",
-  age: 18,
-  tweets: ["This is my first tweet", "This is my second tweet"],
 };
 
 export const userSlice = createSlice({
@@ -16,16 +14,7 @@ export const userSlice = createSlice({
   initialState,
 
   reducers: {
-    incrementAge: (state) => {
-      console.log("incrementing age");
-      state.age += 1;
-    },
-    addTweet: (state, action) => {
-      console.log("adding tweet");
-      state.tweets = [...state.tweets, action.payload];
-    },
     toggleIsLoggedIn: (state, action) => {
-      console.log(state.isLoggedIn);
       if (action.payload === true) {
         state.isLoggedIn = true;
         return;
@@ -36,18 +25,28 @@ export const userSlice = createSlice({
         throw new Error("isLoggedIn is invalid");
       }
     },
-    setName: (state, action) => {
-      state.name = action.payload;
+    setDisplayName: (state, action) => {
+      state.displayName = action.payload;
+    },
+    setUserName: (state, action) => {
+      state.userName = action.payload;
+    },
+    setDescription: (state) => {
+      console.log("prompting for a new description");
+      const newDescription = prompt("Enter your new description here");
+      state.description = newDescription;
     },
   },
 });
 
-export const { incrementAge, addTweet, toggleIsLoggedIn, setName } =
+export const { toggleIsLoggedIn, setDisplayName, setUserName, setDescription } =
   userSlice.actions;
 
-export const selectTweets = (state) => state.user.tweets;
-export const selectAge = (state) => state.user.age;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const selectName = (state) => state.user.name;
+export const selectDisplayName = (state) => state.user.displayName;
+export const selectUserName = (state) => state.user.userName;
+export const selectDescription = (state) => state.user.description;
+export const selectFollowers = (state) => state.user.followers;
+export const selectFollowing = (state) => state.user.following;
 
 export default userSlice.reducer;

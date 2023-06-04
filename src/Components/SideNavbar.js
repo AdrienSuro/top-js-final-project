@@ -19,21 +19,25 @@ export default function SideNavbar() {
           <img src={mainLogoImg}></img>
           <p></p>
         </div>
-        <Link className="homeLink" to="/">
+        <Link style={{ textDecoration: "none" }} className="homeLink" to="/">
           <div>
             {" "}
             <img src={homeImg}></img>
             <p>Home</p>
           </div>
         </Link>
-
-        <div>
-          <Link className="homeLink" to="/userprofile">
+        <Link
+          style={{ textDecoration: "none" }}
+          className="homeLink"
+          to="/userprofile"
+        >
+          <div>
             {" "}
             <img src={exploreImg}></img>
             <p>Search</p>
-          </Link>
-        </div>
+          </div>
+        </Link>
+
         <div>
           {" "}
           <img src={notificationsImg}></img>

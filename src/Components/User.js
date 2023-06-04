@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, myFunc } from "./Firebase.js";
 import { db, getUserName, getProfilePicUrl } from "./Firebase";
+import { getFirestore, query, collection, getDocs } from "firebase/firestore";
+
 import {
   selectIsLoggedIn,
   setName,
@@ -57,6 +59,18 @@ export default function User() {
     dispatch(toggleIsLoggedIn(false));
   }
 
+  async function checkExistingUsername(name) {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      //   console.log(doc.id, " => ", doc.data());
+      if (doc.id === name) {
+        console.log("user already exists");
+      } else {
+        console.log("user id doesn't exist yet");
+      }
+    });
+  }
+
   return (
     <div>
       <Link className="homeLink" to="/userprofile">
@@ -69,6 +83,9 @@ export default function User() {
       <p>Username : {userName}</p>
       <button onClick={() => signInUser()}>Sign In</button>
       <button onClick={() => signOut()}>Sign Out</button>
+      <button onClick={() => checkExistingUsername("2r8CtvoORnL3CQJbVs3K")}>
+        Check Username
+      </button>
       <p>{isLoggedIn ? "signed in" : "signed out"}</p>
     </div>
   );

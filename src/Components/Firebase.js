@@ -1,7 +1,13 @@
 import { initializeApp, firebase } from "firebase/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { getFirestore, query, collection } from "firebase/firestore";
+import {
+  getFirestore,
+  query,
+  collection,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 import {
   getAuth,
   onAuthStateChanged,
@@ -64,4 +70,11 @@ export function getUserToken() {
 // Returns true if a user is signed-in.
 export function isUserSignedIn() {
   return !!getAuth().currentUser;
+}
+
+// Returns an user object from Firebase, with props (ex: following, followers, description etc)
+export function getUserData(username) {
+  const sub = onSnapshot(doc(db, "users", username), (doc) => {
+    console.log("Current data: ", doc.data());
+  });
 }

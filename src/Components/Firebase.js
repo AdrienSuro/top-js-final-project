@@ -1,5 +1,3 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { initializeApp, firebase } from "firebase/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -12,7 +10,6 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
-import { toggleIsLoggedIn, selectIsLoggedIn, setName } from "./userSlice.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXfjM2GwVLeV0-6mh85hbMnZz9xBWIkOk",
@@ -27,77 +24,44 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
-
-export default function Firebase() {
-  return <div></div>;
-}
+let currentUser = null;
 
 export async function signIn() {
   var provider = new GoogleAuthProvider();
   await signInWithPopup(auth, provider);
 }
 
-export const myFunc = onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log("onAuth check : userisSignedIn");
-    console.log(user.toJSON().displayName);
-    return user.toJSON().displayName;
+    currentUser = user;
+    console.log(user.toJSON());
   } else {
     return "NO USER";
-    console.log("onAuth check : user is Signed Out");
   }
 });
 
 export function signOutUser() {
   signOut(getAuth());
-  console.log("user signed out");
-}
-
-export function initFirebaseAuth() {
-  onAuthStateChanged(getAuth(), authStateObserver);
 }
 
 // Returns the signed-in user's profile Pic URL.
 export function getProfilePicUrl() {
-  const currentUser = getAuth().currentUser;
+  currentUser = getAuth().currentUser;
   return currentUser ? currentUser.photoURL : profilePlaceholder;
 }
 
 // Returns the signed-in user's display name.
-export function getUserName() {
-  const currentUser = getAuth().currentUser;
+export function getUserDisplayName() {
+  currentUser = getAuth().currentUser;
   return currentUser ? currentUser.displayName : null;
+}
+
+export function getUserToken() {
+  currentUser = getAuth().currentUser;
+  return currentUser ? currentUser.getToken() : null;
 }
 
 // Returns true if a user is signed-in.
 export function isUserSignedIn() {
   return !!getAuth().currentUser;
-}
-
-export function authStateObserver(user) {
-  if (user) {
-    console.log("user signed in");
-    // User is signed in!
-    // Get the signed-in user's profile pic and name.
-    var profilePicUrl = getProfilePicUrl();
-    var userName = getUserName();
-
-    // Set the user's profile pic and name.
-    // userPicElement.style.backgroundImage =
-    //   "url(" + addSizeToGoogleProfilePic(profilePicUrl) + ")";
-    // userNameElement.textContent = userName;
-
-    // We save the Firebase Messaging Device token and enable notifications.
-    // saveMessagingDeviceToken();
-  } else {
-    console.log("no user");
-    // // User is signed out!
-    // // Hide user's profile and sign-out button.
-    // userNameElement.setAttribute("hidden", "true");
-    // userPicElement.setAttribute("hidden", "true");
-    // signOutButtonElement.setAttribute("hidden", "true");
-
-    // // Show sign-in button.
-    // signInButtonElement.removeAttribute("hidden");
-  }
 }

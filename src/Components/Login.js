@@ -24,7 +24,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <div className="login-wrapper">
       <p>
         If you want to try my Twitter Mock-up, please login using your Google
         Account

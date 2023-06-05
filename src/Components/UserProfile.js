@@ -19,20 +19,31 @@ import {
   setUserName,
   setDescription,
 } from "./userSlice.js";
+import { getUserDisplayName } from "./Firebase";
 
-export default function UserProfile() {
+//user doit être un objet avec toutes les props nécessaires
+//qu'il soit invoqué comme activeUser ou juste comme lien
+// sur l'auteur d'un tweet
+export default function UserProfile(user) {
   const dispatch = useDispatch();
   const displayName = useSelector(selectDisplayName);
   const userName = useSelector(selectUserName);
   const userDescription = useSelector(selectDescription);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  // Avoir ici un objet qui contient toutes les informations nécessaires
+  // pour créer n'importe quel profil d'utilisateur.
+  // on l'invoquera ainsi < UserProfile name="userName" />
+  // Dans le cas de l'utilisateur actif on fera de même.
+
+  let userInfo = {};
+
   return (
     <div>
       <div className="header-wrapper">
         <div className="header-header">
           <p id="header-backarrow">&#8592;</p>
-          <p id="header-userName">Adrien Surowiec</p>
+          <p id="header-userName">{user.displayName}</p>
           <div id="header-tweetCount">26.8K Tweets</div>
         </div>
         <div className="header-section">
@@ -52,8 +63,8 @@ export default function UserProfile() {
         </div>
       </div>
       <div className="header-main-wrapper">
-        <div id="header-main-userName">{displayName}</div>
-        <div id="header-main-userId">@{userName}</div>
+        <div id="header-main-userName">{user.displayName}</div>
+        <div id="header-main-userId">@{user.getToken()}</div>
         <div id="header-description">
           {userDescription} + On my way to become a Fullstack Developer
           #javascript #reactJS

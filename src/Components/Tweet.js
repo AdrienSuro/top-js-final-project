@@ -10,6 +10,7 @@ import { ReactComponent as StatsSVG } from "../icons/stats.svg";
 import { v4 as uuidv4 } from "uuid";
 import { doc, updateDoc, increment } from "firebase/firestore";
 import { db } from "./Firebase";
+import { Link, BrowserRouter } from "react-router-dom";
 
 function Tweet(props) {
   function getDate() {
@@ -45,41 +46,45 @@ function Tweet(props) {
 
   return (
     <div>
-      <div className="tweet">
-        <img src={rushdie}></img>
-        <div className="tweetAuthor">
-          <p className="authorName">{props.name}</p>
-          <p className="authorUsername">@{props.userName}</p>
-          <p className="tweetTime">· {getDate()}</p>
+      <BrowserRouter>
+        <div className="tweet">
+          <img src={rushdie}></img>
+          <div className="tweetAuthor">
+            <p className="authorName">{props.name}</p>
+            <Link to={`/${props.username}`}>
+              <p className="authorUsername">@{props.userName}</p>
+            </Link>
+            <p className="tweetTime">· {getDate()}</p>
+          </div>
+          <div className="tweetContent">
+            <p>{props.content}</p>
+          </div>
+          <div className="tweetDetails">
+            <div id="commentIcon">
+              <CommentSVG id="commentSVG" />
+            </div>
+            <span id="commentSpan">{props.comments}</span>
+            <div id="retweetIcon">
+              <RetweetSVG
+                id="retweetSVG"
+                onClick={() => incrementRetweets(props.docId)}
+              />
+            </div>
+            <span id="retweetSpan">{props.retweets}</span>
+            <div id="heartIcon">
+              <HeartSVG
+                id="heartSVG"
+                onClick={() => incrementLikes(props.docId)}
+              />
+            </div>
+            <span id="heartSpan">{props.likes}</span>
+            <div id="statsIcon">
+              <StatsSVG id="statsSVG" />
+            </div>
+            <span id="statsSpan">{props.stats}</span>
+          </div>
         </div>
-        <div className="tweetContent">
-          <p>{props.content}</p>
-        </div>
-        <div className="tweetDetails">
-          <div id="commentIcon">
-            <CommentSVG id="commentSVG" />
-          </div>
-          <span id="commentSpan">{props.comments}</span>
-          <div id="retweetIcon">
-            <RetweetSVG
-              id="retweetSVG"
-              onClick={() => incrementRetweets(props.docId)}
-            />
-          </div>
-          <span id="retweetSpan">{props.retweets}</span>
-          <div id="heartIcon">
-            <HeartSVG
-              id="heartSVG"
-              onClick={() => incrementLikes(props.docId)}
-            />
-          </div>
-          <span id="heartSpan">{props.likes}</span>
-          <div id="statsIcon">
-            <StatsSVG id="statsSVG" />
-          </div>
-          <span id="statsSpan">{props.stats}</span>
-        </div>
-      </div>
+      </BrowserRouter>
     </div>
   );
 }

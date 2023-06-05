@@ -387,4 +387,12 @@ body {
   margin-top: 15px;
 }
 
+.login-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 40px;
+  font-size: 1.6rem;
+}
+
 /*# sourceMappingURL=App.css.map */

@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, myFunc } from "./Firebase.js";
 import { db, getUserName, getProfilePicUrl } from "./Firebase";
-import { getFirestore, query, collection, getDocs } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+
+import {
+  getFirestore,
+  query,
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 
 import {
   selectIsLoggedIn,
@@ -14,22 +23,21 @@ import {
   setUserName,
   setDescription,
 } from "./userSlice.js";
-import { onAuthStateChanged } from "firebase/auth";
+
+export async function createUser(user) {
+  // Add a new document in collection "cities"
+  await setDoc(doc(db, "users", user.uid), {
+    displayName: user.displayName,
+    userName: user.uid,
+    following: [],
+    followers: [],
+  });
+}
 
 export default function User() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        user.providerData.forEach((profile) => {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-          console.log("  Photo URL: " + profile.photoURL);
-        });
-        console.log(user.toJSON());
-        console.log("onAuth check : userisSignedIn");
-        console.log(user.toJSON().displayName);
         dispatch(setDisplayName(user.toJSON().displayName));
         dispatch(toggleIsLoggedIn(true));
       } else {
@@ -46,10 +54,12 @@ export default function User() {
   async function signInUser() {
     signIn()
       .then((result) => {
-        console.log("user signed in");
         const user = result.user;
-        dispatch(setDisplayName(user.displayName));
         console.log(user);
+        if (checkExistingUser(user.uid) === false) {
+          createUser(user);
+        }
+        dispatch(setDisplayName(user.displayName));
         dispatch(setUserName(user.uid));
         dispatch(toggleIsLoggedIn(true));
       })
@@ -69,9 +79,9 @@ export default function User() {
     querySnapshot.forEach((doc) => {
       //   console.log(doc.id, " => ", doc.data());
       if (doc.id === id) {
-        console.log("user already exists");
+        return true;
       } else {
-        console.log("user id doesn't exist yet");
+        return false;
       }
     });
   }

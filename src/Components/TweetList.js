@@ -12,11 +12,11 @@ import { tweetsCollection, db } from "./Firebase";
 
 export default function TweetList(user) {
   const [allTweets, setAllTweets] = useState([]);
-
+  // Update this in order to get tweets from all the users that the active user follows
   useEffect(() => {
     const fetchData = async () => {
       const allTweets = collection(db, "tweets");
-      const q = query(allTweets, where("userName", "==", "Charles_0001"));
+      const q = query(allTweets);
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const tweets = [];
         querySnapshot.forEach((doc) => {

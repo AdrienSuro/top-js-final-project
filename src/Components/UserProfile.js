@@ -9,6 +9,7 @@ import moreInfoIcon from "../icons/threedots.png";
 import messagesIcon from "../icons/messages.png";
 import addNotificationsIcon from "../icons/activateNotifications.png";
 import TweetList from "./TweetList";
+import UserTweets from "./UserTweets";
 import { db, getUserDisplayName } from "./Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
@@ -23,32 +24,32 @@ export default function UserProfile(props) {
 
   const dispatch = useDispatch();
 
-  function getUserUserName(username) {
-    onSnapshot(doc(db, "users", username), (doc) => {
-      setUserUserName(doc.data().userName);
+  function getUserUserName(userArg) {
+    onSnapshot(doc(db, "users", userArg), (doc) => {
+      setUserUserName(doc.data().userArg);
     });
   }
 
-  function getUserDisplayName(username) {
-    onSnapshot(doc(db, "users", username), (doc) => {
+  function getUserDisplayName(userArg) {
+    onSnapshot(doc(db, "users", userArg), (doc) => {
       setUserDisplayName(doc.data().displayName);
     });
   }
 
-  function getUserDescription(username) {
-    onSnapshot(doc(db, "users", username), (doc) => {
+  function getUserDescription(userArg) {
+    onSnapshot(doc(db, "users", userArg), (doc) => {
       setUserDescription(doc.data().description);
     });
   }
 
-  function getUserFollowersLength(username) {
-    onSnapshot(doc(db, "users", username), (doc) => {
+  function getUserFollowersLength(userArg) {
+    onSnapshot(doc(db, "users", userArg), (doc) => {
       setUserFollowersLength(doc.data().followers.length);
     });
   }
 
-  function getUserFollowingLength(username) {
-    onSnapshot(doc(db, "users", username), (doc) => {
+  function getUserFollowingLength(userArg) {
+    onSnapshot(doc(db, "users", userArg), (doc) => {
       setUserFollowingLength(doc.data().following.length);
     });
   }
@@ -99,7 +100,7 @@ export default function UserProfile(props) {
           </div>
         </div>
       </div>
-      <TweetList user={username} />
+      <UserTweets user={username} />
     </div>
   );
 }

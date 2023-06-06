@@ -30,6 +30,7 @@ export default function WriteTweet() {
   const displayName = useSelector(selectDisplayName);
   const userName = useSelector(selectUserName);
 
+  // add an argument that takes the logged in user
   function uploadTweet() {
     const tweetContentField = document.getElementById("tweetContentField");
     let randomIdentifier = uuidv4();

@@ -22,7 +22,10 @@ const App = () => {
       <BrowserRouter>
         <body>
           <div className="leftColumn">
-            <SideNavbar />
+            <Routes>
+              <Route exact path="/" element={<SideNavbar />}></Route>
+              <Route exact path="/:username" element={<User />}></Route>
+            </Routes>
           </div>
           <div className="mainColumn">
             <Routes>
@@ -30,7 +33,8 @@ const App = () => {
               <Route
                 exact
                 path="/:username"
-                element={<UserProfile username="Charles_0001" />}
+                // element={<UserProfile username="Charles_0001" />}
+                element={<UserProfile />}
               ></Route>
             </Routes>
           </div>

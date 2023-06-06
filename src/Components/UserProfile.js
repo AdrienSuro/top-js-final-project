@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 
 import coverPictureImg from "../img/testCover.jpg";
@@ -16,6 +18,8 @@ export default function UserProfile(props) {
   const [userDescription, setUserDescription] = useState(null);
   const [userFollowersLength, setUserFollowersLength] = useState(null);
   const [userFollowingLength, setUserFollowingLength] = useState(null);
+
+  const { username } = useParams();
 
   const dispatch = useDispatch();
 
@@ -50,11 +54,11 @@ export default function UserProfile(props) {
   }
 
   useEffect(() => {
-    getUserDisplayName(props.username);
-    getUserDescription(props.username);
-    getUserUserName(props.username);
-    getUserFollowersLength(props.username);
-    getUserFollowingLength(props.username);
+    getUserDisplayName(username);
+    getUserDescription(username);
+    getUserUserName(username);
+    getUserFollowersLength(username);
+    getUserFollowingLength(username);
   }, []);
 
   return (
@@ -95,7 +99,7 @@ export default function UserProfile(props) {
           </div>
         </div>
       </div>
-      <TweetList user={props.username} />
+      <TweetList user={username} />
     </div>
   );
 }

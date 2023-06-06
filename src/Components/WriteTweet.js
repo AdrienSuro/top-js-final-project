@@ -35,7 +35,7 @@ export default function WriteTweet() {
     let randomIdentifier = uuidv4();
     setDoc(doc(db, "tweets", randomIdentifier), {
       content: tweetContentField.value,
-      userName: userName || randomIdentifier,
+      userName: "AdrienSuro",
       displayName: displayName || "Anonym User",
       timestamp: new Date(),
       comments: getRandomNum(),

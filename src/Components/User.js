@@ -111,7 +111,7 @@ export default function User() {
 
   return (
     <div>
-      <Link className="homeLink" to="/userprofile">
+      <Link className="homeLink" to="/Charles_0001">
         <img
           id="userSmallProfilePic"
           src={getProfilePicUrl()}

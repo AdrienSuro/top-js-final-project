@@ -27,7 +27,11 @@ const App = () => {
           <div className="mainColumn">
             <Routes>
               <Route exact path="/" element={<Timeline />}></Route>
-              <Route exact path="/:username" element={<UserProfile />}></Route>
+              <Route
+                exact
+                path="/:username"
+                element={<UserProfile username="Charles_0001" />}
+              ></Route>
             </Routes>
           </div>
           <div className="rightColumn">

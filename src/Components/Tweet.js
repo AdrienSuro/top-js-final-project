@@ -50,7 +50,7 @@ function Tweet(props) {
         <img src={rushdie}></img>
         <div className="tweetAuthor">
           <p className="authorName">{props.name}</p>
-          <Link to={`/${props.username}`}>
+          <Link to={`/${props.userName}`}>
             <p className="authorUsername">@{props.userName}</p>
           </Link>
           <p className="tweetTime">· {getDate()}</p>

@@ -58,6 +58,7 @@ export default function User() {
         console.log(user);
         if (checkExistingUser(user.uid) === false) {
           createUser(user);
+          return;
         }
         dispatch(setDisplayName(user.displayName));
         dispatch(setUserName(user.uid));
@@ -77,6 +78,7 @@ export default function User() {
   async function checkExistingUser(id) {
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
+      console.log(doc.id);
       //   console.log(doc.id, " => ", doc.data());
       if (doc.id === id) {
         return true;

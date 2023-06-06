@@ -16,8 +16,6 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
-import { useSelector, useDispatch } from "react-redux";
-import { setDisplayName } from "./userSlice";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXfjM2GwVLeV0-6mh85hbMnZz9xBWIkOk",
@@ -29,6 +27,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
@@ -38,15 +37,6 @@ export async function signIn() {
   var provider = new GoogleAuthProvider();
   await signInWithPopup(auth, provider);
 }
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    currentUser = user;
-    console.log(user.toJSON());
-  } else {
-    return "NO USER";
-  }
-});
 
 export function signOutUser() {
   signOut(getAuth());

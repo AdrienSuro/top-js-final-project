@@ -16,6 +16,8 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
+import { useSelector, useDispatch } from "react-redux";
+import { setDisplayName } from "./userSlice";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXfjM2GwVLeV0-6mh85hbMnZz9xBWIkOk",
@@ -73,8 +75,8 @@ export function isUserSignedIn() {
 }
 
 // Returns an user object from Firebase, with props (ex: following, followers, description etc)
-export function getUserData(username) {
-  const sub = onSnapshot(doc(db, "users", username), (doc) => {
-    console.log("Current data: ", doc.data());
+export function getUserDescription(username) {
+  onSnapshot(doc(db, "users", username), (doc) => {
+    return doc.data().description;
   });
 }

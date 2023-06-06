@@ -9,7 +9,7 @@ import { ReactComponent as HeartSVG } from "../icons/heart.svg";
 import { ReactComponent as StatsSVG } from "../icons/stats.svg";
 import { v4 as uuidv4 } from "uuid";
 import { doc, updateDoc, increment } from "firebase/firestore";
-import { db, getUserData } from "./Firebase";
+import { db, getUserDescription } from "./Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
 
 function Tweet(props) {
@@ -48,10 +48,10 @@ function Tweet(props) {
     <div>
       <button
         onClick={() => {
-          getUserData("Charles_0001");
+          getUserDescription("Charles_0001");
         }}
       >
-        Get Data about Charles
+        Get Data about Charles from Firebase
       </button>
       <div className="tweet">
         <img src={rushdie}></img>

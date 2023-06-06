@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import coverPictureImg from "../img/testCover.jpg";
@@ -19,12 +19,20 @@ import {
   setUserName,
   setDescription,
 } from "./userSlice.js";
-import { getUserDisplayName } from "./Firebase";
+import { db, getUserDisplayName } from "./Firebase";
+import {
+  getFirestore,
+  query,
+  collection,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 
 //user doit être un objet avec toutes les props nécessaires
 //qu'il soit invoqué comme activeUser ou juste comme lien
 // sur l'auteur d'un tweet
-export default function UserProfile(user) {
+export default function UserProfile(username) {
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const displayName = useSelector(selectDisplayName);
   const userName = useSelector(selectUserName);
@@ -36,14 +44,22 @@ export default function UserProfile(user) {
   // on l'invoquera ainsi < UserProfile name="userName" />
   // Dans le cas de l'utilisateur actif on fera de même.
 
-  let userInfo = {};
+  function getUserDescription(username) {
+    onSnapshot(doc(db, "users", username), (doc) => {
+      setUser(doc.data().description);
+    });
+  }
+
+  useEffect(() => {
+    getUserDescription("Charles_0001");
+  }, []);
 
   return (
     <div>
       <div className="header-wrapper">
         <div className="header-header">
           <p id="header-backarrow">&#8592;</p>
-          <p id="header-userName">{user.displayName}</p>
+          <p id="header-userName">{userName}</p>
           <div id="header-tweetCount">26.8K Tweets</div>
         </div>
         <div className="header-section">
@@ -63,12 +79,9 @@ export default function UserProfile(user) {
         </div>
       </div>
       <div className="header-main-wrapper">
-        <div id="header-main-userName">{user.displayName}</div>
-        <div id="header-main-userId">@{user.getToken()}</div>
-        <div id="header-description">
-          {userDescription} + On my way to become a Fullstack Developer
-          #javascript #reactJS
-        </div>
+        <div id="header-main-userName">{userName}</div>
+        <div id="header-main-userId">@{userName}</div>
+        <div id="header-description">{user}</div>
         <div id="header-main-details">
           <div>Science & Technology</div>
           <div>Burgundy</div>

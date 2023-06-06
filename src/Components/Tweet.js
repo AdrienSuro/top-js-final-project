@@ -46,13 +46,6 @@ function Tweet(props) {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          getUserDescription("Charles_0001");
-        }}
-      >
-        Get Data about Charles from Firebase
-      </button>
       <div className="tweet">
         <img src={rushdie}></img>
         <div className="tweetAuthor">

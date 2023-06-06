@@ -100,7 +100,7 @@ export default function UserProfile(props) {
           </div>
         </div>
       </div>
-      <UserTweets user={username} />
+      <UserTweets />
     </div>
   );
 }

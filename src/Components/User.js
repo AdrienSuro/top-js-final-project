@@ -29,6 +29,7 @@ export async function createUser(user) {
   await setDoc(doc(db, "users", user.uid), {
     displayName: user.displayName,
     userName: user.uid,
+    // create a function that can change the userName
     following: [],
     followers: [],
   });
@@ -37,11 +38,22 @@ export async function createUser(user) {
 export default function User() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      // check si user.toJSON().uid correspond à une entrée de la db
+      // créer user à partir de user.toJSON()
+      console.log(user.toJSON()); //est un objet
       if (user) {
-        dispatch(setDisplayName(user.toJSON().displayName));
         dispatch(toggleIsLoggedIn(true));
+        if (checkExistingUser(user.uid) === true) {
+          // set CurrentUser in Redux
+          //dispatch(setUser(user.toJSON())
+          //function setUser(userObject) {
+        } else {
+          //createUser to Firebase and then retrieve
+          //the data to dispatch setUser
+        }
+        dispatch(setDisplayName(user.toJSON().displayName));
       } else {
-        console.log("NO USER");
+        console.log("Error, no User");
         console.log("onAuth check : user is Signed Out");
       }
     });
@@ -82,8 +94,6 @@ export default function User() {
       //   console.log(doc.id, " => ", doc.data());
       if (doc.id === id) {
         return true;
-      } else {
-        return false;
       }
     });
   }

@@ -17,7 +17,6 @@ export default function UserTweets() {
   const { username } = useParams();
 
   useEffect(() => {
-    console.log(username);
     const fetchData = async () => {
       const allTweets = collection(db, "tweets");
       const q = query(allTweets, where("userName", "==", username));

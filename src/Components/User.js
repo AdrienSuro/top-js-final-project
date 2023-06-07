@@ -44,14 +44,13 @@ export default function User() {
       if (user) {
         dispatch(toggleIsLoggedIn(true));
         if (checkExistingUser(user.uid) === true) {
-          // set CurrentUser in Redux
-          //dispatch(setUser(user.toJSON())
-          //function setUser(userObject) {
+          dispatch(setDisplayName(user.toJSON().displayName));
+          dispatch(setUserName(user.toJSON().uid));
         } else {
-          //createUser to Firebase and then retrieve
-          //the data to dispatch setUser
+          createUser(user.toJSON());
+          dispatch(setDisplayName(user.toJSON().displayName));
+          dispatch(setUserName(user.toJSON().uid));
         }
-        dispatch(setDisplayName(user.toJSON().displayName));
       } else {
         console.log("Error, no User");
         console.log("onAuth check : user is Signed Out");
@@ -61,6 +60,7 @@ export default function User() {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
+  const displayName = useSelector(selectDisplayName);
   const dispatch = useDispatch();
 
   async function signInUser() {
@@ -135,6 +135,9 @@ export default function User() {
       <button onClick={() => signOut()}>Sign Out</button>
       <button onClick={() => checkExistingUser("2r8CtvoORnL3CQJbVs3K")}>
         Check Username
+      </button>
+      <button onClick={() => console.log("user from Redux is" + displayName)}>
+        displayName from Redux
       </button>
       <p>{isLoggedIn ? "signed in" : "signed out"}</p>
     </div>

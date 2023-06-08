@@ -20,7 +20,7 @@ const App = () => {
     <div className="App">
       {/* <Firebase /> */}
       <BrowserRouter>
-        <body>
+        <div className="body">
           <div className="leftColumn">
             <Routes>
               <Route exact path="/" element={<SideNavbar />}></Route>
@@ -36,7 +36,7 @@ const App = () => {
           <div className="rightColumn">
             <User />
           </div>
-        </body>
+        </div>
       </BrowserRouter>
     </div>
   );

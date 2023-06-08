@@ -28,7 +28,7 @@ export async function createUser(user) {
   // Add a new document in collection "cities"
   await setDoc(doc(db, "users", user.uid), {
     displayName: user.displayName,
-    userName: user.uid,
+    userName: prompt("Choose a username"),
     // create a function that can change the userName
     following: [],
     followers: [],
@@ -36,27 +36,29 @@ export async function createUser(user) {
 }
 
 export default function User() {
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      // check si user.toJSON().uid correspond à une entrée de la db
-      // créer user à partir de user.toJSON()
-      console.log(user.toJSON()); //est un objet
-      if (user) {
-        dispatch(toggleIsLoggedIn(true));
+  onAuthStateChanged(auth, (user) => {
+    // check si user.toJSON().uid correspond à une entrée de la db
+    // créer user à partir de user.toJSON()
+    // console.log(user.toJSON()); //est un objet
+    if (user) {
+      dispatch(toggleIsLoggedIn(true));
+      if (selectIsLoggedIn === true) {
         if (checkExistingUser(user.uid) === true) {
+          // créer fct setExistingUser ???
           dispatch(setDisplayName(user.toJSON().displayName));
           dispatch(setUserName(user.toJSON().uid));
         } else {
+          // amener l'user vers une page où il peut définir son profil
           createUser(user.toJSON());
           dispatch(setDisplayName(user.toJSON().displayName));
           dispatch(setUserName(user.toJSON().uid));
         }
-      } else {
-        console.log("Error, no User");
-        console.log("onAuth check : user is Signed Out");
       }
-    });
-  }, []);
+    } else {
+      console.log("Error, no User");
+      console.log("onAuth check : user is Signed Out");
+    }
+  });
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
@@ -64,7 +66,7 @@ export default function User() {
   const dispatch = useDispatch();
 
   async function signInUser() {
-    signIn()
+    await signIn()
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -77,6 +79,7 @@ export default function User() {
         dispatch(toggleIsLoggedIn(true));
       })
       .catch((error) => {
+        console.log(error);
         console.log("user sign in failed");
       });
   }

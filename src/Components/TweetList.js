@@ -34,9 +34,9 @@ export default function TweetList(user) {
 
   return (
     <div>
-      {allTweets.map((e) => (
+      {allTweets.map((e, index) => (
         <Tweet
-          key={e.id}
+          key={index}
           userName={e.userName}
           name={e.name}
           content={e.content}

@@ -27,7 +27,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
+console.log("hi from Firebase.js");
 export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();

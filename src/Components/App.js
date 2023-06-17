@@ -11,7 +11,6 @@ import UserProfile from "./UserProfile";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { selectIsLoggedIn } from "./userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserToken, getUserDisplayName } from "./Firebase";
 
 const App = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -33,7 +32,7 @@ const App = () => {
               <Route exact path="/:username" element={<UserProfile />}></Route>
             </Routes>
           </div>
-          <div className="rightColumn">{/* <User /> */}</div>
+          <div className="rightColumn">{<User />}</div>
         </div>
       </BrowserRouter>
     </div>

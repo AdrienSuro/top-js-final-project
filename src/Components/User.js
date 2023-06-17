@@ -35,8 +35,8 @@ export default function User() {
         <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
       </Link>
       <p>Username : {userName}</p>
-      <button>Sign In</button>
-      <button>Sign Out</button>
+      <button onClick={signIn}>Sign In</button>
+      <button onClick={signOutUser}>Sign Out</button>
       <button>Check Username</button>
       <button>displayName from Redux</button>
       <p>{isLoggedIn ? "signed in" : "signed out"}</p>

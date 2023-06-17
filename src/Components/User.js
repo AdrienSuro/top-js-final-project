@@ -29,6 +29,17 @@ export default function User() {
   const displayName = useSelector(selectDisplayName);
   const dispatch = useDispatch();
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      console.log(new Date() + " " + user.uid);
+      // ...
+    } else {
+      console.log(new Date() + "no user logged in");
+    }
+  });
+
   return (
     <div>
       <Link className="homeLink" to="/Charles_0001">

@@ -33,9 +33,7 @@ const App = () => {
               <Route exact path="/:username" element={<UserProfile />}></Route>
             </Routes>
           </div>
-          <div className="rightColumn">
-            <User />
-          </div>
+          <div className="rightColumn">{/* <User /> */}</div>
         </div>
       </BrowserRouter>
     </div>

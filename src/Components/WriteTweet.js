@@ -55,7 +55,7 @@ export default function WriteTweet() {
   async function deleteTweets(besideThisUser) {
     const q = query(
       collection(db, "tweets"),
-      where("userName", "!=", "adrien_surowiec")
+      where("userName", "===", "AdrienSuro")
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
@@ -66,11 +66,7 @@ export default function WriteTweet() {
   return (
     <div>
       <div className="writeTweetBox">
-        <img
-          id="userSmallProfilePic"
-          src={getProfilePicUrl()}
-          alt="userProfilePicture"
-        ></img>
+        <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
         <textarea
           placeholder="What is happening?!"
           id="tweetContentField"
@@ -79,7 +75,7 @@ export default function WriteTweet() {
           <div className="tweetOptionsIcon">
             <img src={imageIcon}></img>
           </div>
-          <button className="tweetBtn" onClick={uploadTweet}>
+          <button className="tweetBtn" onClick={deleteTweets}>
             Tweet
           </button>
         </div>

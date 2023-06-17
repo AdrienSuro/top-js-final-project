@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import rushdie from "../img/rushdie.jpg";
 import "../Stylesheets/normalize.scss";
 import { ReactSVG } from "react-svg";
@@ -8,11 +8,41 @@ import { ReactComponent as RetweetSVG } from "../icons/retweet.svg";
 import { ReactComponent as HeartSVG } from "../icons/heart.svg";
 import { ReactComponent as StatsSVG } from "../icons/stats.svg";
 import { v4 as uuidv4 } from "uuid";
-import { doc, updateDoc, increment } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  increment,
+  query,
+  where,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db, getUserDescription } from "./Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
 
 function Tweet(props) {
+  const [userDisplayName, setUserDisplayName] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchDisplayName = async () => {
+  //     let displayUserId = null;
+  //     // Create a reference to the cities collection
+  //     const users = collection(db, "users");
+
+  //     // Create a query against the collection.
+  //     const q = query(users, where("userId", "==", props.userId));
+  //     const querySnapshot = await getDocs(q);
+  //     console.log(querySnapshot);
+  //     querySnapshot.forEach((doc) => {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       displayUserId = doc.data().displayName;
+  //     });
+  //     console.log(displayUserId);
+  //     setUserDisplayName(displayUserId);
+  //   };
+  //   fetchDisplayName();
+  // }, []);
+
   function getDate() {
     let currentDate = new Date().getTime();
     let tweetDate = props.timestamp.toDate().getTime();
@@ -49,7 +79,7 @@ function Tweet(props) {
       <div className="tweet">
         <img src={rushdie}></img>
         <div className="tweetAuthor">
-          <p className="authorName">{props.name}</p>
+          <p className="authorName">{userDisplayName}</p>{" "}
           <Link to={`/${props.userName}`}>
             <p className="authorUsername">@{props.userName}</p>
           </Link>

@@ -28,8 +28,8 @@ export default function TweetList(user) {
     };
     fetchData();
 
-    const interval = setInterval(() => fetchData(), 10000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => fetchData(), 10000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
@@ -37,8 +37,7 @@ export default function TweetList(user) {
       {allTweets.map((e, index) => (
         <Tweet
           key={index}
-          userName={e.userName}
-          name={e.name}
+          userId={e.userId}
           content={e.content}
           likes={e.likes}
           retweets={e.retweets}

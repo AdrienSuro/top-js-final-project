@@ -1,7 +1,6 @@
 import { initializeApp, firebase } from "firebase/app";
 import { useSelector, useDispatch } from "react-redux";
-
-import { selectIsLoggedIn } from "./userSlice";
+import { userSlice, selectIsLoggedIn, toggleIsLoggedIn } from "./userSlice";
 import firebaseConfig from "./FirebaseConfig";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -20,7 +19,6 @@ import {
   signOut,
 } from "firebase/auth";
 import profilePlaceholder from "../img/profile_placeholder.jpeg";
-import userSlice from "./userSlice";
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
@@ -30,7 +28,7 @@ export const auth = getAuth();
 export async function signIn() {
   try {
     var provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    return await signInWithPopup(auth, provider);
   } catch (error) {
     return { error: error.message };
   }

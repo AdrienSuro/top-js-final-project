@@ -34,11 +34,21 @@ export default function User() {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       console.log(new Date() + " " + user.uid);
+      dispatch(toggleIsLoggedIn(true));
+      console.log(isLoggedIn);
       // ...
     } else {
       console.log(new Date() + "no user logged in");
+      dispatch(toggleIsLoggedIn(false));
     }
   });
+
+  function onSignIn() {
+    signIn().then((result) => {
+      dispatch(toggleIsLoggedIn(true));
+      console.log(result.user);
+    });
+  }
 
   return (
     <div>

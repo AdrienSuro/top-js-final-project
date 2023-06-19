@@ -25,18 +25,21 @@ export default function User() {
   const displayUserId = useSelector(selectUserId);
   const dispatch = useDispatch();
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       dispatch(toggleIsLoggedIn(true));
       dispatch(setUserId(user.uid));
       console.log(user.displayName);
-      let userExists = checkExistingUser(user.uid);
+      let userExists = await checkExistingUser(user.uid);
       if (userExists === false) {
         setNewUser(user);
+        console.log("no such user");
       } else if (userExists === true) {
+        console.log("user exists already in firebase");
       }
+      console.log(userExists);
       // ...check if user.uid already refers to a user.
     } else {
       dispatch(toggleIsLoggedIn(false));
@@ -45,13 +48,15 @@ export default function User() {
   });
 
   async function checkExistingUser(id) {
+    let userExists = false;
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
       //   console.log(doc.id, " => ", doc.data());
       if (doc.id === id) {
-        return true;
+        userExists = true;
       }
     });
+    return userExists;
   }
 
   function setNewUser(user) {

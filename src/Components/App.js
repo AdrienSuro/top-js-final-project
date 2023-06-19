@@ -4,7 +4,6 @@ import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
 import User from "./User";
-import Login from "./Login";
 import SideNavbar from "./SideNavbar";
 import Timeline from "./Timeline";
 import UserProfile from "./UserProfile";

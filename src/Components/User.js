@@ -15,18 +15,14 @@ import {
 
 import {
   selectIsLoggedIn,
-  selectUserName,
-  selectDisplayName,
+  selectUserId,
   toggleIsLoggedIn,
-  setDisplayName,
-  setUserName,
-  setDescription,
+  setUserId,
 } from "./userSlice.js";
 
 export default function User() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userName = useSelector(selectUserName);
-  const displayName = useSelector(selectDisplayName);
+  const displayUserId = useSelector(selectUserId);
   const dispatch = useDispatch();
 
   onAuthStateChanged(auth, (user) => {
@@ -35,11 +31,13 @@ export default function User() {
       // https://firebase.google.com/docs/reference/js/auth.user
       console.log(new Date() + " " + user.uid);
       dispatch(toggleIsLoggedIn(true));
+      dispatch(setUserId(user.uid));
       console.log(isLoggedIn);
       // ...
     } else {
       console.log(new Date() + "no user logged in");
       dispatch(toggleIsLoggedIn(false));
+      dispatch(setUserId(null));
     }
   });
 
@@ -55,7 +53,7 @@ export default function User() {
       <Link className="homeLink" to="/Charles_0001">
         <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
       </Link>
-      <p>Username : {userName}</p>
+      <p>User ID : {displayUserId}</p>
       <button onClick={signIn}>Sign In</button>
       <button onClick={signOutUser}>Sign Out</button>
       <button>Check Username</button>

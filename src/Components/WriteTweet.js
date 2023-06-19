@@ -3,12 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import myProfilePicture from "../img/me.png";
 import imageIcon from "../icons/image-icon.png";
 import "firebase/firestore";
-import {
-  selectName,
-  selectIsLoggedIn,
-  selectDisplayName,
-  selectUserName,
-} from "./userSlice";
+import { selectIsLoggedIn } from "./userSlice";
 
 import { firebase } from "firebase/app";
 import {
@@ -27,9 +22,6 @@ import { db, getProfilePicUrl } from "./Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function WriteTweet() {
-  const displayName = useSelector(selectDisplayName);
-  const userName = useSelector(selectUserName);
-
   // add an argument that takes the logged in user
   function uploadTweet() {
     const tweetContentField = document.getElementById("tweetContentField");
@@ -37,7 +29,7 @@ export default function WriteTweet() {
     setDoc(doc(db, "tweets", randomIdentifier), {
       content: tweetContentField.value,
       userName: "AdrienSuro",
-      displayName: displayName || "Anonym User",
+      displayName: "Anonym User",
       timestamp: new Date(),
       comments: getRandomNum(),
       retweets: getRandomNum(),

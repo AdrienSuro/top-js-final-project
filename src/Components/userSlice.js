@@ -3,10 +3,7 @@ import imageIcon from "../icons/image-icon.png";
 
 const initialState = {
   isLoggedIn: false,
-  displayName: "random user",
-  userName: null,
-  profilePic: imageIcon,
-  description: "I'm a random user",
+  userId: null,
 };
 
 export const userSlice = createSlice({
@@ -25,28 +22,14 @@ export const userSlice = createSlice({
         throw new Error("isLoggedIn is invalid");
       }
     },
-    setDisplayName: (state, action) => {
-      state.displayName = action.payload;
-    },
-    setUserName: (state, action) => {
-      state.userName = action.payload;
-    },
-    setDescription: (state) => {
-      console.log("prompting for a new description");
-      const newDescription = prompt("Enter your new description here");
-      state.description = newDescription;
+    setUserId: (state, action) => {
+      state.userId = action.payload;
     },
   },
 });
 
-export const { toggleIsLoggedIn, setDisplayName, setUserName, setDescription } =
-  userSlice.actions;
+export const { toggleIsLoggedIn, setUserId } = userSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const selectDisplayName = (state) => state.user.displayName;
-export const selectUserName = (state) => state.user.userName;
-export const selectDescription = (state) => state.user.description;
-export const selectFollowers = (state) => state.user.followers;
-export const selectFollowing = (state) => state.user.following;
-
+export const selectUserId = (state) => state.user.userId;
 export default userSlice.reducer;

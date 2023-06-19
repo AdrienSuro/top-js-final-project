@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, signIn, signOutUser, myFunc } from "./Firebase.js";
+import { auth, signIn, signOutUser, db } from "./Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 import {
@@ -29,23 +29,33 @@ export default function User() {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
-      console.log(new Date() + " " + user.uid);
       dispatch(toggleIsLoggedIn(true));
       dispatch(setUserId(user.uid));
-      console.log(isLoggedIn);
-      // ...
+      console.log(user.displayName);
+      let userExists = checkExistingUser(user.uid);
+      if (userExists === false) {
+        setNewUser(user);
+      } else if (userExists === true) {
+      }
+      // ...check if user.uid already refers to a user.
     } else {
-      console.log(new Date() + "no user logged in");
       dispatch(toggleIsLoggedIn(false));
       dispatch(setUserId(null));
     }
   });
 
-  function onSignIn() {
-    signIn().then((result) => {
-      dispatch(toggleIsLoggedIn(true));
-      console.log(result.user);
+  async function checkExistingUser(id) {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      //   console.log(doc.id, " => ", doc.data());
+      if (doc.id === id) {
+        return true;
+      }
     });
+  }
+
+  function setNewUser(user) {
+    console.log("I will soon create a new profile for " + user.uid);
   }
 
   return (

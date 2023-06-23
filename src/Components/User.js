@@ -62,18 +62,24 @@ export default function User() {
   function setNewUser(user) {
     console.log("I will soon create a new profile for " + user.uid);
   }
-
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Link className="homeLink" to="/Charles_0001">
+          <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
+        </Link>
+        <p>User ID : {displayUserId}</p>
+        <button onClick={signIn}>Sign In</button>
+        <button onClick={signOutUser}>Sign Out</button>
+        <button>Check Username</button>
+        <button>displayName from Redux</button>
+        <p>{isLoggedIn ? "signed in" : "signed out"}</p>
+      </div>
+    );
+  }
   return (
     <div>
-      <Link className="homeLink" to="/Charles_0001">
-        <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
-      </Link>
-      <p>User ID : {displayUserId}</p>
       <button onClick={signIn}>Sign In</button>
-      <button onClick={signOutUser}>Sign Out</button>
-      <button>Check Username</button>
-      <button>displayName from Redux</button>
-      <p>{isLoggedIn ? "signed in" : "signed out"}</p>
     </div>
   );
 }

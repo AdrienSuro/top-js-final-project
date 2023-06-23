@@ -74,7 +74,23 @@ export default function SideNavbar() {
   }
   return (
     <div>
-      <p>No Logged In User</p>
+      <div className="sideNavbar">
+        <div className="sideNavBarCat">
+          <img src={mainLogoImg}></img>
+          <p></p>
+        </div>
+        <Link
+          style={{ textDecoration: "none" }}
+          className="homeLink"
+          to="/userprofile"
+        >
+          <div>
+            {" "}
+            <img src={exploreImg}></img>
+            <p>Search</p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

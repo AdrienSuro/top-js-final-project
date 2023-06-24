@@ -3,6 +3,7 @@ import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
+import CreateAccount from "./CreateAccount";
 import User from "./User";
 import SideNavbar from "./SideNavbar";
 import Timeline from "./Timeline";
@@ -23,12 +24,18 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<SideNavbar />}></Route>
               <Route exact path="/:username" element={<User />}></Route>
+              <Route exact path="/createaccount"></Route>
             </Routes>
           </div>
           <div className="mainColumn">
             <Routes>
               <Route exact path="/" element={<Timeline />}></Route>
               <Route exact path="/:username" element={<UserProfile />}></Route>
+              <Route
+                exact
+                path="/createaccount"
+                element={<CreateAccount />}
+              ></Route>
             </Routes>
           </div>
           <div className="rightColumn">{<User />}</div>

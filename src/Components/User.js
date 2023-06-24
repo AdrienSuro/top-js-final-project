@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, db } from "./Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
@@ -24,22 +25,26 @@ export default function User() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const displayUserId = useSelector(selectUserId);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      dispatch(toggleIsLoggedIn(true));
-      dispatch(setUserId(user.uid));
-      console.log(user.displayName);
-      let userExists = await checkExistingUser(user.uid);
-      if (userExists === false) {
-        setNewUser(user);
-        console.log("no such user");
-      } else if (userExists === true) {
-        console.log("user exists already in firebase");
+      if (isLoggedIn === false) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        dispatch(toggleIsLoggedIn(true));
+        dispatch(setUserId(user.uid));
+        console.log(user.displayName);
+        let userExists = await checkExistingUser(user.uid);
+        if (userExists === false) {
+          // redirect to a form that creates the user in FB
+          setNewUser(user);
+          console.log("no such user");
+        } else if (userExists === true) {
+          console.log("user exists already in firebase");
+        }
+        console.log(userExists);
       }
-      console.log(userExists);
       // ...check if user.uid already refers to a user.
     } else {
       dispatch(toggleIsLoggedIn(false));
@@ -61,6 +66,7 @@ export default function User() {
 
   function setNewUser(user) {
     console.log("I will soon create a new profile for " + user.uid);
+    navigate("/createaccount"); //utiliser DisplayUserId au sein de cette page (a créer)
   }
   if (isLoggedIn) {
     return (

@@ -30,8 +30,6 @@ export default function User() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       if (isLoggedIn === false) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         dispatch(toggleIsLoggedIn(true));
         dispatch(setUserId(user.uid));
         console.log(user.displayName);

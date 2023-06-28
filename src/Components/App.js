@@ -38,7 +38,12 @@ const App = () => {
               ></Route>
             </Routes>
           </div>
-          <div className="rightColumn">{<User />}</div>
+          <div className="rightColumn">
+            <Routes>
+              <Route exact path="/createaccount"></Route>
+              <Route exact path="/" element={<User />}></Route>
+            </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </div>

@@ -19,11 +19,14 @@ import {
   selectUserId,
   toggleIsLoggedIn,
   setUserId,
+  selectUserDisplayName,
+  setUserDisplayName,
 } from "./userSlice.js";
 
 export default function User() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const displayUserId = useSelector(selectUserId);
+  const displayUserDisplayName = useSelector(selectUserDisplayName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +35,7 @@ export default function User() {
       if (isLoggedIn === false) {
         dispatch(toggleIsLoggedIn(true));
         dispatch(setUserId(user.uid));
+        dispatch(setUserDisplayName(user.displayName));
         console.log(user.displayName);
         let userExists = await checkExistingUser(user.uid);
         if (userExists === false) {
@@ -64,7 +68,7 @@ export default function User() {
 
   function setNewUser(user) {
     console.log("I will soon create a new profile for " + user.uid);
-    navigate("/createaccount"); //utiliser DisplayUserId au sein de cette page (a créer)
+    navigate("/createaccount");
   }
   if (isLoggedIn) {
     return (
@@ -73,7 +77,7 @@ export default function User() {
           <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
         </Link>
         <p>User ID : {displayUserId}</p>
-        <button onClick={signIn}>Sign In</button>
+        {/* <button onClick={signIn}>Sign In</button> */}
         <button onClick={signOutUser}>Sign Out</button>
         <button>Check Username</button>
         <button>displayName from Redux</button>
@@ -82,8 +86,12 @@ export default function User() {
     );
   }
   return (
-    <div>
-      <button onClick={signIn}>Sign In</button>
+    <div className="signInBox">
+      <h1>New on Twitter ?</h1>
+      <button onClick={signIn}>Sign in with Google</button>
+      <button>Sign in with Apple (soon)</button>
+      <button>Create an Account (soon)</button>
+      <p>By setting up an account, you're accepting our Terms of Use.</p>
     </div>
   );
 }

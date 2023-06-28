@@ -4,6 +4,7 @@ import imageIcon from "../icons/image-icon.png";
 const initialState = {
   isLoggedIn: false,
   userId: null,
+  userDisplayName: null,
 };
 
 export const userSlice = createSlice({
@@ -25,11 +26,16 @@ export const userSlice = createSlice({
     setUserId: (state, action) => {
       state.userId = action.payload;
     },
+    setUserDisplayName: (state, action) => {
+      state.userDisplayName = action.payload;
+    },
   },
 });
 
-export const { toggleIsLoggedIn, setUserId } = userSlice.actions;
+export const { toggleIsLoggedIn, setUserId, setUserDisplayName } =
+  userSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectUserId = (state) => state.user.userId;
+export const selectUserDisplayName = (state) => state.user.userDisplayName;
 export default userSlice.reducer;

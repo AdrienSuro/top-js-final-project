@@ -37,7 +37,7 @@ $main-column-width: 930px;
 }
 
 .rightColumn {
-    width: 348px;
+    width: 448px;
 }
 
 .chooseTimeline {
@@ -399,4 +399,19 @@ $main-column-width: 930px;
     align-items: center;
     margin-top: 40px;
     font-size: 1.6rem;
+}
+
+.rightColumn {
+    .signInBox {
+        border: $border-light-grey 2px solid;
+        border-radius: 5px;
+        margin-top: 10px;
+        button {
+            border-radius: 5px;
+            width: 80%;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            background-color: white;
+        }
+    }
 }

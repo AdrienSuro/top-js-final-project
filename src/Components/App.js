@@ -6,6 +6,7 @@ import TweetList from "./TweetList";
 import CreateAccount from "./CreateAccount";
 import User from "./User";
 import SideNavbar from "./SideNavbar";
+import SignUp from "./SignUp";
 import Timeline from "./Timeline";
 import UserProfile from "./UserProfile";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
@@ -34,7 +35,7 @@ const App = () => {
               <Route
                 exact
                 path="/createaccount"
-                element={<CreateAccount />}
+                element={<SignUp step="birthDate" />}
               ></Route>
             </Routes>
           </div>

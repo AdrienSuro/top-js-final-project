@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   doc,
@@ -19,6 +19,21 @@ export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
   const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+
+  function handleNext(data) {
+    switch (step) {
+      case 1:
+    }
+    setStep(step + 1);
+  }
+
+  function renderStep() {
+    switch (step) {
+      case 1:
+        return <div>Display Name</div>;
+    }
+  }
 
   function createUser(event) {
     event.preventDefault();
@@ -47,37 +62,8 @@ export default function CreateAccount(user) {
 
   return (
     <div>
-      <h1>Hi {displayUserDisplayName} !</h1>
-      <h2>
-        Fill in the following fields to set up an account and explore Twitter !
-      </h2>
-      <form>
-        <label for="username">Username:</label>
-        <br></br>
-        <input required type="text" name="username" id="username"></input>
-        <br></br>
-        <label for="displayname">Display Name:</label>
-        <br></br>
-        <input
-          type="text"
-          name="displayname"
-          id="displayname"
-          value={user.displayName}
-          required
-        ></input>
-        <br></br>
-        <label for="description">Description:</label>
-        <br></br>
-        <input type="text" name="description" id="description" required></input>
-        <br></br>
-        <label for="location">Location:</label>
-        <br></br>
-        <input type="text" name="location" id="location" required></input>
-        <br></br>
-        <button type="submit" value="submit" onClick={createUser}>
-          Set Account
-        </button>
-      </form>
+      <h1>Twitter Logo</h1>
+      {renderStep()}
     </div>
   );
 }

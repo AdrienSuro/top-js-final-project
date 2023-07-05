@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SignUp(props) {
+export default function SignUpSteps(props) {
   const { step } = props;
 
   switch (step) {

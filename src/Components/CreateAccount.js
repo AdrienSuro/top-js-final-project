@@ -27,6 +27,11 @@ export default function CreateAccount(user) {
       case 1:
         alert("step 1");
         console.log("step1");
+        break;
+      case 2:
+        alert("step 2");
+        console.log("step2");
+        break;
     }
     setStep(step + 1);
   }
@@ -35,6 +40,10 @@ export default function CreateAccount(user) {
     switch (step) {
       case 1:
         return <SignUpSteps step="displayName" handleNext={handleNext} />;
+      case 2:
+        return <SignUpSteps step="userName" handleNext={handleNext} />;
+      default:
+        return <div>Default</div>;
     }
   }
 

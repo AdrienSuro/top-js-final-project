@@ -12,7 +12,12 @@ export default function SignUpSteps(props) {
         </div>
       );
     case "userName":
-      return <div>User Name</div>;
+      return (
+        <div>
+          <h1>User Name</h1>
+          <button onClick={handleNext}>Next</button>
+        </div>
+      );
     case "birthDate":
       return <div>Birth Date</div>;
     default:

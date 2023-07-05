@@ -14,6 +14,7 @@ import {
 import { db } from "./Firebase";
 import { selectUserId, selectUserDisplayName } from "./userSlice.js";
 import { useNavigate } from "react-router-dom";
+import SignUpSteps from "./SignUpSteps";
 
 export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
@@ -21,17 +22,19 @@ export default function CreateAccount(user) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
 
-  function handleNext(data) {
+  function handleNext() {
     switch (step) {
       case 1:
+        alert("step 1");
+        console.log("step1");
     }
     setStep(step + 1);
   }
 
-  function renderStep() {
+  function renderStep(handleNext) {
     switch (step) {
       case 1:
-        return <div>Display Name</div>;
+        return <SignUpSteps step="displayName" handleNext={handleNext} />;
     }
   }
 
@@ -63,7 +66,7 @@ export default function CreateAccount(user) {
   return (
     <div>
       <h1>Twitter Logo</h1>
-      {renderStep()}
+      {renderStep(handleNext)}
     </div>
   );
 }

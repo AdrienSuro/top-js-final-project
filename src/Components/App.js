@@ -35,7 +35,7 @@ const App = () => {
               <Route
                 exact
                 path="/createaccount"
-                element={<SignUpSteps step="birthDate" />}
+                element={<CreateAccount />}
               ></Route>
             </Routes>
           </div>

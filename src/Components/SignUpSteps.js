@@ -1,11 +1,16 @@
 import React from "react";
 
 export default function SignUpSteps(props) {
-  const { step } = props;
+  const { step, handleNext } = props;
 
   switch (step) {
     case "displayName":
-      return <div>Display Name</div>;
+      return (
+        <div>
+          <h1>Display Name</h1>
+          <button onClick={handleNext}>Next</button>
+        </div>
+      );
     case "userName":
       return <div>User Name</div>;
     case "birthDate":

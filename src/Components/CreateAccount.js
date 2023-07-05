@@ -22,11 +22,11 @@ export default function CreateAccount(user) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
 
-  function handleNext() {
+  function handleNext(data) {
     switch (step) {
       case 1:
         alert("step 1");
-        console.log("step1");
+        console.log(data);
         break;
       case 2:
         alert("step 2");

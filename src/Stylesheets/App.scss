@@ -415,3 +415,17 @@ $main-column-width: 930px;
         }
     }
 }
+
+.createAccountWrapper {
+    margin-top: 30px;
+    border: solid 1px $border-light-grey;
+    border-radius: 10px;
+    background-color: $border-light-grey;
+    #twitterLogo {
+        width: 50px;
+        margin: auto;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}

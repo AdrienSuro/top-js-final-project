@@ -1,7 +1,12 @@
 import React from "react";
+import { selectUserId, selectUserDisplayName } from "./userSlice.js";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpSteps(props) {
   const { step, handleNext } = props;
+  const displayUserId = useSelector(selectUserId);
+  const navigate = useNavigate();
 
   const addUserData = (data) => {
     handleNext(data);
@@ -25,12 +30,51 @@ export default function SignUpSteps(props) {
     case "userName":
       return (
         <div>
-          <h1>User Name</h1>
-          <button onClick={handleNext}>Next</button>
+          <label for="userName">User Name:</label>
+          <input
+            type="text"
+            name="userName"
+            id="userName"
+            value={displayUserId}
+          ></input>
+          <button
+            onClick={() =>
+              handleNext(document.getElementById("userName").value)
+            }
+          >
+            Next
+          </button>
         </div>
       );
-    case "birthDate":
-      return <div>Birth Date</div>;
+    case "userLocation":
+      return (
+        <div>
+          <label for="location">Location :</label>
+          <input type="text" name="location" id="location"></input>
+          <button
+            onClick={() =>
+              handleNext(document.getElementById("location").value)
+            }
+          >
+            Next
+          </button>
+        </div>
+      );
+    case "userDescription":
+      return (
+        <div>
+          <label for="userDescription">Description :</label>
+          <input type="text" name="description" id="description"></input>
+          <button
+            onClick={() => {
+              handleNext(document.getElementById("location").value);
+              navigate("/");
+            }}
+          >
+            Done !
+          </button>
+        </div>
+      );
     default:
       return <div>"Looking forward to the Weekend"</div>;
   }

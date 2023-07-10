@@ -15,22 +15,32 @@ import { db } from "./Firebase";
 import { selectUserId, selectUserDisplayName } from "./userSlice.js";
 import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
+import twitterLogo from "../icons/main-logo.png";
 
 export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
   const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const accountCreated = null;
+  const userName = null;
+  const userDisplayName = null;
+  const userDescription = null;
+  const userLocation = null;
 
   function handleNext(data) {
     switch (step) {
       case 1:
-        alert("step 1");
-        console.log(data);
+        userDisplayName = data;
         break;
       case 2:
-        alert("step 2");
-        console.log("step2");
+        userName = data;
+        break;
+      case 3:
+        userLocation = data;
+        break;
+      case 4:
+        userDescription = data;
         break;
     }
     setStep(step + 1);
@@ -42,6 +52,10 @@ export default function CreateAccount(user) {
         return <SignUpSteps step="displayName" handleNext={handleNext} />;
       case 2:
         return <SignUpSteps step="userName" handleNext={handleNext} />;
+      case 3:
+        return <SignUpSteps step="userLocation" handleNext={handleNext} />;
+      case 4:
+        return <SignUpSteps step="userDescription" handleNext={handleNext} />;
       default:
         return <div>Default</div>;
     }
@@ -73,8 +87,8 @@ export default function CreateAccount(user) {
   }
 
   return (
-    <div>
-      <h1>Twitter Logo</h1>
+    <div className="createAccountWrapper">
+      <img src={twitterLogo} id="twitterLogo"></img>
       {renderStep(handleNext)}
     </div>
   );

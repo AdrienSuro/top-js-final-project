@@ -408,4 +408,18 @@
   background-color: white;
 }
 
+.createAccountWrapper {
+  margin-top: 30px;
+  border: solid 1px #EFF3F4;
+  border-radius: 10px;
+  background-color: #EFF3F4;
+}
+.createAccountWrapper #twitterLogo {
+  width: 50px;
+  margin: auto;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 /*# sourceMappingURL=App.css.map */

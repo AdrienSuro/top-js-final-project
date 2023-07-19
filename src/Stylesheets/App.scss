@@ -428,4 +428,23 @@ $main-column-width: 930px;
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    .createAccountContent {
+        margin-right: 90px;
+        margin-left: 90px;
+        h2 {
+            font-size: 2rem;
+        }
+        .formWrapper {
+            display: flex;
+            flex-flow: column nowrap;
+            border: solid 2px $primary-blue;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 40px;
+            input {
+                background-color: $border-light-grey;
+                border: none;
+            }
+        }
+    }
 }

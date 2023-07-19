@@ -421,5 +421,24 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
+.createAccountWrapper .createAccountContent {
+  margin-right: 90px;
+  margin-left: 90px;
+}
+.createAccountWrapper .createAccountContent h2 {
+  font-size: 2rem;
+}
+.createAccountWrapper .createAccountContent .formWrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  border: solid 2px #1D9BF0;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 40px;
+}
+.createAccountWrapper .createAccountContent .formWrapper input {
+  background-color: #EFF3F4;
+  border: none;
+}
 
 /*# sourceMappingURL=App.css.map */

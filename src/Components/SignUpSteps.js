@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function SignUpSteps(props) {
   const { step, handleNext } = props;
   const displayUserId = useSelector(selectUserId);
+  const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
 
   const addUserData = (data) => {
@@ -15,9 +16,18 @@ export default function SignUpSteps(props) {
   switch (step) {
     case "displayName":
       return (
-        <div>
-          <label for="displayname">Display Name:</label>
-          <input type="text" name="displayName" id="displayName"></input>
+        <div className="createAccountContent">
+          <h2>How do you want to be called ?</h2>
+          <p>You can always modify this later.</p>
+          <div className="formWrapper">
+            <label for="displayname">Display Name</label>
+            <input
+              type="text"
+              name="displayName"
+              id="displayName"
+              value={displayUserDisplayName}
+            ></input>
+          </div>
           <button
             onClick={() =>
               handleNext(document.getElementById("displayName").value)

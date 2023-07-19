@@ -22,11 +22,11 @@ export default function CreateAccount(user) {
   const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const accountCreated = null;
-  const userName = null;
-  const userDisplayName = null;
-  const userDescription = null;
-  const userLocation = null;
+  let accountCreated = null;
+  let userName = null;
+  let userDisplayName = null;
+  let userDescription = null;
+  let userLocation = null;
 
   function handleNext(data) {
     switch (step) {
@@ -44,6 +44,7 @@ export default function CreateAccount(user) {
         break;
     }
     setStep(step + 1);
+    console.log(userDisplayName);
   }
 
   function renderStep(handleNext) {
@@ -61,30 +62,30 @@ export default function CreateAccount(user) {
     }
   }
 
-  function createUser(event) {
-    event.preventDefault();
+  //   function createUser(event) {
+  //     event.preventDefault();
 
-    const username = document.getElementById("username").value;
-    const displayName = document.getElementById("displayname").value;
-    const description = document.getElementById("description").value;
-    const location = document.getElementById("location").value;
+  //     const username = document.getElementById("username").value;
+  //     const displayName = document.getElementById("displayname").value;
+  //     const description = document.getElementById("description").value;
+  //     const location = document.getElementById("location").value;
 
-    if (username && displayName && description && location) {
-      // All required fields are filled, proceed with account creation
-      setDoc(doc(db, "users", displayUserId), {
-        accountCreated: new Date(),
-        userName: username,
-        displayName: displayName,
-        description: description,
-        location: location,
-      });
+  //     if (username && displayName && description && location) {
+  //       // All required fields are filled, proceed with account creation
+  //       setDoc(doc(db, "users", displayUserId), {
+  //         accountCreated: new Date(),
+  //         userName: username,
+  //         displayName: displayName,
+  //         description: description,
+  //         location: location,
+  //       });
 
-      navigate("/");
-    } else {
-      // Show an error message or perform any other required validation logic
-      alert("Please fill in all required fields.");
-    }
-  }
+  //       navigate("/");
+  //     } else {
+  //       // Show an error message or perform any other required validation logic
+  //       alert("Please fill in all required fields.");
+  //     }
+  //   }
 
   return (
     <div className="createAccountWrapper">

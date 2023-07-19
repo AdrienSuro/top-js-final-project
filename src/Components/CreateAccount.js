@@ -24,7 +24,7 @@ export default function CreateAccount(user) {
   const [step, setStep] = useState(1);
   let accountCreated = null;
   let userName = null;
-  let userDisplayName = null;
+  let userDisplayName = displayUserDisplayName;
   let userDescription = null;
   let userLocation = null;
 
@@ -59,6 +59,7 @@ export default function CreateAccount(user) {
         return <SignUpSteps step="userDescription" handleNext={handleNext} />;
       default:
         return <div>Default</div>;
+      // THIS SHOUDL REDIRECT USER TO MAIN PAGE
     }
   }
 

@@ -1,6 +1,10 @@
 import React from "react";
-import { selectUserId, selectUserDisplayName } from "./userSlice.js";
-import { useSelector } from "react-redux";
+import {
+  selectUserId,
+  selectUserDisplayName,
+  setUserDisplayName,
+} from "./userSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUpSteps(props) {
@@ -8,9 +12,14 @@ export default function SignUpSteps(props) {
   const displayUserId = useSelector(selectUserId);
   const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const addUserData = (data) => {
     handleNext(data);
+  };
+
+  const handleChange = (event) => {
+    dispatch(setUserDisplayName(event.target.value));
   };
 
   switch (step) {
@@ -26,12 +35,14 @@ export default function SignUpSteps(props) {
               name="displayName"
               id="displayName"
               value={displayUserDisplayName}
+              onChange={handleChange}
             ></input>
           </div>
           <button
-            onClick={() =>
-              handleNext(document.getElementById("displayName").value)
-            }
+            onClick={() => {
+              handleNext(document.getElementById("displayName").value);
+              document.getElementById("displayName").value = null;
+            }}
           >
             Next
           </button>
@@ -39,32 +50,37 @@ export default function SignUpSteps(props) {
       );
     case "userName":
       return (
-        <div>
-          <label for="userName">User Name:</label>
-          <input
-            type="text"
-            name="userName"
-            id="userName"
-            value={displayUserId}
-          ></input>
+        <div className="createAccountContent">
+          <h2>Define ayour username.</h2>
+          <p>This one will never change.</p>
+          <div className="formWrapper">
+            <label for="userName">Username</label>
+            <input type="text" name="userName" id="userName"></input>
+          </div>
           <button
-            onClick={() =>
-              handleNext(document.getElementById("userName").value)
-            }
+            onClick={() => {
+              handleNext(document.getElementById("userName").value);
+              document.getElementById("userName").value = null;
+            }}
           >
             Next
           </button>
         </div>
       );
+
     case "userLocation":
       return (
-        <div>
-          <label for="location">Location :</label>
-          <input type="text" name="location" id="location"></input>
+        <div className="createAccountContent">
+          <h2>Set your location.</h2>
+          <div className="formWrapper">
+            <label for="userLocation">Location</label>
+            <input type="text" name="userLocation" id="userLocation"></input>
+          </div>
           <button
-            onClick={() =>
-              handleNext(document.getElementById("location").value)
-            }
+            onClick={() => {
+              handleNext(document.getElementById("userLocation").value);
+              document.getElementById("userLocation").value = null;
+            }}
           >
             Next
           </button>
@@ -72,16 +88,23 @@ export default function SignUpSteps(props) {
       );
     case "userDescription":
       return (
-        <div>
-          <label for="userDescription">Description :</label>
-          <input type="text" name="description" id="description"></input>
+        <div className="createAccountContent">
+          <h2>Say a few words about you.</h2>
+          <div className="formWrapper">
+            <label for="userDescription">Description</label>
+            <input
+              type="text"
+              name="userDescription"
+              id="userDescription"
+            ></input>
+          </div>
           <button
             onClick={() => {
-              handleNext(document.getElementById("location").value);
-              navigate("/");
+              handleNext(document.getElementById("userDescription").value);
+              document.getElementById("userDescription").value = null;
             }}
           >
-            Done !
+            Next
           </button>
         </div>
       );

@@ -64,31 +64,6 @@ export default function CreateAccount(user) {
     }
   }
 
-  //   function createUser(event) {
-  //     event.preventDefault();
-
-  //     const username = document.getElementById("username").value;
-  //     const displayName = document.getElementById("displayname").value;
-  //     const description = document.getElementById("description").value;
-  //     const location = document.getElementById("location").value;
-
-  //     if (username && displayName && description && location) {
-  //       // All required fields are filled, proceed with account creation
-  //       setDoc(doc(db, "users", displayUserId), {
-  //         accountCreated: new Date(),
-  //         userName: username,
-  //         displayName: displayName,
-  //         description: description,
-  //         location: location,
-  //       });
-
-  //       navigate("/");
-  //     } else {
-  //       // Show an error message or perform any other required validation logic
-  //       alert("Please fill in all required fields.");
-  //     }
-  //   }
-
   return (
     <div className="createAccountWrapper">
       <img src={twitterLogo} id="twitterLogo"></img>

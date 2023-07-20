@@ -57,9 +57,10 @@ export default function CreateAccount(user) {
         return <SignUpSteps step="userLocation" handleNext={handleNext} />;
       case 4:
         return <SignUpSteps step="userDescription" handleNext={handleNext} />;
+      case 5:
+        navigate("/");
       default:
         return <div>Default</div>;
-      // THIS SHOUDL REDIRECT USER TO MAIN PAGE
     }
   }
 

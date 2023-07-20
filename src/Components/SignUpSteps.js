@@ -43,6 +43,7 @@ export default function SignUpSteps(props) {
               handleNext(document.getElementById("displayName").value);
               document.getElementById("displayName").value = null;
             }}
+            id="nextButton"
           >
             Next
           </button>
@@ -62,6 +63,7 @@ export default function SignUpSteps(props) {
               handleNext(document.getElementById("userName").value);
               document.getElementById("userName").value = null;
             }}
+            id="nextButton"
           >
             Next
           </button>
@@ -81,6 +83,7 @@ export default function SignUpSteps(props) {
               handleNext(document.getElementById("userLocation").value);
               document.getElementById("userLocation").value = null;
             }}
+            id="nextButton"
           >
             Next
           </button>
@@ -103,6 +106,7 @@ export default function SignUpSteps(props) {
               handleNext(document.getElementById("userDescription").value);
               document.getElementById("userDescription").value = null;
             }}
+            id="nextButton"
           >
             Next
           </button>

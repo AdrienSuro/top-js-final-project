@@ -1,6 +1,10 @@
 import { initializeApp, firebase } from "firebase/app";
 import { useSelector, useDispatch } from "react-redux";
-import { userSlice, selectIsLoggedIn, toggleIsLoggedIn } from "./userSlice";
+import {
+  userSlice,
+  selectIsLoggedIn,
+  toggleIsLoggedIn,
+} from "../Components/userSlice";
 import firebaseConfig from "./FirebaseConfig";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";

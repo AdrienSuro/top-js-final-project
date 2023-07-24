@@ -11,7 +11,7 @@ import {
   getDocs,
   docRef,
 } from "firebase/firestore";
-import { db } from "./Firebase";
+import { db } from "../api/Firebase";
 import { selectUserId, selectUserDisplayName } from "./userSlice.js";
 import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";

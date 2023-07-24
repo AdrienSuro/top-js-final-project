@@ -20,7 +20,7 @@ import {
   docRef,
 } from "firebase/firestore";
 
-import { db, getUserName, getProfilePicUrl } from "./Firebase";
+import { db, getUserName, getProfilePicUrl } from "../api/Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Timeline() {

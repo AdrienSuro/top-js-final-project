@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import Tweet from "./Tweet";
-import { tweetsCollection, db } from "./Firebase";
+import { tweetsCollection, db } from "../api/Firebase";
 
 export default function TweetList(user) {
   const [allTweets, setAllTweets] = useState([]);

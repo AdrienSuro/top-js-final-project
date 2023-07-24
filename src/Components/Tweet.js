@@ -17,7 +17,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-import { db, getUserDescription } from "./Firebase";
+import { db, getUserDescription } from "../api/Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
 
 function Tweet(props) {

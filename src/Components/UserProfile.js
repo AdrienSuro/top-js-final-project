@@ -10,7 +10,7 @@ import messagesIcon from "../icons/messages.png";
 import addNotificationsIcon from "../icons/activateNotifications.png";
 import TweetList from "./TweetList";
 import UserTweets from "./UserTweets";
-import { db, getUserDisplayName } from "./Firebase";
+import { db, getUserDisplayName } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
 export default function UserProfile(props) {

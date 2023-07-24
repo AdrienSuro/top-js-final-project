@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import Tweet from "./Tweet";
-import { tweetsCollection, db } from "./Firebase";
+import { tweetsCollection, db } from "../api/Firebase";
 
 export default function UserTweets() {
   const [userTweets, setUserTweets] = useState([]);

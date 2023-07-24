@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, signIn, signOutUser, db } from "./Firebase.js";
+import { auth, signIn, signOutUser, db } from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 import {

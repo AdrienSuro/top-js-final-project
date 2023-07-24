@@ -18,7 +18,7 @@ import {
   docRef,
 } from "firebase/firestore";
 
-import { db, getProfilePicUrl } from "./Firebase";
+import { db, getProfilePicUrl } from "../api/Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function WriteTweet() {

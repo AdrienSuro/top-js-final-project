@@ -16,7 +16,9 @@ export function getProfileData(userName) {
   // will get user Info as an object
 }
 
-export function getTimeline(userName) {}
+export function getTimeline(userName) {
+  return;
+}
 
 // ******* WRITE ******* //
 
@@ -33,5 +35,15 @@ export function changeUserLocation(userName, newLocation) {
 }
 
 export function changeUserDisplayName(userName, newDisplayName) {
+  return;
+}
+
+export function addTweet(userName, content) {
+  return;
+}
+
+export function retweet(userName, reference) {
+  //userName will be taken locally, from the userSlice
+  //reference will be taken from the actual tweet
   return;
 }

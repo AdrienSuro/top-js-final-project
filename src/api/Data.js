@@ -1,3 +1,19 @@
+// ******* IMPORTS ******* //
+import { v4 as uuidv4 } from "uuid";
+import { db, getProfilePicUrl } from "../api/Firebase";
+import { firebase } from "firebase/app";
+import {
+  doc,
+  setDoc,
+  deleteDoc,
+  querySnapshot,
+  query,
+  where,
+  collection,
+  getDocs,
+  docRef,
+} from "firebase/firestore";
+
 // ******* READ ******* //
 
 export function getOwnTweets(userName) {
@@ -20,6 +36,10 @@ export function getTimeline(userName) {
   return;
 }
 
+export function getUserDisplayName(userName) {
+  return;
+}
+
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {
@@ -39,7 +59,36 @@ export function changeUserDisplayName(userName, newDisplayName) {
 }
 
 export function addTweet(userName, content) {
+  let randomIdentifier = uuidv4();
+  setDoc(doc(db, "tweets", randomIdentifier), {
+    content: content,
+    userName: userName,
+    displayName: getUserDisplayName(userName),
+    timestamp: new Date(),
+    comments: 0,
+    retweets: 0,
+    likes: 0,
+    stats: 0,
+    docId: randomIdentifier,
+  });
   return;
+}
+
+function uploadTweet() {
+  const tweetContentField = document.getElementById("tweetContentField");
+  let randomIdentifier = uuidv4();
+  setDoc(doc(db, "tweets", randomIdentifier), {
+    content: tweetContentField.value,
+    userName: "AdrienSuro",
+    displayName: "Anonym User",
+    timestamp: new Date(),
+    comments: getRandomNum(),
+    retweets: getRandomNum(),
+    likes: getRandomNum(),
+    stats: getRandomNum(),
+    docId: randomIdentifier,
+  });
+  tweetContentField.value = "";
 }
 
 export function retweet(userName, reference) {

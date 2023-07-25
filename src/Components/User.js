@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, signIn, signOutUser, db } from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
+import { checkExistingUser, getOwnTweets } from "../api/Data.js";
 
 import {
   getFirestore,
@@ -54,18 +55,6 @@ export default function User() {
     }
   });
 
-  async function checkExistingUser(id) {
-    let userExists = false;
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      //   console.log(doc.id, " => ", doc.data());
-      if (doc.id === id) {
-        userExists = true;
-      }
-    });
-    return userExists;
-  }
-
   function setNewUser(user) {
     console.log("I will soon create a new profile for " + user.uid);
     navigate("/createaccount");
@@ -90,7 +79,9 @@ export default function User() {
       <h1>New on Twitter ?</h1>
       <button onClick={signIn}>Sign in with Google</button>
       <button>Sign in with Apple (soon)</button>
-      <button>Create an Account (soon)</button>
+      <button onClick={() => getOwnTweets("AdrienSuro")}>
+        Create an Account (soon)
+      </button>
       <p>By setting up an account, you're accepting our Terms of Use.</p>
     </div>
   );

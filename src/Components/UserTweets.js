@@ -12,7 +12,7 @@ import {
 import Tweet from "./Tweet";
 import { tweetsCollection, db } from "../api/Firebase";
 
-export default function UserTweets() {
+export default function UserTweets(props) {
   const [userTweets, setUserTweets] = useState([]);
   const { username } = useParams();
 

@@ -16,8 +16,19 @@ import {
 
 // ******* READ ******* //
 
-export function getOwnTweets(userName) {
-  //will get user Tweets
+// Simple query example :
+// const q = query(citiesRef, where("state", "==", "CA"));
+
+export async function getOwnTweets(userName) {
+  const tweetsRef = collection(db, "tweets");
+  const q = query(tweetsRef, where("userName", "==", userName));
+  const querySnapshot = await getDocs(q);
+  const tweets = [];
+  querySnapshot.forEach((doc) => {
+    tweets.push(doc.data());
+  });
+  tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
+  return tweets;
 }
 
 export function getRetweets(userName) {
@@ -38,6 +49,26 @@ export function getTimeline(userName) {
 
 export function getUserDisplayName(userName) {
   return;
+}
+
+export async function returnExistingUser(userName) {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    if (doc.id === userName) {
+      return userName;
+    } else return false;
+  });
+}
+
+export async function checkExistingUser(id) {
+  let userExists = false;
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    if (doc.id === id) {
+      userExists = true;
+    }
+  });
+  return userExists;
 }
 
 // ******* WRITE ******* //
@@ -72,23 +103,6 @@ export function addTweet(userName, content) {
     docId: randomIdentifier,
   });
   return;
-}
-
-function uploadTweet() {
-  const tweetContentField = document.getElementById("tweetContentField");
-  let randomIdentifier = uuidv4();
-  setDoc(doc(db, "tweets", randomIdentifier), {
-    content: tweetContentField.value,
-    userName: "AdrienSuro",
-    displayName: "Anonym User",
-    timestamp: new Date(),
-    comments: getRandomNum(),
-    retweets: getRandomNum(),
-    likes: getRandomNum(),
-    stats: getRandomNum(),
-    docId: randomIdentifier,
-  });
-  tweetContentField.value = "";
 }
 
 export function retweet(userName, reference) {

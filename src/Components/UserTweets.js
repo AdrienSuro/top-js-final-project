@@ -11,29 +11,21 @@ import {
 } from "firebase/firestore";
 import Tweet from "./Tweet";
 import { tweetsCollection, db } from "../api/Firebase";
+import { getOwnTweets } from "../api/Data";
 
 export default function UserTweets(props) {
   const [userTweets, setUserTweets] = useState([]);
   const { username } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allTweets = collection(db, "tweets");
-      const q = query(allTweets, where("userName", "==", username));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const tweets = [];
-        querySnapshot.forEach((doc) => {
-          tweets.push(doc.data());
-        });
-        tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-        setUserTweets(tweets);
-      });
+    const fetchOwnTweets = () => {
+      setUserTweets(() => getOwnTweets(username));
     };
-    fetchData();
-
-    const interval = setInterval(() => fetchData(), 10000);
+    fetchOwnTweets();
+    const interval = setInterval(() => fetchOwnTweets(), 10000);
     return () => clearInterval(interval);
   });
+
   return (
     <div>
       {userTweets.map((e) => (

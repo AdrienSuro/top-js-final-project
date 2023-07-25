@@ -22,29 +22,43 @@ export default function CreateAccount(user) {
   const displayUserDisplayName = useSelector(selectUserDisplayName);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  let accountCreated = null;
-  let userName = null;
   let userDisplayName = displayUserDisplayName;
-  let userDescription = null;
-  let userLocation = null;
+  const [userObject, setUserObject] = useState({
+    displayName: null,
+    userName: null,
+    location: null,
+    description: null,
+  });
 
   function handleNext(data) {
     switch (step) {
       case 1:
-        userDisplayName = data;
+        setUserObject({
+          ...userObject,
+          displayName: data,
+        });
         break;
       case 2:
-        userName = data;
+        setUserObject({
+          ...userObject,
+          userName: data,
+        });
         break;
       case 3:
-        userLocation = data;
+        setUserObject({
+          ...userObject,
+          location: data,
+        });
         break;
       case 4:
-        userDescription = data;
+        setUserObject({
+          ...userObject,
+          description: data,
+        });
         break;
     }
     setStep(step + 1);
-    console.log(userDisplayName);
+    console.log(userObject);
   }
 
   function renderStep(handleNext) {
@@ -66,7 +80,13 @@ export default function CreateAccount(user) {
 
   return (
     <div className="createAccountWrapper">
-      <img src={twitterLogo} id="twitterLogo"></img>
+      <img
+        src={twitterLogo}
+        id="twitterLogo"
+        onClick={() => {
+          console.log(userObject);
+        }}
+      ></img>
       {renderStep(handleNext)}
     </div>
   );

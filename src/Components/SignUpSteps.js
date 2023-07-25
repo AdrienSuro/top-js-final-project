@@ -14,10 +14,6 @@ export default function SignUpSteps(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const addUserData = (data) => {
-    handleNext(data);
-  };
-
   const handleChange = (event) => {
     dispatch(setUserDisplayName(event.target.value));
   };

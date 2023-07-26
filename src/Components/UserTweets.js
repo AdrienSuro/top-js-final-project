@@ -18,9 +18,15 @@ export default function UserTweets(props) {
   const { username } = useParams();
 
   useEffect(() => {
-    const fetchOwnTweets = () => {
-      setUserTweets(() => getOwnTweets(username));
+    const fetchOwnTweets = async () => {
+      try {
+        const tweets = await getOwnTweets(username);
+        setUserTweets(tweets);
+      } catch (error) {
+        console.error("Error fetching tweets:", error);
+      }
     };
+
     fetchOwnTweets();
     const interval = setInterval(() => fetchOwnTweets(), 10000);
     return () => clearInterval(interval);

@@ -86,6 +86,7 @@ export default function User() {
         Create an Account (work in progress)
       </button>
       <p>By setting up an account, you're accepting our Terms of Use.</p>
+      <button>Login to an existing account</button>
     </div>
   );
 }

@@ -40,8 +40,7 @@ export default function User() {
         let userExists = await checkExistingUser(user.uid);
         if (userExists === false) {
           // redirect to a form that creates the user in FB
-          setNewUser(user);
-          console.log("no such user");
+          navigate("/createaccount");
         } else if (userExists === true) {
           console.log("user exists already in firebase");
         }
@@ -54,10 +53,6 @@ export default function User() {
     }
   });
 
-  function setNewUser(user) {
-    console.log("I will soon create a new profile for " + user.uid);
-    navigate("/createaccount");
-  }
   if (isLoggedIn) {
     return (
       <div>

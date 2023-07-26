@@ -75,6 +75,7 @@ export default function SideNavbar() {
   return (
     <div>
       <div className="sideNavbar">
+        <p>No logged in User</p>
         <div className="sideNavBarCat">
           <img src={mainLogoImg}></img>
           <p></p>

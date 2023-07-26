@@ -24,7 +24,6 @@ const App = () => {
           <div className="leftColumn">
             <Routes>
               <Route exact path="/" element={<SideNavbar />}></Route>
-              <Route exact path="/:username" element={<User />}></Route>
               <Route exact path="/createaccount"></Route>
             </Routes>
           </div>

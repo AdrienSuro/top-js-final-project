@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, signIn, signOutUser, db } from "../api/Firebase.js";
+import { auth, signInWithGoogle, signOutUser, db } from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { checkExistingUser, getOwnTweets } from "../api/Data.js";
+import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
 
 import {
   getFirestore,
@@ -22,7 +22,7 @@ import {
   setUserId,
   selectUserDisplayName,
   setUserDisplayName,
-} from "./userSlice.js";
+} from "../redux/userSlice.js";
 
 export default function User() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -76,10 +76,14 @@ export default function User() {
   return (
     <div className="signInBox">
       <h1>New on Twitter ?</h1>
-      <button onClick={signIn}>Sign in with Google</button>
+      <button onClick={signInWithGoogle}>Sign in with Google</button>
       <button>Sign in with Apple (soon)</button>
-      <button onClick={() => getOwnTweets("AdrienSuro")}>
-        Create an Account (soon)
+      <button
+        onClick={() => {
+          return;
+        }}
+      >
+        Create an Account (work in progress)
       </button>
       <p>By setting up an account, you're accepting our Terms of Use.</p>
     </div>

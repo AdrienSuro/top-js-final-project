@@ -3,7 +3,7 @@ import {
   selectUserId,
   selectUserDisplayName,
   setUserDisplayName,
-} from "./userSlice.js";
+} from "../redux/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

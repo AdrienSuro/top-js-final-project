@@ -10,7 +10,7 @@ import SignUpSteps from "./SignUpSteps";
 import Timeline from "./Timeline";
 import UserProfile from "./UserProfile";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { selectIsLoggedIn } from "./userSlice";
+import { selectIsLoggedIn } from "../redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {

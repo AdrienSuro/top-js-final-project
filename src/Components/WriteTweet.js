@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import myProfilePicture from "../img/me.png";
 import imageIcon from "../icons/image-icon.png";
 import "firebase/firestore";
-import { selectIsLoggedIn } from "./userSlice";
+import { selectIsLoggedIn } from "../redux/userSlice";
 
 import { firebase } from "firebase/app";
 import {

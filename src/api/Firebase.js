@@ -4,7 +4,7 @@ import {
   userSlice,
   selectIsLoggedIn,
   toggleIsLoggedIn,
-} from "../Components/userSlice";
+} from "../redux/userSlice";
 import firebaseConfig from "./FirebaseConfig";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -29,13 +29,17 @@ export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
 
-export async function signIn() {
+export async function signInWithGoogle() {
   try {
     var provider = new GoogleAuthProvider();
     return await signInWithPopup(auth, provider);
   } catch (error) {
     return { error: error.message };
   }
+}
+
+export async function signInWithForm() {
+  // redirect to the Form
 }
 
 export function signOutUser() {

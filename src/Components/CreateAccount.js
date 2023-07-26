@@ -12,7 +12,7 @@ import {
   docRef,
 } from "firebase/firestore";
 import { db } from "../api/Firebase";
-import { selectUserId, selectUserDisplayName } from "./userSlice.js";
+import { selectUserId, selectUserDisplayName } from "../redux/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
 import twitterLogo from "../icons/main-logo.png";

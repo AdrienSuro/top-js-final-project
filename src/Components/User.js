@@ -37,7 +37,6 @@ export default function User() {
         dispatch(toggleIsLoggedIn(true));
         dispatch(setUserId(user.uid));
         dispatch(setUserDisplayName(user.displayName));
-        console.log(user.displayName);
         let userExists = await checkExistingUser(user.uid);
         if (userExists === false) {
           // redirect to a form that creates the user in FB

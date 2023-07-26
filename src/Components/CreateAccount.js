@@ -16,6 +16,7 @@ import { selectUserId, selectUserDisplayName } from "./userSlice.js";
 import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
 import twitterLogo from "../icons/main-logo.png";
+import { createNewUser } from "../api/Data";
 
 export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
@@ -24,6 +25,7 @@ export default function CreateAccount(user) {
   const [step, setStep] = useState(1);
   let userDisplayName = displayUserDisplayName;
   const [userObject, setUserObject] = useState({
+    uid: displayUserId,
     displayName: null,
     userName: null,
     location: null,
@@ -56,6 +58,8 @@ export default function CreateAccount(user) {
           description: data,
         });
         break;
+      default:
+        return;
     }
     setStep(step + 1);
     console.log(userObject);
@@ -72,7 +76,9 @@ export default function CreateAccount(user) {
       case 4:
         return <SignUpSteps step="userDescription" handleNext={handleNext} />;
       case 5:
+        createNewUser(userObject);
         navigate("/");
+        break;
       default:
         return <div>Default</div>;
     }

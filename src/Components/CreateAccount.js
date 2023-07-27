@@ -93,7 +93,7 @@ export default function CreateAccount(user) {
           console.log(userObject);
         }}
       ></img>
-      {renderStep(handleNext)}
+      {renderStep(addData)}
     </div>
   );
 }

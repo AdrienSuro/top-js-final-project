@@ -34,6 +34,7 @@ export default function User() {
   function signInWithEmailAndDispatch() {
     dispatch(setLoginType("email"));
     createUserWithEmail();
+    navigate("/createaccount");
   }
 
   onAuthStateChanged(auth, async (user) => {

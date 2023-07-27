@@ -32,7 +32,7 @@ export default function CreateAccount(user) {
     description: null,
   });
 
-  function handleNext(data) {
+  function addData(data) {
     switch (step) {
       case 1:
         setUserObject({
@@ -68,13 +68,13 @@ export default function CreateAccount(user) {
   function renderStep(handleNext) {
     switch (step) {
       case 1:
-        return <SignUpSteps step="displayName" handleNext={handleNext} />;
+        return <SignUpSteps step="displayName" handleNext={addData} />;
       case 2:
-        return <SignUpSteps step="userName" handleNext={handleNext} />;
+        return <SignUpSteps step="userName" handleNext={addData} />;
       case 3:
-        return <SignUpSteps step="userLocation" handleNext={handleNext} />;
+        return <SignUpSteps step="userLocation" handleNext={addData} />;
       case 4:
-        return <SignUpSteps step="userDescription" handleNext={handleNext} />;
+        return <SignUpSteps step="userDescription" handleNext={addData} />;
       case 5:
         createNewUser(userObject);
         navigate("/");

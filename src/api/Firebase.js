@@ -1,10 +1,5 @@
 import { initializeApp, firebase } from "firebase/app";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  userSlice,
-  selectIsLoggedIn,
-  toggleIsLoggedIn,
-} from "../redux/userSlice";
 import firebaseConfig from "./FirebaseConfig";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -22,7 +17,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import profilePlaceholder from "../img/profile_placeholder.jpeg";
+import { setLoginType } from "../redux/userSlice.js";
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
@@ -31,6 +26,7 @@ export const auth = getAuth();
 
 export async function signInWithGoogle() {
   try {
+    // cannot put useDispatch here !!!!
     var provider = new GoogleAuthProvider();
     return await signInWithPopup(auth, provider);
   } catch (error) {
@@ -38,7 +34,7 @@ export async function signInWithGoogle() {
   }
 }
 
-export async function signInWithForm() {
+export async function signInWithEmail() {
   // redirect to the Form
 }
 

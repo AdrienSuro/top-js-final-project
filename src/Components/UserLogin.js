@@ -2,34 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, signInWithGoogle, signOutUser, db } from "../api/Firebase.js";
+import {
+  auth,
+  signInWithGoogle,
+  signOutUser,
+  signInWithEmail,
+} from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
-
-import {
-  getFirestore,
-  query,
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-} from "firebase/firestore";
 
 import {
   selectIsLoggedIn,
   selectUserId,
   toggleIsLoggedIn,
   setUserId,
-  selectUserDisplayName,
   setUserDisplayName,
+  setLoginType,
 } from "../redux/userSlice.js";
 
 export default function User() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const displayUserId = useSelector(selectUserId);
-  const displayUserDisplayName = useSelector(selectUserDisplayName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function signInWithGoogleAndDispatch() {
+    dispatch(setLoginType("google"));
+    signInWithGoogle();
+  }
+
+  function signInWithEmailAndDispatch() {
+    dispatch(setLoginType("email"));
+    signInWithEmail();
+  }
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -71,7 +76,7 @@ export default function User() {
   return (
     <div className="signInBox">
       <h1>New on Twitter ?</h1>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+      <button onClick={signInWithGoogleAndDispatch}>Sign in with Google</button>
       <button>Sign in with Apple (soon)</button>
       <button
         onClick={() => {

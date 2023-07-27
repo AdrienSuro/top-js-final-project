@@ -1,18 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  doc,
-  setDoc,
-  deleteDoc,
-  querySnapshot,
-  query,
-  where,
-  collection,
-  getDocs,
-  docRef,
-} from "firebase/firestore";
-import { db } from "../api/Firebase";
-import { selectUserId, selectUserDisplayName } from "../redux/userSlice.js";
+import { selectUserId, selectLoginType } from "../redux/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
 import twitterLogo from "../icons/main-logo.png";
@@ -20,10 +8,9 @@ import { createNewUser } from "../api/Data";
 
 export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
-  const displayUserDisplayName = useSelector(selectUserDisplayName);
+  const loginType = useSelector(selectLoginType);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  let userDisplayName = displayUserDisplayName;
   const [userObject, setUserObject] = useState({
     uid: displayUserId,
     displayName: null,
@@ -76,6 +63,17 @@ export default function CreateAccount(user) {
       case 4:
         return <SignUpSteps step="userDescription" handleNext={addData} />;
       case 5:
+        if (loginType === "google") {
+          createNewUser(userObject);
+          navigate("/");
+          break;
+        } else if (loginType === "email") {
+          return <SignUpSteps step="userEmail" handleNext={addData} />;
+        }
+        break;
+      case 6:
+        return <SignUpSteps step="userPassword" handleNext={addData} />;
+      case 7:
         createNewUser(userObject);
         navigate("/");
         break;

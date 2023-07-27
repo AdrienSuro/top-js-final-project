@@ -108,6 +108,44 @@ export default function SignUpSteps(props) {
           </button>
         </div>
       );
+    case "userEmail":
+      return (
+        <div className="createAccountContent">
+          <h2>Enter your email</h2>
+          <div className="formWrapper">
+            <label for="userEmail">Email</label>
+            <input type="text" name="userEmail" id="userEmail"></input>
+          </div>
+          <button
+            onClick={() => {
+              handleNext(document.getElementById("userEmail").value);
+              document.getElementById("userEmail").value = null;
+            }}
+            id="nextButton"
+          >
+            Next
+          </button>
+        </div>
+      );
+    case "userPassword":
+      return (
+        <div className="createAccountContent">
+          <h2>Enter your password</h2>
+          <div className="formWrapper">
+            <label for="userPassword">Password</label>
+            <input type="text" name="userPassword" id="userPassword"></input>
+          </div>
+          <button
+            onClick={() => {
+              handleNext(document.getElementById("userPassword").value);
+              document.getElementById("userPassword").value = null;
+            }}
+            id="nextButton"
+          >
+            Next
+          </button>
+        </div>
+      );
     default:
       return <div>"Looking forward to the Weekend"</div>;
   }

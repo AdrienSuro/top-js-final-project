@@ -40,8 +40,9 @@ const App = () => {
           </div>
           <div className="rightColumn">
             <Routes>
-              <Route exact path="/createaccount"></Route>
+              <Route exact path="/createaccount" element={<User />}></Route>
               <Route exact path="/" element={<User />}></Route>
+            
             </Routes>
           </div>
         </div>

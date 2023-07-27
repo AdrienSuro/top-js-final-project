@@ -37,6 +37,11 @@ export default function User() {
     navigate("/createaccount");
   }
 
+  function signOutAndBackToHome() {
+    signOutUser();
+    navigate("/");
+  }
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       if (isLoggedIn === false) {
@@ -67,7 +72,7 @@ export default function User() {
         </Link>
         <p>User ID : {displayUserId}</p>
         {/* <button onClick={signIn}>Sign In</button> */}
-        <button onClick={signOutUser}>Sign Out</button>
+        <button onClick={signOutAndBackToHome}>Sign Out</button>
         <button>Check Username</button>
         <button>displayName from Redux</button>
         <p>{isLoggedIn ? "signed in" : "signed out"}</p>

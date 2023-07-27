@@ -16,6 +16,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { setLoginType } from "../redux/userSlice.js";
 
@@ -34,8 +35,18 @@ export async function signInWithGoogle() {
   }
 }
 
-export async function signInWithEmail() {
-  // redirect to the Form
+export async function createUserWithEmail(email, password) {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
 }
 
 export function signOutUser() {

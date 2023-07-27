@@ -6,7 +6,7 @@ import {
   auth,
   signInWithGoogle,
   signOutUser,
-  signInWithEmail,
+  createUserWithEmail,
 } from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
@@ -28,12 +28,12 @@ export default function User() {
 
   function signInWithGoogleAndDispatch() {
     dispatch(setLoginType("google"));
-    signInWithGoogle();
+    navigate("/createaccount");
   }
 
   function signInWithEmailAndDispatch() {
     dispatch(setLoginType("email"));
-    signInWithEmail();
+    createUserWithEmail();
   }
 
   onAuthStateChanged(auth, async (user) => {
@@ -80,7 +80,7 @@ export default function User() {
       <button>Sign in with Apple (soon)</button>
       <button
         onClick={() => {
-          return;
+          signInWithEmailAndDispatch();
         }}
       >
         Create an Account (work in progress)

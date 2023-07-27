@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
 import twitterLogo from "../icons/main-logo.png";
 import { createNewUser } from "../api/Data";
+import { createUserWithEmail } from "../api/Firebase.js";
 
 export default function CreateAccount(user) {
   const displayUserId = useSelector(selectUserId);
@@ -17,6 +18,8 @@ export default function CreateAccount(user) {
     userName: null,
     location: null,
     description: null,
+    email: null,
+    password: null,
   });
 
   function addData(data) {
@@ -43,6 +46,18 @@ export default function CreateAccount(user) {
         setUserObject({
           ...userObject,
           description: data,
+        });
+        break;
+      case 5:
+        setUserObject({
+          ...userObject,
+          email: data,
+        });
+        break;
+      case 6:
+        setUserObject({
+          ...userObject,
+          password: data,
         });
         break;
       default:
@@ -74,6 +89,7 @@ export default function CreateAccount(user) {
       case 6:
         return <SignUpSteps step="userPassword" handleNext={addData} />;
       case 7:
+        createUserWithEmail(userObject.email, userObject.password);
         createNewUser(userObject);
         navigate("/");
         break;

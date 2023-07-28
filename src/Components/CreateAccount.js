@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUserId, selectLoginType } from "../redux/userSlice.js";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export default function CreateAccount(user) {
   const loginType = useSelector(selectLoginType);
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const [userObjectComplete, setUserObjectComplete] = useState(false);
   const [userObject, setUserObject] = useState({
     uid: displayUserId,
     displayName: null,
@@ -21,6 +22,17 @@ export default function CreateAccount(user) {
     email: null,
     password: null,
   });
+
+  useEffect(() => {
+    if (loginType === "google") {
+      createNewUser(userObject);
+      navigate("/");
+    } else if (loginType === "email") {
+      createUserWithEmail(userObject.email, "random Password");
+      createNewUser(userObject);
+      navigate("/");
+    }
+  }, [userObjectComplete]);
 
   function addData(data) {
     switch (step) {
@@ -48,9 +60,7 @@ export default function CreateAccount(user) {
           description: data,
         });
         if (loginType === "google") {
-          console.log("login type google");
-          createNewUser(userObject);
-          navigate("/");
+          setUserObjectComplete(true);
         }
         break;
       case 5:
@@ -65,10 +75,7 @@ export default function CreateAccount(user) {
           password: data,
         });
         if (loginType === "email") {
-          // change second argument to variable "userObject.password"  (using useEffect ?)!!!
-          createUserWithEmail(userObject.email, "random Password");
-          createNewUser(userObject);
-          navigate("/");
+          setUserObjectComplete(true);
         }
         break;
       default:

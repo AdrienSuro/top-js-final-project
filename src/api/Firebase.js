@@ -37,20 +37,26 @@ export async function signInWithGoogle() {
 }
 
 export async function createUserWithEmail(email, password) {
-  console.log("inside Firebase.js");
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      console.log("inside Firebase.js");
-      // ...
-    })
-    .catch((error) => {
-      console.log("error")
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+  try {
+    console.log("inside Firebase.js");
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    // Signed in
+    const user = userCredential.user;
+    console.log("inside Firebase.js");
+    // ...
+  } catch (error) {
+    console.log("error");
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(error);
+    console.log(error.code);
+    console.log(error.message);
+    // ..
+  }
 }
 
 export function signOutUser() {

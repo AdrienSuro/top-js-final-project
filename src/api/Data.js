@@ -74,8 +74,8 @@ export async function checkExistingUser(id) {
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {
-  // setDoc(doc(db, "tweets", randomIdentifier), {
-  // content: content,
+  console.log("inside Data.js");
+  console.log(userObject);
   setDoc(doc(db, "users", userObject.uid), {
     userName: userObject.userName,
     displayName: userObject.displayName,

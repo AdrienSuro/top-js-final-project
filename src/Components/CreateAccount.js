@@ -47,6 +47,11 @@ export default function CreateAccount(user) {
           ...userObject,
           description: data,
         });
+        if (loginType === "google") {
+          console.log("login type google");
+          createNewUser(userObject);
+          navigate("/");
+        }
         break;
       case 5:
         setUserObject({
@@ -59,6 +64,11 @@ export default function CreateAccount(user) {
           ...userObject,
           password: data,
         });
+        if (loginType === "email") {
+          createUserWithEmail(userObject.email, userObject.password);
+          createNewUser(userObject);
+          navigate("/");
+        }
         break;
       default:
         return;
@@ -79,22 +89,9 @@ export default function CreateAccount(user) {
       case 4:
         return <SignUpSteps step="userDescription" handleNext={addData} />;
       case 5:
-        if (loginType === "google") {
-          console.log("login type google");
-          createNewUser(userObject);
-          navigate("/");
-          break;
-        } else if (loginType === "email") {
-          return <SignUpSteps step="userEmail" handleNext={addData} />;
-        }
-        break;
+        return <SignUpSteps step="userEmail" handleNext={addData} />;
       case 6:
         return <SignUpSteps step="userPassword" handleNext={addData} />;
-      case 7:
-        createUserWithEmail(userObject.email, userObject.password);
-        createNewUser(userObject);
-        navigate("/");
-        break;
       default:
         return <div>Default</div>;
     }

@@ -24,13 +24,15 @@ export default function CreateAccount(user) {
   });
 
   useEffect(() => {
-    if (loginType === "google") {
-      createNewUser(userObject);
-      navigate("/");
-    } else if (loginType === "email") {
-      createUserWithEmail(userObject.email, "random Password");
-      createNewUser(userObject);
-      navigate("/");
+    if (userObjectComplete === true) {
+      if (loginType === "google") {
+        createNewUser(userObject);
+        navigate("/");
+      } else if (loginType === "email") {
+        createUserWithEmail(userObject.email, "random Password");
+        createNewUser(userObject);
+        navigate("/");
+      }
     }
   }, [userObjectComplete]);
 

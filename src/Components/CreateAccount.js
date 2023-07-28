@@ -67,6 +67,7 @@ export default function CreateAccount(user) {
     console.log(userObject);
   }
 
+  // TO DO : renderStep should only return component, no side effects !!!
   function renderStep(handleNext) {
     switch (step) {
       case 1:
@@ -79,6 +80,7 @@ export default function CreateAccount(user) {
         return <SignUpSteps step="userDescription" handleNext={addData} />;
       case 5:
         if (loginType === "google") {
+          console.log("login type google");
           createNewUser(userObject);
           navigate("/");
           break;

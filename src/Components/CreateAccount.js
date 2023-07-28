@@ -65,6 +65,7 @@ export default function CreateAccount(user) {
           password: data,
         });
         if (loginType === "email") {
+          // change second argument to variable "userObject.password"  (using useEffect ?)!!!
           createUserWithEmail(userObject.email, userObject.password);
           createNewUser(userObject);
           navigate("/");

@@ -27,6 +27,7 @@ export const auth = getAuth();
 
 export async function signInWithGoogle() {
   try {
+    console.log("signed in with google");
     // cannot put useDispatch here !!!!
     var provider = new GoogleAuthProvider();
     return await signInWithPopup(auth, provider);
@@ -36,13 +37,16 @@ export async function signInWithGoogle() {
 }
 
 export async function createUserWithEmail(email, password) {
+  console.log("inside Firebase.js");
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log("inside Firebase.js");
       // ...
     })
     .catch((error) => {
+      console.log("error")
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..

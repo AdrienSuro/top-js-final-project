@@ -76,7 +76,8 @@ export async function checkExistingUser(id) {
 export function createNewUser(userObject) {
   console.log("inside Data.js");
   console.log(userObject);
-  setDoc(doc(db, "users", userObject.uid), {
+  // MODIFY "testUser" argument and use variable !!!
+  setDoc(doc(db, "users", "testUser"), {
     userName: userObject.userName,
     displayName: userObject.displayName,
     description: userObject.description,

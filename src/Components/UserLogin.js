@@ -29,13 +29,13 @@ export default function User() {
   function signInWithGoogleAndDispatch() {
     signInWithGoogle();
     dispatch(setLoginType("google"));
-    navigate("/createaccount");
+    navigate("/createaccountwithgoogle");
   }
 
   function signInWithEmailAndDispatch() {
     dispatch(setLoginType("email"));
     createUserWithEmail();
-    navigate("/createaccount");
+    navigate("/createaccountwithemail");
   }
 
   function signOutAndBackToHome() {

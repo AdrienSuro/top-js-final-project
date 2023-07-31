@@ -7,7 +7,7 @@ import twitterLogo from "../icons/main-logo.png";
 import { createNewUser } from "../api/Data";
 import { createUserWithEmail } from "../api/Firebase.js";
 
-export default function CreateAccount(user) {
+export default function CreateAccountWithGoogle(user) {
   const displayUserId = useSelector(selectUserId);
   const loginType = useSelector(selectLoginType);
   const navigate = useNavigate();

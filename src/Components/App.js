@@ -3,7 +3,8 @@ import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
 import WriteTweet from "./WriteTweet";
 import TweetList from "./TweetList";
-import CreateAccount from "./CreateAccount";
+import CreateAccountWithGoogle from "./CreateAccountWithGoogle";
+import CreateAccountWithEmail from "./CreateAccountWithEmail";
 import User from "./UserLogin";
 import SideNavbar from "./SideNavbar";
 import SignUpSteps from "./SignUpSteps";
@@ -33,8 +34,13 @@ const App = () => {
               <Route exact path="/:username" element={<UserProfile />}></Route>
               <Route
                 exact
-                path="/createaccount"
-                element={<CreateAccount />}
+                path="/createaccountwithgoogle"
+                element={<CreateAccountWithGoogle />}
+              ></Route>
+              <Route
+                exact
+                path="/createaccountwithemail"
+                element={<CreateAccountWithEmail />}
               ></Route>
             </Routes>
           </div>
@@ -42,7 +48,6 @@ const App = () => {
             <Routes>
               <Route exact path="/createaccount" element={<User />}></Route>
               <Route exact path="/" element={<User />}></Route>
-            
             </Routes>
           </div>
         </div>

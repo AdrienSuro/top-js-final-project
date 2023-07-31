@@ -25,14 +25,8 @@ export default function CreateAccountWithGoogle(user) {
 
   useEffect(() => {
     if (userObjectComplete === true) {
-      if (loginType === "google") {
-        createNewUser(userObject);
-        navigate("/");
-      } else if (loginType === "email") {
-        createUserWithEmail(userObject.email, "random Password");
-        createNewUser(userObject);
-        navigate("/");
-      }
+      createNewUser(userObject);
+      navigate("/");
     }
   }, [userObjectComplete]);
 

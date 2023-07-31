@@ -54,14 +54,6 @@ export default function UserProfile(props) {
     });
   }
 
-  useEffect(() => {
-    getUserDisplayName(username);
-    getUserDescription(username);
-    getUserUserName(username);
-    getUserFollowersLength(username);
-    getUserFollowingLength(username);
-  }, []);
-
   return (
     <div>
       <div className="header-wrapper">

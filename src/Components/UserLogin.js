@@ -27,6 +27,7 @@ export default function User() {
   const navigate = useNavigate();
 
   function signInWithGoogleAndDispatch() {
+    signInWithGoogle();
     dispatch(setLoginType("google"));
     navigate("/createaccount");
   }
@@ -48,9 +49,11 @@ export default function User() {
         dispatch(toggleIsLoggedIn(true));
         dispatch(setUserId(user.uid));
         dispatch(setUserDisplayName(user.displayName));
+        console.log(user.uid + "equals" + displayUserId);
         let userExists = await checkExistingUser(user.uid);
         if (userExists === false) {
           // redirect to a form that creates the user in FB
+          console.log("user doesn't exist");
           navigate("/createaccount");
         } else if (userExists === true) {
           console.log("user exists already in firebase");

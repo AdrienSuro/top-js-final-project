@@ -64,6 +64,7 @@ export async function checkExistingUser(id) {
   let userExists = false;
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
+    console.log(doc.id);
     if (doc.id === id) {
       userExists = true;
     }
@@ -77,7 +78,7 @@ export function createNewUser(userObject) {
   console.log("inside Data.js");
   console.log(userObject);
   // MODIFY "testUser" argument and use variable !!!
-  setDoc(doc(db, "users", userObject.userName), {
+  setDoc(doc(db, "users", userObject.uid), {
     userName: userObject.userName,
     displayName: userObject.displayName,
     description: userObject.description,

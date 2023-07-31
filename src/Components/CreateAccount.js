@@ -69,6 +69,7 @@ export default function CreateAccount(user) {
         setUserObject({
           ...userObject,
           email: data,
+          uid: data,
         });
         break;
       case 6:

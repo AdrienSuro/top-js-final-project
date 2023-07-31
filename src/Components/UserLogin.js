@@ -85,8 +85,8 @@ export default function User() {
   return (
     <div className="signInBox">
       <h1>New on Twitter ?</h1>
-      <button onClick={signInWithGoogleAndDispatch}>Sign in with Google</button>
-      <button>Sign in with Apple (soon)</button>
+      <button onClick={signInWithGoogleAndDispatch}>Sign up with Google</button>
+      <button>Sign up with Apple (soon)</button>
       <button
         onClick={() => {
           signInWithEmailAndDispatch();

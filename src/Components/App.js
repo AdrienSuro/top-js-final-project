@@ -10,7 +10,7 @@ import SideNavbar from "./SideNavbar";
 import SignUpSteps from "./SignUpSteps";
 import Timeline from "./Timeline";
 import UserProfile from "./UserProfile";
-import Login from "./Login";
+import LoginPage from "./LoginPage";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { selectIsLoggedIn } from "../redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +43,7 @@ const App = () => {
                 path="/createaccountwithemail"
                 element={<CreateAccountWithEmail />}
               ></Route>
-              <Route exact path="/login" element={<Login />}></Route>
+              <Route exact path="/login" element={<LoginPage />}></Route>
             </Routes>
           </div>
           <div className="rightColumn">

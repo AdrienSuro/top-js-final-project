@@ -25,14 +25,9 @@ export default function CreateAccountWithEmail(user) {
 
   useEffect(() => {
     if (userObjectComplete === true) {
-      if (loginType === "google") {
-        createNewUser(userObject);
-        navigate("/");
-      } else if (loginType === "email") {
-        createUserWithEmail(userObject.email, "random Password");
-        createNewUser(userObject);
-        navigate("/");
-      }
+      createUserWithEmail(userObject.email, "random Password");
+      createNewUser(userObject);
+      navigate("/");
     }
   }, [userObjectComplete]);
 
@@ -41,45 +36,40 @@ export default function CreateAccountWithEmail(user) {
       case 1:
         setUserObject({
           ...userObject,
-          displayName: data,
+          email: data,
+          uid: data,
         });
         break;
       case 2:
         setUserObject({
           ...userObject,
-          userName: data,
+          password: data,
         });
         break;
       case 3:
         setUserObject({
           ...userObject,
-          location: data,
+          displayName: data,
         });
         break;
       case 4:
         setUserObject({
           ...userObject,
-          description: data,
+          userName: data,
         });
-        if (loginType === "google") {
-          setUserObjectComplete(true);
-        }
         break;
       case 5:
         setUserObject({
           ...userObject,
-          email: data,
-          uid: data,
+          location: data,
         });
         break;
       case 6:
         setUserObject({
           ...userObject,
-          password: data,
+          description: data,
         });
-        if (loginType === "email") {
-          setUserObjectComplete(true);
-        }
+        setUserObjectComplete(true);
         break;
       default:
         return;
@@ -92,17 +82,17 @@ export default function CreateAccountWithEmail(user) {
   function renderStep(handleNext) {
     switch (step) {
       case 1:
-        return <SignUpSteps step="displayName" handleNext={addData} />;
-      case 2:
-        return <SignUpSteps step="userName" handleNext={addData} />;
-      case 3:
-        return <SignUpSteps step="userLocation" handleNext={addData} />;
-      case 4:
-        return <SignUpSteps step="userDescription" handleNext={addData} />;
-      case 5:
         return <SignUpSteps step="userEmail" handleNext={addData} />;
-      case 6:
+      case 2:
         return <SignUpSteps step="userPassword" handleNext={addData} />;
+      case 3:
+        return <SignUpSteps step="displayName" handleNext={addData} />;
+      case 4:
+        return <SignUpSteps step="userName" handleNext={addData} />;
+      case 5:
+        return <SignUpSteps step="userLocation" handleNext={addData} />;
+      case 6:
+        return <SignUpSteps step="userDescription" handleNext={addData} />;
       default:
         return <div>Default</div>;
     }

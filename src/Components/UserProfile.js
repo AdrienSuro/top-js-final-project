@@ -10,8 +10,9 @@ import messagesIcon from "../icons/messages.png";
 import addNotificationsIcon from "../icons/activateNotifications.png";
 import TweetList from "./TweetList";
 import UserTweets from "./UserTweets";
-import { db, getUserDisplayName } from "../api/Firebase";
+import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import { getUserDisplayName } from "../api/Data";
 
 export default function UserProfile(props) {
   const [userUserName, setUserUserName] = useState(null);
@@ -30,11 +31,11 @@ export default function UserProfile(props) {
     });
   }
 
-  function getUserDisplayName(userArg) {
-    onSnapshot(doc(db, "users", userArg), (doc) => {
-      setUserDisplayName(doc.data().displayName);
-    });
-  }
+  // function getUserDisplayName(userArg) {
+  //   onSnapshot(doc(db, "users", userArg), (doc) => {
+  //     setUserDisplayName(doc.data().displayName);
+  //   });
+  // }
 
   function getUserDescription(userArg) {
     onSnapshot(doc(db, "users", userArg), (doc) => {
@@ -69,7 +70,11 @@ export default function UserProfile(props) {
             {" "}
             <img class="header-button" src={moreInfoIcon}></img>
             <img class="header-button" src={messagesIcon}></img>
-            <img class="header-button" src={addNotificationsIcon}></img>
+            <img
+              class="header-button"
+              src={addNotificationsIcon}
+              onClick={getUserDisplayName("AdrienSuro")}
+            ></img>
             <div id="followingButton">Following</div>
           </div>
         </div>

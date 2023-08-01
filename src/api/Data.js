@@ -12,6 +12,7 @@ import {
   collection,
   getDocs,
   docRef,
+  onSnapshot,
 } from "firebase/firestore";
 
 // ******* READ ******* //
@@ -19,9 +20,9 @@ import {
 // Simple query example :
 // const q = query(citiesRef, where("state", "==", "CA"));
 
-export async function getOwnTweets(userName) {
+export async function getOwnTweets(userId) {
   const tweetsRef = collection(db, "tweets");
-  const q = query(tweetsRef, where("userName", "==", userName));
+  const q = query(tweetsRef, where("userName", "==", userId));
   const querySnapshot = await getDocs(q);
   const tweets = [];
   querySnapshot.forEach((doc) => {
@@ -31,23 +32,37 @@ export async function getOwnTweets(userName) {
   return tweets;
 }
 
-export function getRetweets(userName) {
+export function getRetweets(userId) {
   //will get user Tweets
 }
 
-export function getOwnTweetsAndRetweets(userName) {
+export function getOwnTweetsAndRetweets(userId) {
   // will get both Tweets and Retweets
 }
 
-export function getProfileData(userName) {
+export function getProfileData(userId) {
   // will get user Info as an object
 }
 
-export function getTimeline(userName) {
+export function getTimeline(userId) {
   return;
 }
 
-export function getUserDisplayName(userName) {
+export function getUserDisplayName(userId) {
+  const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
+    console.log("Current data: ", doc.data());
+  });
+}
+
+export function getUserUserName(userId) {
+  return;
+}
+
+export function getUserLocation(userId) {
+  return;
+}
+
+export function getUserDescription(userId) {
   return;
 }
 

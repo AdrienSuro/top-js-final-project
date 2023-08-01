@@ -46,6 +46,7 @@ export default function UserProfile(props) {
   function getUserFollowersLength(userArg) {
     onSnapshot(doc(db, "users", userArg), (doc) => {
       setUserFollowersLength(doc.data().followers.length);
+      console.log("using ONSNAPSHOT");
     });
   }
 

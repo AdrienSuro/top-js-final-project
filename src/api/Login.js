@@ -26,10 +26,12 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { setLoginType } from "../redux/userSlice.js";
+import { useSelector, useDispatch } from "react-redux";
 
 const app = initializeApp(firebaseConfig);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
+const dispatch = useDispatch();
 
 export function connectWithEmail(email, password) {
   // will check existing user ???
@@ -39,6 +41,7 @@ export function connectWithEmail(email, password) {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      dispatch(setLoginType("email"));
       // ...
       console.log("connected as " + user);
     })
@@ -52,6 +55,7 @@ export function connectWithEmail(email, password) {
 
 export async function connectWithGoogle() {
   try {
+    dispatch(setLoginType("google"));
     console.log("signed in with google");
     var provider = new GoogleAuthProvider();
     return await signInWithPopup(auth, provider);

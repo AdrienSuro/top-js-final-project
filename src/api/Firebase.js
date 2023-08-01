@@ -39,7 +39,7 @@ export async function connectWithEmail(auth, email, password) {
     });
 }
 
-export async function signInWithGoogle() {
+export async function signUpWithGoogle() {
   try {
     console.log("signed in with google");
     // cannot put useDispatch here !!!!

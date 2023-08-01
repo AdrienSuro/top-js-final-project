@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   auth,
-  signInWithGoogle,
+  signUpWithGoogle,
   signOutUser,
   createUserWithEmail,
 } from "../api/Firebase.js";
@@ -26,13 +26,13 @@ export default function User() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function signInWithGoogleAndDispatch() {
-    signInWithGoogle();
+  function signUpWithGoogleAndDispatch() {
+    signUpWithGoogle();
     dispatch(setLoginType("google"));
     navigate("/createaccountwithgoogle");
   }
 
-  function signInWithEmailAndDispatch() {
+  function signUpWithEmailAndDispatch() {
     dispatch(setLoginType("email"));
     createUserWithEmail();
     navigate("/createaccountwithemail");
@@ -45,21 +45,18 @@ export default function User() {
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      if (isLoggedIn === false) {
-        dispatch(toggleIsLoggedIn(true));
-        dispatch(setUserId(user.uid));
-        dispatch(setUserDisplayName(user.displayName));
-        console.log(user.uid + "equals" + displayUserId);
-        let userExists = await checkExistingUser(user.uid);
-        if (userExists === false) {
-          // redirect to a form that creates the user in FB
-          console.log("user doesn't exist");
-          navigate("/createaccount");
-        } else if (userExists === true) {
-          console.log("user exists already in firebase");
-        }
-        console.log(userExists);
+      dispatch(toggleIsLoggedIn(true));
+      console.log(user.uid + "equals" + displayUserId);
+      let userExists = await checkExistingUser(displayUserId);
+      if (userExists === false) {
+        // redirect to a form that creates the user in FB
+        console.log("user doesn't exist");
+        navigate("/createaccount");
+      } else if (userExists === true) {
+        console.log("user exists already in firebase");
       }
+      console.log(userExists);
+
       // ...check if user.uid already refers to a user.
     } else {
       dispatch(toggleIsLoggedIn(false));
@@ -85,11 +82,11 @@ export default function User() {
   return (
     <div className="signInBox">
       <h1>New on Twitter ?</h1>
-      <button onClick={signInWithGoogleAndDispatch}>Sign up with Google</button>
+      <button onClick={signUpWithGoogleAndDispatch}>Sign up with Google</button>
       <button>Sign up with Apple (soon)</button>
       <button
         onClick={() => {
-          signInWithEmailAndDispatch();
+          signUpWithEmailAndDispatch();
         }}
       >
         Create an Account (work in progress)

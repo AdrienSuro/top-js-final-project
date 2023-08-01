@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>Login Page</h1>
       <button
         onClick={() => {
           connectWithGoogle();
+          navigate("/");
         }}
       >
         Connect with Google
@@ -20,12 +23,21 @@ export default function LoginPage() {
       <button
         onClick={() => {
           connectWithEmail(
-            document.getElementById("emailField"),
-            document.getElementById("passwordField")
+            document.getElementById("emailField").value,
+            document.getElementById("passwordField").value
           );
+          navigate("/");
         }}
       >
         Connect with Email
+      </button>
+      <hr></hr>
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Back to Homepage
       </button>
     </div>
   );

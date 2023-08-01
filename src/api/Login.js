@@ -34,15 +34,19 @@ export const auth = getAuth();
 export function connectWithEmail(email, password) {
   // will check existing user ???
   // will connect to email account
+  console.log(email + " " + password);
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       // ...
+      console.log("connected as " + user);
     })
     .catch((error) => {
+      console.log(email + " " + password);
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log("login failed " + errorCode + errorMessage);
     });
 }
 

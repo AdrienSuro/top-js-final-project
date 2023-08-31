@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
+import { setLoginType } from "../redux/userSlice.js";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div>
       <h1>Login Page</h1>
       <button
         onClick={() => {
+          dispatch(setLoginType("google"));
           connectWithGoogle();
           navigate("/");
         }}
@@ -22,6 +25,7 @@ export default function LoginPage() {
       <input type="text" name="passwordField" id="passwordField"></input>
       <button
         onClick={() => {
+          dispatch(setLoginType("email"));
           connectWithEmail(
             document.getElementById("emailField").value,
             document.getElementById("passwordField").value

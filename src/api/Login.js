@@ -28,7 +28,7 @@ import {
 
 const app = initializeApp(firebaseConfig);
 export const tweetsCollection = query(collection(db, "tweets"));
-export const auth = getAuth();
+export const auth = getAuth(app);
 
 export function connectWithEmail(email, password) {
   // will check existing user ???

@@ -25,7 +25,7 @@ export default function CreateAccountWithEmail(user) {
 
   useEffect(() => {
     if (userObjectComplete === true) {
-      createUserWithEmail(userObject.email, "random Password");
+      createUserWithEmail(userObject.email, userObject.password);
       createNewUser(userObject);
       navigate("/");
     }

@@ -50,7 +50,7 @@ export default function User() {
       let userExists = await checkExistingUser(displayUserId);
       if (userExists === false) {
         // redirect to a form that creates the user in FB
-        console.log("user doesn't exist");
+        console.log("user doesn't exist so let's go to create account");
         navigate("/createaccount");
       } else if (userExists === true) {
         console.log("user exists already in firebase");

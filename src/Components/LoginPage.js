@@ -29,7 +29,9 @@ export default function LoginPage() {
           connectWithEmail(
             document.getElementById("emailField").value,
             document.getElementById("passwordField").value
-          );
+          )
+            ? console.log("true")
+            : console.log("false");
           navigate("/");
         }}
       >

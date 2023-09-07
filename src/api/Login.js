@@ -40,12 +40,13 @@ export function connectWithEmail(email, password) {
       const user = userCredential.user;
       // ...
       console.log("connected as " + user);
+      return true;
     })
     .catch((error) => {
-      console.log(email + " " + password);
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("login failed " + errorCode + errorMessage);
+      return false;
     });
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
-import { setLoginType } from "../redux/userSlice.js";
+import { setLoginType, setUserDisplayName, setUserId } from "../redux/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function LoginPage() {
@@ -25,6 +25,7 @@ export default function LoginPage() {
       <input type="text" name="passwordField" id="passwordField"></input>
       <button
         onClick={() => {
+          dispatch(setUserId(document.getElementById("emailField").value));
           dispatch(setLoginType("email"));
           connectWithEmail(
             document.getElementById("emailField").value,

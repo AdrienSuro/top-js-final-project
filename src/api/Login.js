@@ -31,21 +31,14 @@ export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth(app);
 
 export function connectWithEmail(email, password) {
-  // will check existing user ???
-  // will connect to email account
-  console.log(email + " " + password);
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
-      // ...
-      console.log("connected as " + user);
       return true;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log("login failed " + errorCode + errorMessage);
       return false;
     });
 }

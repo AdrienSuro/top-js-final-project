@@ -48,24 +48,23 @@ export default function User() {
       dispatch(toggleIsLoggedIn(true));
       let userExists = await checkExistingUser(displayUserId);
       if (userExists === false) {
-        navigate("/createaccount");
+        // navigate("/createaccount");
       } else if (userExists === true) {
         //...
       }
     } else {
-      dispatch(toggleIsLoggedIn(false));
-      dispatch(setUserId(null));
+      // dispatch(toggleIsLoggedIn(false));
+      // dispatch(setUserId(null));
     }
   });
 
   if (isLoggedIn) {
     return (
       <div>
-        <Link className="homeLink" to="/Charles_0001">
+        <Link className="homeLink" to={displayUserId}>
           <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
         </Link>
         <p>User ID : {displayUserId}</p>
-        {/* <button onClick={signIn}>Sign In</button> */}
         <button onClick={signOutAndBackToHome}>Sign Out</button>
         <button>Check Username</button>
         <button>displayName from Redux</button>

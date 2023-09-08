@@ -45,6 +45,7 @@ export default function User() {
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
+      console.log(user);
       dispatch(toggleIsLoggedIn(true));
       let userExists = await checkExistingUser(displayUserId);
       if (userExists === false) {

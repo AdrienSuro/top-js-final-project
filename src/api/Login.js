@@ -31,16 +31,22 @@ export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth(app);
 
 export function connectWithEmail(email, password) {
+  let result = null;
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
-      return true;
+      const user = userCredential.providerId;
+      console.log("user is " + user);
+      result = true;
+      console.log(result);
+      return result;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      return false;
+      console.log(errorCode + " " + errorMessage);
+      result = false;
     });
+  console.log(result);
 }
 
 export async function connectWithGoogle() {

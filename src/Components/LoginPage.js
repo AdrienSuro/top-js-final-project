@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
-import { setLoginType, setUserDisplayName, setUserId } from "../redux/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
+import {
+  auth,
+  signUpWithGoogle,
+  signOutUser,
+  createUserWithEmail,
+} from "../api/Firebase.js";
+
+import {
+  selectIsLoggedIn,
+  selectUserId,
+  toggleIsLoggedIn,
+  setUserId,
+  setUserDisplayName,
+  setLoginType,
+} from "../redux/userSlice.js";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const displayUserId = useSelector(selectUserId);
 
   return (
     <div>
@@ -30,10 +47,7 @@ export default function LoginPage() {
           connectWithEmail(
             document.getElementById("emailField").value,
             document.getElementById("passwordField").value
-          )
-            ? console.log("true")
-            : console.log("false");
-          navigate("/");
+          );
         }}
       >
         Connect with Email

@@ -79,7 +79,6 @@ export async function checkExistingUser(id) {
   let userExists = false;
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
-    console.log(doc.id);
     if (doc.id === id) {
       userExists = true;
     }

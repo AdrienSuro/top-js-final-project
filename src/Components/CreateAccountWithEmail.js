@@ -14,9 +14,8 @@ export default function CreateAccountWithEmail(user) {
   const [step, setStep] = useState(1);
   const [userObjectComplete, setUserObjectComplete] = useState(false);
   const [userObject, setUserObject] = useState({
-    uid: null,
+    userId: null,
     displayName: null,
-    userName: null,
     location: null,
     description: null,
     email: null,
@@ -37,7 +36,6 @@ export default function CreateAccountWithEmail(user) {
         setUserObject({
           ...userObject,
           email: data,
-          uid: data,
         });
         break;
       case 2:
@@ -55,7 +53,7 @@ export default function CreateAccountWithEmail(user) {
       case 4:
         setUserObject({
           ...userObject,
-          userName: data,
+          userId: data,
         });
         break;
       case 5:

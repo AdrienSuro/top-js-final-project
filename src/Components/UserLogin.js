@@ -47,6 +47,7 @@ export default function User() {
     if (user) {
       console.log(user);
       dispatch(toggleIsLoggedIn(true));
+      dispatch(setUserId(user.uid)); // ou bien mail ? vérifier comment est créé le user dans la database
       let userExists = await checkExistingUser(displayUserId);
       if (userExists === false) {
         // navigate("/createaccount");

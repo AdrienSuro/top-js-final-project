@@ -92,8 +92,8 @@ export function createNewUser(userObject) {
   console.log("inside Data.js");
   console.log(userObject);
   // MODIFY "testUser" argument and use variable !!!
-  setDoc(doc(db, "users", userObject.uid), {
-    userName: userObject.userName,
+  setDoc(doc(db, "users", userObject.email), {
+    userId: userObject.userId,
     displayName: userObject.displayName,
     description: userObject.description,
     location: userObject.location,

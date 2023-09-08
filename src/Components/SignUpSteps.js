@@ -48,10 +48,10 @@ export default function SignUpSteps(props) {
     case "userName":
       return (
         <div className="createAccountContent">
-          <h2>Define ayour username.</h2>
-          <p>This one will never change.</p>
+          <h2>Define your user ID.</h2>
+          <p>This is how others will refer to you. It will never change.</p>
           <div className="formWrapper">
-            <label for="userName">Username</label>
+            <label for="userName">User ID</label>
             <input type="text" name="userName" id="userName"></input>
           </div>
           <button

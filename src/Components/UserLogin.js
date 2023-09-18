@@ -55,8 +55,8 @@ export default function User() {
         //...
       }
     } else {
-      // dispatch(toggleIsLoggedIn(false));
-      // dispatch(setUserId(null));
+      dispatch(toggleIsLoggedIn(false));
+      dispatch(setUserId(null));
     }
   });
 

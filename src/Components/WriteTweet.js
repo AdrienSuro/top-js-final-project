@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { selectUserId, selectLoginType } from "../redux/userSlice.js";
 import myProfilePicture from "../img/me.png";
 import imageIcon from "../icons/image-icon.png";
 import "firebase/firestore";
@@ -22,14 +23,15 @@ import { db, getProfilePicUrl } from "../api/Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function WriteTweet() {
+  const displayUserId = useSelector(selectUserId);
+
   // add an argument that takes the logged in user
   function uploadTweet() {
     const tweetContentField = document.getElementById("tweetContentField");
     let randomIdentifier = uuidv4();
     setDoc(doc(db, "tweets", randomIdentifier), {
       content: tweetContentField.value,
-      userName: "AdrienSuro",
-      displayName: "Anonym User",
+      userId: displayUserId,
       timestamp: new Date(),
       comments: getRandomNum(),
       retweets: getRandomNum(),
@@ -44,6 +46,7 @@ export default function WriteTweet() {
     return Math.floor(Math.random() * 999);
   }
 
+  // Will be deleted and moved to api/Firebase ou Data
   async function deleteTweets(besideThisUser) {
     const q = query(
       collection(db, "tweets"),
@@ -67,7 +70,7 @@ export default function WriteTweet() {
           <div className="tweetOptionsIcon">
             <img src={imageIcon}></img>
           </div>
-          <button className="tweetBtn" onClick={deleteTweets}>
+          <button className="tweetBtn" onClick={uploadTweet}>
             Tweet
           </button>
         </div>

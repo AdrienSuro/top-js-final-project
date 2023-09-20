@@ -46,7 +46,7 @@ export default function LoginPage() {
           dispatch(setLoginType("email"));
           connectWithEmail(
             document.getElementById("emailField").value,
-            document.getElementById("passwordField").value,
+            document.getElementById("passwordField").value
           );
           navigate("/");
         }}

@@ -13,6 +13,7 @@ import UserTweets from "./UserTweets";
 import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { getUserDisplayName } from "../api/Data";
+import { getUserProfilePic } from "../api/Data";
 
 export default function UserProfile(props) {
   const [userUserName, setUserUserName] = useState(null);
@@ -66,7 +67,10 @@ export default function UserProfile(props) {
         </div>
         <div className="header-section">
           <img src={coverPictureImg} id="header-coverPicture"></img>
-          <img src={profilePicImg} id="header-profilePicture"></img>
+          <img
+            src={getUserProfilePic("newuser1@mail.com")}
+            id="header-profilePicture"
+          ></img>
           <div class="header-buttons-section">
             {" "}
             <img class="header-button" src={moreInfoIcon}></img>

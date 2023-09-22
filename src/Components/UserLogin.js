@@ -20,11 +20,29 @@ import {
   setLoginType,
 } from "../redux/userSlice.js";
 
+import { getUserProfilePic } from "../api/Data";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 export default function User() {
+  const [imageUrl, setImageUrl] = useState("");
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const displayUserId = useSelector(selectUserId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const imageName = "newuser1@mail.com"; // Replace with your image name or path
+    getUserProfilePic(imageName)
+      .then((url) => {
+        if (url) {
+          setImageUrl(url);
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting image URL:", error);
+      });
+  }, []);
 
   function signUpWithGoogleAndDispatch() {
     signUpWithGoogle();
@@ -64,7 +82,11 @@ export default function User() {
     return (
       <div>
         <Link className="homeLink" to={displayUserId}>
-          <img id="userSmallProfilePic" src="" alt="userProfilePicture"></img>
+          <img
+            id="userSmallProfilePic"
+            src={imageUrl}
+            alt="userProfilePicture"
+          ></img>
         </Link>
         <p>User ID : {displayUserId}</p>
         <button onClick={signOutAndBackToHome}>Sign Out</button>

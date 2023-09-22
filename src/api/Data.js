@@ -14,6 +14,15 @@ import {
   docRef,
   onSnapshot,
 } from "firebase/firestore";
+import firebaseConfig from "./FirebaseConfig";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+const app = initializeApp(firebaseConfig);
+
+const storage = getStorage(app);
+
+const storageRef = ref(storage);
 
 // ******* READ ******* //
 
@@ -84,6 +93,19 @@ export async function checkExistingUser(id) {
     }
   });
   return userExists;
+}
+
+export async function getUserProfilePic(userId) {
+  const path = "userProfilePic/" + userId + ".png";
+  const userProfilePicRef = ref(storage, path);
+
+  getDownloadURL(userProfilePicRef)
+    .then((url) => {
+      return url;
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
 }
 
 // ******* WRITE ******* //

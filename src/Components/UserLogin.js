@@ -32,16 +32,16 @@ export default function User() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const imageName = "newuser1@mail.com"; // Replace with your image name or path
-    getUserProfilePic(imageName)
-      .then((url) => {
-        if (url) {
-          setImageUrl(url);
-        }
-      })
-      .catch((error) => {
-        console.error("Error getting image URL:", error);
-      });
+    const fetchImage = async () => {
+      try {
+        const userId = "newuser1@mail.com"; // Replace with your image name or path
+        const url = await getUserProfilePic(userId);
+        setImageUrl(url);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchImage();
   }, []);
 
   function signUpWithGoogleAndDispatch() {

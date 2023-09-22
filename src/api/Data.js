@@ -98,14 +98,14 @@ export async function checkExistingUser(id) {
 export async function getUserProfilePic(userId) {
   const path = "userProfilePic/" + userId + ".png";
   const userProfilePicRef = ref(storage, path);
-
-  getDownloadURL(userProfilePicRef)
-    .then((url) => {
-      return url;
-    })
-    .catch((error) => {
-      console.log(error.code);
-    });
+  try {
+    const url = await getDownloadURL(userProfilePicRef);
+    console.log(url);
+    return url;
+  } catch (error) {
+    console.error(error.code);
+    return null;
+  }
 }
 
 // ******* WRITE ******* //

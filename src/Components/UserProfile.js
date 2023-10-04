@@ -15,6 +15,15 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { getUserDisplayName } from "../api/Data";
 import { getUserProfilePic } from "../api/Data";
 
+import {
+  selectIsLoggedIn,
+  selectUserId,
+  toggleIsLoggedIn,
+  setUserId,
+  setUserDisplayName,
+  setLoginType,
+} from "../redux/userSlice.js";
+
 export default function UserProfile(props) {
   const [userUserName, setUserUserName] = useState(null);
   const [userDisplayName, setUserDisplayName] = useState(null);
@@ -22,6 +31,7 @@ export default function UserProfile(props) {
   const [userFollowersLength, setUserFollowersLength] = useState(null);
   const [userFollowingLength, setUserFollowingLength] = useState(null);
 
+  const displayUserId = useSelector(selectUserId);
   const { username } = useParams();
 
   const dispatch = useDispatch();
@@ -62,7 +72,7 @@ export default function UserProfile(props) {
       <div className="header-wrapper">
         <div className="header-header">
           <p id="header-backarrow">&#8592;</p>
-          <p id="header-userName">{userDisplayName}</p>
+          <p id="header-userName">{getUserDisplayName(displayUserId)}</p>
           <div id="header-tweetCount">26.8K Tweets</div>
         </div>
         <div className="header-section">
@@ -78,7 +88,7 @@ export default function UserProfile(props) {
             <img
               class="header-button"
               src={addNotificationsIcon}
-              onClick={getUserDisplayName("AdrienSuro")}
+              onClick={getUserDisplayName(displayUserId)}
             ></img>
             <div id="followingButton">Following</div>
           </div>

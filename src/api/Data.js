@@ -60,8 +60,8 @@ export function getTimeline(userId) {
 export function getUserDisplayName(userId) {
   const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
     console.log("Current data: ", doc.data());
-    // console.log(doc.displayName);
-    return doc.displayName;
+    console.log(doc.data().displayName);
+    return doc.data().displayName;
   });
 }
 

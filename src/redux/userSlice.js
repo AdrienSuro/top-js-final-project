@@ -6,6 +6,10 @@ const initialState = {
   userId: null,
   userDisplayName: null,
   loginType: null,
+  currentUserObject: {
+    description: "test description",
+    displayName: "test Display Name",
+  },
 };
 
 export const userSlice = createSlice({
@@ -33,14 +37,23 @@ export const userSlice = createSlice({
     setLoginType: (state, action) => {
       state.loginType = action.payload;
     },
+    setCurrentUserObject: (state, action) => {
+      state.currentUserObject.description = action.payload.description;
+    },
   },
 });
 
-export const { toggleIsLoggedIn, setUserId, setUserDisplayName, setLoginType } =
-  userSlice.actions;
+export const {
+  toggleIsLoggedIn,
+  setUserId,
+  setUserDisplayName,
+  setLoginType,
+  setCurrentUserObject,
+} = userSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectUserId = (state) => state.user.userId;
 export const selectUserDisplayName = (state) => state.user.userDisplayName;
 export const selectLoginType = (state) => state.user.loginType;
+export const selectCurrentUserObject = (state) => state.user.currentUserObject;
 export default userSlice.reducer;

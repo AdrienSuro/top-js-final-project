@@ -18,6 +18,7 @@ import { getUserProfilePic } from "../api/Data";
 import {
   selectIsLoggedIn,
   selectUserId,
+  selectCurrentUserObject,
   toggleIsLoggedIn,
   setUserId,
   setUserDisplayName,
@@ -32,6 +33,7 @@ export default function UserProfile(props) {
   const [userFollowingLength, setUserFollowingLength] = useState(null);
 
   const displayUserId = useSelector(selectUserId);
+  const displayCurrentUserObject = useSelector(selectCurrentUserObject);
   const { username } = useParams();
 
   const dispatch = useDispatch();
@@ -72,7 +74,8 @@ export default function UserProfile(props) {
       <div className="header-wrapper">
         <div className="header-header">
           <p id="header-backarrow">&#8592;</p>
-          <p id="header-userName">{getUserDisplayName(displayUserId)}</p>
+          {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
+          <p id="header-userName">{displayCurrentUserObject.displayName}</p>
           <div id="header-tweetCount">26.8K Tweets</div>
         </div>
         <div className="header-section">
@@ -88,7 +91,7 @@ export default function UserProfile(props) {
             <img
               class="header-button"
               src={addNotificationsIcon}
-              onClick={getUserDisplayName(displayUserId)}
+              //onClick={getUserDisplayName(displayUserId)}
             ></img>
             <div id="followingButton">Following</div>
           </div>

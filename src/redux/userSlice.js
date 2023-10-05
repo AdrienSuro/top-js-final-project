@@ -9,6 +9,9 @@ const initialState = {
   currentUserObject: {
     description: "test description",
     displayName: "test Display Name",
+    location: "test location",
+    timestamp: "test timestamp",
+    userName: "test userName",
   },
 };
 

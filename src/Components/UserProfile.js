@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import coverPictureImg from "../img/testCover.jpg";
 import profilePicImg from "../img/me.png";
@@ -26,6 +27,7 @@ import {
 } from "../redux/userSlice.js";
 
 export default function UserProfile(props) {
+  const [imageUrl, setImageUrl] = useState("");
   const [userUserName, setUserUserName] = useState(null);
   const [userDisplayName, setUserDisplayName] = useState(null);
   const [userDescription, setUserDescription] = useState(null);
@@ -37,6 +39,20 @@ export default function UserProfile(props) {
   const { username } = useParams();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const userId = "newuser1@mail.com"; // Replace with your image name or path
+        const url = await getUserProfilePic(userId);
+        setImageUrl(url);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchImage();
+  }, []);
 
   function getUserUserName(userArg) {
     onSnapshot(doc(db, "users", userArg), (doc) => {
@@ -73,17 +89,16 @@ export default function UserProfile(props) {
     <div>
       <div className="header-wrapper">
         <div className="header-header">
-          <p id="header-backarrow">&#8592;</p>
+          <p id="header-backarrow" onClick={() => navigate("/")}>
+            &#8592;
+          </p>
           {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
           <p id="header-userName">{displayCurrentUserObject.displayName}</p>
           <div id="header-tweetCount">26.8K Tweets</div>
         </div>
         <div className="header-section">
           <img src={coverPictureImg} id="header-coverPicture"></img>
-          <img
-            src={getUserProfilePic("newuser1@mail.com")}
-            id="header-profilePicture"
-          ></img>
+          <img src={imageUrl} id="header-profilePicture"></img>
           <div class="header-buttons-section">
             {" "}
             <img class="header-button" src={moreInfoIcon}></img>

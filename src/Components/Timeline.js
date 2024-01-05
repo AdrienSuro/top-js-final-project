@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import myProfilePicture from "../img/me.png";
 import imageIcon from "../icons/image-icon.png";
@@ -24,6 +24,13 @@ import { db, getUserName, getProfilePicUrl } from "../api/Firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Timeline() {
+  useEffect(() => {
+    // puisque Timeline est chargé à chaque fois qu'un user
+    // réussit à se connecter, on peut tenter de retrouver
+    // l'user authentifié et ainsi le mettre dans la Slice
+    // partagée
+    //
+  }, []);
   return (
     <div>
       {" "}

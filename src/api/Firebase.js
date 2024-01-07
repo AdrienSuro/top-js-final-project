@@ -52,7 +52,6 @@ export async function signUpWithGoogle() {
 
 export async function createUserWithEmail(email, password) {
   try {
-    console.log("inside Firebase.js");
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -60,7 +59,6 @@ export async function createUserWithEmail(email, password) {
     );
     // Signed in
     const user = userCredential.user;
-    console.log("inside Firebase.js");
     // ...
   } catch (error) {
     console.log("error");

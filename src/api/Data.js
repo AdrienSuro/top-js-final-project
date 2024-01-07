@@ -11,6 +11,7 @@ import {
   where,
   collection,
   getDocs,
+  getDoc,
   docRef,
   onSnapshot,
 } from "firebase/firestore";
@@ -87,15 +88,27 @@ export async function returnExistingUser(userName) {
 }
 
 export async function checkExistingUser(id) {
-  let userExists = false;
-  const querySnapshot = await getDocs(collection(db, "users"));
-  querySnapshot.forEach((doc) => {
-    if (doc.id === id) {
-      userExists = true;
-    }
-  });
-  return userExists;
+  const docRef = doc(db, "users", id);
+  const docSnap = await getDoc(docRef);
+  console.log("inside Data.js - checkExistingUser");
+
+  if (docSnap.exists()) {
+    console.log("docSnaps exists true");
+    return true;
+  } else {
+    console.log("docSnaps exists false");
+    return false;
+  }
 }
+// PREVIOUSLY :
+// let userExists = false;
+// const querySnapshot = await getDocs(collection(db, "users"));
+// querySnapshot.forEach((doc) => {
+//   if (doc.id === id) {
+//     userExists = true;
+//   }
+// });
+// return userExists;
 
 export async function getUserProfilePic(userId) {
   const path = "userProfilePic/" + userId + ".png";
@@ -116,7 +129,7 @@ export function createNewUser(userObject) {
   console.log("inside Data.js");
   console.log(userObject);
   // MODIFY "testUser" argument and use variable !!!
-  setDoc(doc(db, "users", userObject.email), {
+  setDoc(doc(db, "users", userObject.userId), {
     userId: userObject.userId,
     displayName: userObject.displayName,
     description: userObject.description,

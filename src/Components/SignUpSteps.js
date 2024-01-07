@@ -6,6 +6,7 @@ import {
 } from "../redux/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { checkExistingUser } from "../api/Data.js";
 
 export default function SignUpSteps(props) {
   const { step, handleNext } = props;
@@ -52,10 +53,33 @@ export default function SignUpSteps(props) {
           <p>This is how others will refer to you. It will never change.</p>
           <div className="formWrapper">
             <label for="userName">User ID</label>
-            <input type="text" name="userName" id="userName"></input>
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              onChange={async (event) => {
+                let userExists = await checkExistingUser(event.target.value);
+                if (userExists === true) {
+                  alert("userId already taken!");
+                }
+                console.log(
+                  "inside SignUpSteps.js - onChange Event - checkExistingUser"
+                );
+              }}
+            ></input>
           </div>
           <button
             onClick={() => {
+              console.log(
+                "inside SignUpSteps.js - onClick - checkExistingUser"
+              );
+
+              let userExists = checkExistingUser(
+                document.getElementById("userName").value
+              );
+              if (userExists == true) {
+                alert("User ID already taken !");
+              }
               handleNext(document.getElementById("userName").value);
               document.getElementById("userName").value = null;
             }}

@@ -65,13 +65,13 @@ export default function User() {
     if (user) {
       console.log(user);
       dispatch(toggleIsLoggedIn(true));
-      dispatch(setUserId(user.email));
-      let userExists = await checkExistingUser(displayUserId);
-      if (userExists === false) {
-        // navigate("/createaccount");
-      } else if (userExists === true) {
-        //...
-      }
+      dispatch(setUserId(user.uid));
+      // let userExists = await checkExistingUser(displayUserId);
+      // if (userExists === false) {
+      //   // navigate("/createaccount");
+      // } else if (userExists === true) {
+      //   //...
+      // }
     } else {
       dispatch(toggleIsLoggedIn(false));
       dispatch(setUserId(null));

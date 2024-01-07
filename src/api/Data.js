@@ -90,13 +90,10 @@ export async function returnExistingUser(userName) {
 export async function checkExistingUser(id) {
   const docRef = doc(db, "users", id);
   const docSnap = await getDoc(docRef);
-  console.log("inside Data.js - checkExistingUser");
 
   if (docSnap.exists()) {
-    console.log("docSnaps exists true");
     return true;
   } else {
-    console.log("docSnaps exists false");
     return false;
   }
 }
@@ -109,6 +106,17 @@ export async function checkExistingUser(id) {
 //   }
 // });
 // return userExists;
+
+export async function checkExistingEmail(email) {
+  let emailExists = false;
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    if (doc.data().email === email) {
+      emailExists = true;
+    }
+  });
+  return emailExists;
+}
 
 export async function getUserProfilePic(userId) {
   const path = "userProfilePic/" + userId + ".png";
@@ -138,6 +146,7 @@ export function createNewUser(userObject) {
     following: [],
     pictureId: null,
     timestamp: new Date(),
+    email: userObject.email,
   });
 }
 

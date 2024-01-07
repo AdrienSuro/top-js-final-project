@@ -67,6 +67,7 @@ export async function createUserWithEmail(email, password) {
     console.log(error);
     console.log(error.code);
     console.log(error.message);
+    return error.code;
     // ..
   }
 }

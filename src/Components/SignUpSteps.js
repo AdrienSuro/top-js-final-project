@@ -6,7 +6,7 @@ import {
 } from "../redux/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { checkExistingUser } from "../api/Data.js";
+import { checkExistingUser, checkExistingEmail } from "../api/Data.js";
 
 export default function SignUpSteps(props) {
   const { step, handleNext } = props;
@@ -62,26 +62,21 @@ export default function SignUpSteps(props) {
                 if (userExists === true) {
                   alert("userId already taken!");
                 }
-                console.log(
-                  "inside SignUpSteps.js - onChange Event - checkExistingUser"
-                );
+                console.log();
               }}
             ></input>
           </div>
           <button
-            onClick={() => {
-              console.log(
-                "inside SignUpSteps.js - onClick - checkExistingUser"
-              );
-
-              let userExists = checkExistingUser(
+            onClick={async () => {
+              let userExists = await checkExistingUser(
                 document.getElementById("userName").value
               );
-              if (userExists == true) {
+              if (userExists === true) {
                 alert("User ID already taken !");
+              } else if (userExists !== true) {
+                handleNext(document.getElementById("userName").value);
+                document.getElementById("userName").value = null;
               }
-              handleNext(document.getElementById("userName").value);
-              document.getElementById("userName").value = null;
             }}
             id="nextButton"
           >
@@ -141,9 +136,16 @@ export default function SignUpSteps(props) {
             <input type="text" name="userEmail" id="userEmail"></input>
           </div>
           <button
-            onClick={() => {
-              handleNext(document.getElementById("userEmail").value);
-              document.getElementById("userEmail").value = null;
+            onClick={async () => {
+              let emailExists = await checkExistingEmail(
+                document.getElementById("userEmail").value
+              );
+              if (emailExists === true) {
+                alert("email already exists !!");
+              } else if (emailExists !== true) {
+                handleNext(document.getElementById("userEmail").value);
+                document.getElementById("userEmail").value = null;
+              }
             }}
             id="nextButton"
           >

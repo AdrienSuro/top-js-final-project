@@ -41,14 +41,23 @@ export default function LoginPage() {
       <input type="text" name="emailField" id="emailField"></input>
       <input type="text" name="passwordField" id="passwordField"></input>
       <button
-        onClick={() => {
-          dispatch(setUserId(document.getElementById("emailField").value));
-          dispatch(setLoginType("email"));
-          connectWithEmail(
-            document.getElementById("emailField").value,
-            document.getElementById("passwordField").value
-          );
-          navigate("/");
+        onClick={async () => {
+          try {
+            let connexionSuccessful = await connectWithEmail(
+              document.getElementById("emailField").value,
+              document.getElementById("passwordField").value
+            );
+            if (connexionSuccessful === true) {
+              dispatch(setUserId(document.getElementById("emailField").value));
+              dispatch(setLoginType("email"));
+              navigate("/");
+            } else {
+              alert("Ups, we don't know these credentials");
+            }
+            console.log(connexionSuccessful);
+          } catch (error) {
+            console.error("An error occurred:", error);
+          }
         }}
       >
         Connect with Email

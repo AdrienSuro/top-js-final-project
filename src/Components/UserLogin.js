@@ -14,9 +14,11 @@ import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
 import {
   selectIsLoggedIn,
   selectUserId,
+  selectUserEmail,
   toggleIsLoggedIn,
   setUserId,
   setUserDisplayName,
+  setUserEmail,
   setLoginType,
 } from "../redux/userSlice.js";
 

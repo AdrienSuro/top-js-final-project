@@ -30,23 +30,21 @@ const app = initializeApp(firebaseConfig);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth(app);
 
-export function connectWithEmail(email, password) {
-  let result = null;
-  signInWithEmailAndPassword(auth, email, password)
+export async function connectWithEmail(email, password) {
+  let result = signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.providerId;
       console.log("user is " + user);
-      result = true;
-      console.log(result);
-      return result;
+      return true;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + " " + errorMessage);
-      result = false;
+      return false;
     });
   console.log(result);
+  return result;
 }
 
 export async function connectWithGoogle() {

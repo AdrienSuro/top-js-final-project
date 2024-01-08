@@ -5,7 +5,7 @@ const initialState = {
   isLoggedIn: false,
   userId: null,
   userDisplayName: null,
-  userEmail: null,
+  userEmail: "initial email",
   loginType: null,
   currentUserObject: {
     description: "test description",
@@ -42,7 +42,7 @@ export const userSlice = createSlice({
       state.loginType = action.payload;
     },
     setUserEmail: (state, action) => {
-      state.loginType = action.payload;
+      state.userEmail = action.payload;
     },
     setCurrentUserObject: (state, action) => {
       state.currentUserObject.description = action.payload.description;

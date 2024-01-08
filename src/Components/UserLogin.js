@@ -30,6 +30,7 @@ export default function User() {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const displayUserId = useSelector(selectUserId);
+  const displayUserEmail = useSelector(selectUserEmail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -68,6 +69,7 @@ export default function User() {
       console.log(user);
       dispatch(toggleIsLoggedIn(true));
       dispatch(setUserId(user.uid));
+      // dispatch(setUserEmail(user.email));
       // let userExists = await checkExistingUser(displayUserId);
       // if (userExists === false) {
       //   // navigate("/createaccount");
@@ -90,7 +92,7 @@ export default function User() {
             alt="userProfilePicture"
           ></img>
         </Link>
-        <p>User ID : {displayUserId}</p>
+        <p>User Email : {displayUserEmail}</p>
         <button onClick={signOutAndBackToHome}>Sign Out</button>
         <button>Check Username</button>
         <button>displayName from Redux</button>

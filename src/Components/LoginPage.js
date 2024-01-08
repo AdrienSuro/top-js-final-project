@@ -18,6 +18,7 @@ import {
   setUserId,
   setUserDisplayName,
   setLoginType,
+  setUserEmail,
 } from "../redux/userSlice.js";
 
 export default function LoginPage() {
@@ -43,20 +44,21 @@ export default function LoginPage() {
       <button
         onClick={async () => {
           try {
-            let connexionSuccessful = await connectWithEmail(
+            let connexionResult = await connectWithEmail(
               document.getElementById("emailField").value,
               document.getElementById("passwordField").value
             );
-            if (connexionSuccessful === true) {
+            if (connexionResult != false) {
+              console.log(connexionResult);
               dispatch(setUserId(document.getElementById("emailField").value));
+              dispatch(setUserEmail(connexionResult));
               dispatch(setLoginType("email"));
               navigate("/");
             } else {
               alert("Ups, we don't know these credentials");
             }
-            console.log(connexionSuccessful);
           } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred: ", error);
           }
         }}
       >

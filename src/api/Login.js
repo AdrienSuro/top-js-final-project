@@ -33,17 +33,13 @@ export const auth = getAuth(app);
 export async function connectWithEmail(email, password) {
   let result = signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.providerId;
-      console.log("user is " + user);
-      return true;
+      console.log(userCredential.user.email);
+      return userCredential.user.email;
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode + " " + errorMessage);
+      console.log(error.message);
       return false;
     });
-  console.log(result);
   return result;
 }
 

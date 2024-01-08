@@ -69,13 +69,6 @@ export default function User() {
       console.log(user);
       dispatch(toggleIsLoggedIn(true));
       dispatch(setUserId(user.uid));
-      // dispatch(setUserEmail(user.email));
-      // let userExists = await checkExistingUser(displayUserId);
-      // if (userExists === false) {
-      //   // navigate("/createaccount");
-      // } else if (userExists === true) {
-      //   //...
-      // }
     } else {
       dispatch(toggleIsLoggedIn(false));
       dispatch(setUserId(null));
@@ -92,10 +85,16 @@ export default function User() {
             alt="userProfilePicture"
           ></img>
         </Link>
-        <p>User Email : {displayUserEmail}</p>
+        <p>
+          <b>User Email</b> : {displayUserEmail}
+        </p>
+        <hr></hr>
         <button onClick={signOutAndBackToHome}>Sign Out</button>
-        <button>Check Username</button>
-        <button>displayName from Redux</button>
+        <hr></hr>
+        <button>Empty Button 1</button>
+        <hr></hr>
+        <button>Empty Button 2</button>
+        <hr></hr>
         <p>{isLoggedIn ? "signed in" : "signed out"}</p>
       </div>
     );

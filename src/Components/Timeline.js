@@ -31,6 +31,9 @@ export default function Timeline() {
     // partagée
     //
   }, []);
+
+  const displayIsLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <div>
       {" "}
@@ -39,7 +42,7 @@ export default function Timeline() {
         <h3>For you</h3>
         <h3>Following</h3>
       </div>
-      <WriteTweet />
+      {displayIsLoggedIn ? <WriteTweet /> : null}
       <TweetList />
     </div>
   );

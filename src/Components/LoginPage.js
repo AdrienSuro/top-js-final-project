@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
 import { useSelector, useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
+import {
+  checkExistingUser,
+  getOwnTweets,
+  createNewUser,
+  getUserIdWithEmail,
+} from "../api/Data.js";
 import {
   auth,
   signUpWithGoogle,
@@ -52,6 +57,8 @@ export default function LoginPage() {
               console.log(connexionResult);
               dispatch(setUserId(document.getElementById("emailField").value));
               dispatch(setUserEmail(connexionResult));
+              let id = await getUserIdWithEmail(connexionResult);
+              console.log("id is " + id);
               dispatch(setLoginType("email"));
               navigate("/");
             } else {

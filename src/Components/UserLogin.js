@@ -9,7 +9,12 @@ import {
   createUserWithEmail,
 } from "../api/Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { checkExistingUser, getOwnTweets, createNewUser } from "../api/Data.js";
+import {
+  checkExistingUser,
+  getOwnTweets,
+  createNewUser,
+  getUserIdWithEmail,
+} from "../api/Data.js";
 
 import {
   selectIsLoggedIn,
@@ -66,12 +71,13 @@ export default function User() {
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       dispatch(toggleIsLoggedIn(true));
-      dispatch(setUserId(user.uid));
+      // dispatch(setUserId(user.uid));
     } else {
       dispatch(toggleIsLoggedIn(false));
       dispatch(setUserId(null));
+      dispatch(setUserEmail(null));
     }
   });
 
@@ -91,7 +97,7 @@ export default function User() {
         <hr></hr>
         <button onClick={signOutAndBackToHome}>Sign Out</button>
         <hr></hr>
-        <button>Empty Button 1</button>
+        <button onClick={getUserIdWithEmail}>Empty Button 1</button>
         <hr></hr>
         <button>Empty Button 2</button>
         <hr></hr>

@@ -97,15 +97,17 @@ export async function checkExistingUser(id) {
     return false;
   }
 }
-// PREVIOUSLY :
-// let userExists = false;
-// const querySnapshot = await getDocs(collection(db, "users"));
-// querySnapshot.forEach((doc) => {
-//   if (doc.id === id) {
-//     userExists = true;
-//   }
-// });
-// return userExists;
+
+export async function getUserIdWithEmail(email) {
+  let result = null;
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    if (doc.data().email === email) {
+      result = doc.id;
+    }
+  });
+  return result;
+}
 
 export async function checkExistingEmail(email) {
   let emailExists = false;

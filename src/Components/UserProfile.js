@@ -13,18 +13,10 @@ import TweetList from "./TweetList";
 import UserTweets from "./UserTweets";
 import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import { getUserDisplayName } from "../api/Data";
+import { checkExistingUser, getUserDisplayName } from "../api/Data";
 import { getUserProfilePic } from "../api/Data";
 
-import {
-  selectIsLoggedIn,
-  selectUserId,
-  selectCurrentUserObject,
-  toggleIsLoggedIn,
-  setUserId,
-  setUserDisplayName,
-  setLoginType,
-} from "../redux/userSlice.js";
+import { selectUserId, selectCurrentUserObject } from "../redux/userSlice.js";
 
 export default function UserProfile(props) {
   const [imageUrl, setImageUrl] = useState("");
@@ -41,24 +33,29 @@ export default function UserProfile(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const userId = "newuser1@mail.com"; // Replace with your image name or path
-        const url = await getUserProfilePic(userId);
-        setImageUrl(url);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchImage();
+  let userExists = false;
+
+  useEffect(async () => {
+    userExists = await checkExistingUser(username);
+    if (userExists != false) {
+      const fetchImage = async () => {
+        try {
+          const userId = displayUserId; // Replace with your image name or path
+          const url = await getUserProfilePic(userId);
+          setImageUrl(url);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchImage();
+    }
   }, []);
 
-  function getUserUserName(userArg) {
-    onSnapshot(doc(db, "users", userArg), (doc) => {
-      setUserUserName(doc.data().userArg);
-    });
-  }
+  // function getUserUserName(userArg) {
+  //   onSnapshot(doc(db, "users", userArg), (doc) => {
+  //     setUserUserName(doc.data().userArg);
+  //   });
+  // }
 
   // function getUserDisplayName(userArg) {
   //   onSnapshot(doc(db, "users", userArg), (doc) => {
@@ -66,71 +63,74 @@ export default function UserProfile(props) {
   //   });
   // }
 
-  function getUserDescription(userArg) {
-    onSnapshot(doc(db, "users", userArg), (doc) => {
-      setUserDescription(doc.data().description);
-    });
-  }
+  // function getUserDescription(userArg) {
+  //   onSnapshot(doc(db, "users", userArg), (doc) => {
+  //     setUserDescription(doc.data().description);
+  //   });
+  // }
 
-  function getUserFollowersLength(userArg) {
-    onSnapshot(doc(db, "users", userArg), (doc) => {
-      setUserFollowersLength(doc.data().followers.length);
-      console.log("using ONSNAPSHOT");
-    });
-  }
+  // function getUserFollowersLength(userArg) {
+  //   onSnapshot(doc(db, "users", userArg), (doc) => {
+  //     setUserFollowersLength(doc.data().followers.length);
+  //     console.log("using ONSNAPSHOT");
+  //   });
+  // }
 
-  function getUserFollowingLength(userArg) {
-    onSnapshot(doc(db, "users", userArg), (doc) => {
-      setUserFollowingLength(doc.data().following.length);
-    });
-  }
-
-  return (
-    <div>
-      <div className="header-wrapper">
-        <div className="header-header">
-          <p id="header-backarrow" onClick={() => navigate("/")}>
-            &#8592;
-          </p>
-          {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
-          <p id="header-userName">{displayCurrentUserObject.displayName}</p>
-          <div id="header-tweetCount">26.8K Tweets</div>
-        </div>
-        <div className="header-section">
-          <img src={coverPictureImg} id="header-coverPicture"></img>
-          <img src={imageUrl} id="header-profilePicture"></img>
-          <div class="header-buttons-section">
-            {" "}
-            <img class="header-button" src={moreInfoIcon}></img>
-            <img class="header-button" src={messagesIcon}></img>
-            <img
-              class="header-button"
-              src={addNotificationsIcon}
-              //onClick={getUserDisplayName(displayUserId)}
-            ></img>
-            <div id="followingButton">Following</div>
+  // function getUserFollowingLength(userArg) {
+  //   onSnapshot(doc(db, "users", userArg), (doc) => {
+  //     setUserFollowingLength(doc.data().following.length);
+  //   });
+  // }
+  if (userExists != false) {
+    return (
+      <div>
+        <div className="header-wrapper">
+          <div className="header-header">
+            <p id="header-backarrow" onClick={() => navigate("/")}>
+              &#8592;
+            </p>
+            {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
+            <p id="header-userName">{displayCurrentUserObject.displayName}</p>
+            <div id="header-tweetCount">26.8K Tweets</div>
+          </div>
+          <div className="header-section">
+            <img src={coverPictureImg} id="header-coverPicture"></img>
+            <img src={imageUrl} id="header-profilePicture"></img>
+            <div class="header-buttons-section">
+              {" "}
+              <img class="header-button" src={moreInfoIcon}></img>
+              <img class="header-button" src={messagesIcon}></img>
+              <img
+                class="header-button"
+                src={addNotificationsIcon}
+                //onClick={getUserDisplayName(displayUserId)}
+              ></img>
+              <div id="followingButton">Following</div>
+            </div>
           </div>
         </div>
+        <div className="header-main-wrapper">
+          <div id="header-main-userName">{userDisplayName}</div>
+          <div id="header-main-userId">@{userUserName}</div>
+          <div id="header-description">{userDescription}</div>
+          <div id="header-main-details">
+            <div>Science & Technology</div>
+            <div>Burgundy</div>
+            <div>Joined September 2022</div>
+          </div>
+          <div id="header-followers-following">
+            <div>
+              <b>{userFollowingLength}</b> Following
+            </div>
+            <div>
+              <b>{userFollowersLength}</b> Followers
+            </div>
+          </div>
+        </div>
+        <UserTweets />
       </div>
-      <div className="header-main-wrapper">
-        <div id="header-main-userName">{userDisplayName}</div>
-        <div id="header-main-userId">@{userUserName}</div>
-        <div id="header-description">{userDescription}</div>
-        <div id="header-main-details">
-          <div>Science & Technology</div>
-          <div>Burgundy</div>
-          <div>Joined September 2022</div>
-        </div>
-        <div id="header-followers-following">
-          <div>
-            <b>{userFollowingLength}</b> Following
-          </div>
-          <div>
-            <b>{userFollowersLength}</b> Followers
-          </div>
-        </div>
-      </div>
-      <UserTweets />
-    </div>
-  );
+    );
+  } else {
+    return <div>"user doesn't exist"</div>;
+  }
 }

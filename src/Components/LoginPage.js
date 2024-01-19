@@ -54,11 +54,8 @@ export default function LoginPage() {
               document.getElementById("passwordField").value
             );
             if (connexionResult != false) {
-              console.log(connexionResult);
-              dispatch(setUserId(document.getElementById("emailField").value));
               dispatch(setUserEmail(connexionResult));
-              let id = await getUserIdWithEmail(connexionResult);
-              console.log("id is " + id);
+              dispatch(setUserId(await getUserIdWithEmail(connexionResult)));
               dispatch(setLoginType("email"));
               navigate("/");
             } else {

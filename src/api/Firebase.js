@@ -18,6 +18,9 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+  inMemoryPersistence,
 } from "firebase/auth";
 import { setLoginType } from "../redux/userSlice.js";
 
@@ -25,6 +28,20 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
+
+auth
+  .setPersistence(inMemoryPersistence)
+  .then(() => {
+    // Le paramètre de persistance a été configuré avec succès
+    // Maintenant, vous pouvez continuer avec l'initialisation de votre application
+    // ou d'autres configurations Firebase
+  })
+  .catch((error) => {
+    console.error(
+      "Erreur lors de la configuration de la persistance : ",
+      error
+    );
+  });
 
 export async function connectWithEmail(auth, email, password) {
   signInWithEmailAndPassword(auth, email, password)

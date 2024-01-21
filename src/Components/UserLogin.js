@@ -60,7 +60,7 @@ export default function User() {
 
   function signUpWithEmailAndDispatch() {
     dispatch(setLoginType("email"));
-    createUserWithEmail();
+    // createUserWithEmail();
     navigate("/createaccountwithemail");
   }
 

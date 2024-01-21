@@ -25,6 +25,7 @@ export default function UserProfile(props) {
   const [userDescription, setUserDescription] = useState(null);
   const [userFollowersLength, setUserFollowersLength] = useState(null);
   const [userFollowingLength, setUserFollowingLength] = useState(null);
+  const [userExists, setUserExists] = useState(false);
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -33,10 +34,14 @@ export default function UserProfile(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let userExists = false;
-
-  useEffect(async () => {
-    userExists = await checkExistingUser(username);
+  useEffect(() => {
+    console.log("inside useEffect in UserProfile");
+    console.log("userExists value is " + userExists);
+    const checkUser = async () => {
+      setUserExists(await checkExistingUser(username));
+      console.log("userExists value is " + userExists);
+    };
+    checkUser();
     if (userExists != false) {
       const fetchImage = async () => {
         try {

@@ -26,10 +26,10 @@ export default function TweetList(user) {
         setAllTweets(tweets);
       });
     };
-    // fetchData();
+    fetchData();
 
-    // const interval = setInterval(() => fetchData(), 10000);
-    // return () => clearInterval(interval);
+    const interval = setInterval(() => fetchData(), 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (

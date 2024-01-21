@@ -37,7 +37,7 @@ export default function UserTweets(props) {
       {userTweets.map((e) => (
         <Tweet
           key={e.id}
-          userName={e.userName}
+          userId={e.userId}
           name={e.name}
           content={e.content}
           likes={e.likes}

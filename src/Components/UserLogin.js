@@ -93,6 +93,8 @@ export default function User() {
         </Link>
         <p>
           <b>User Email</b> : {displayUserEmail}
+          <br></br>
+          <b>User ID</b> : {displayUserId}
         </p>
         <hr></hr>
         <button onClick={signOutAndBackToHome}>Sign Out</button>

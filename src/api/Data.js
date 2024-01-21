@@ -122,14 +122,17 @@ export async function checkExistingEmail(email) {
 
 export async function getUserProfilePic(userId) {
   const path = "userProfilePic/" + userId + ".png";
+  const defaultPath = "userProfilePic/default_profilePic.png";
   const userProfilePicRef = ref(storage, path);
+  const defaultUserProfilePicRef = ref(storage, defaultPath);
   try {
     const url = await getDownloadURL(userProfilePicRef);
     console.log(url);
     return url;
   } catch (error) {
     console.error(error.code);
-    return null;
+    const defaultUrl = await getDownloadURL(defaultUserProfilePicRef);
+    return defaultUrl;
   }
 }
 

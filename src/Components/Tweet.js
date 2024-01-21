@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import rushdie from "../img/rushdie.jpg";
 import "../Stylesheets/normalize.scss";
+import { useSelector, useDispatch } from "react-redux";
+
 import { ReactSVG } from "react-svg";
 import { ReactComponent as CommentSVG } from "../icons/comment.svg";
 import { ReactComponent as RetweetSVG } from "../icons/retweet.svg";
@@ -19,29 +21,20 @@ import {
 } from "firebase/firestore";
 import { db, getUserDescription } from "../api/Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
+import { selectUserId } from "../redux/userSlice.js";
+import { getUserProfilePic } from "../api/Data";
 
 function Tweet(props) {
   const [userDisplayName, setUserDisplayName] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
+  const displayUserId = useSelector(selectUserId);
 
-  // useEffect(() => {
-  //   const fetchDisplayName = async () => {
-  //     let displayUserId = null;
-  //     // Create a reference to the cities collection
-  //     const users = collection(db, "users");
-
-  //     // Create a query against the collection.
-  //     const q = query(users, where("userId", "==", props.userId));
-  //     const querySnapshot = await getDocs(q);
-  //     console.log(querySnapshot);
-  //     querySnapshot.forEach((doc) => {
-  //       // doc.data() is never undefined for query doc snapshots
-  //       displayUserId = doc.data().displayName;
-  //     });
-  //     console.log(displayUserId);
-  //     setUserDisplayName(displayUserId);
-  //   };
-  //   fetchDisplayName();
-  // }, []);
+  useEffect(() => {
+    async function metaSetProfilePic() {
+      setProfilePic(await getUserProfilePic(props.userId));
+    }
+    metaSetProfilePic();
+  }, []);
 
   function getDate() {
     let currentDate = new Date().getTime();
@@ -77,11 +70,11 @@ function Tweet(props) {
   return (
     <div>
       <div className="tweet">
-        <img src={rushdie}></img>
+        <img src={profilePic ? profilePic : rushdie}></img>
         <div className="tweetAuthor">
           <p className="authorName">{userDisplayName}</p>{" "}
-          <Link to={`/${props.userName}`}>
-            <p className="authorUsername">@{props.userName}</p>
+          <Link to={`/${props.userId}`}>
+            <p className="authorUsername">@{props.userId}</p>
           </Link>
           <p className="tweetTime">· {getDate()}</p>
         </div>

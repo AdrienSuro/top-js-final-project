@@ -19,7 +19,7 @@ import { getUserProfilePic } from "../api/Data";
 import { selectUserId, selectCurrentUserObject } from "../redux/userSlice.js";
 
 export default function UserProfile(props) {
-  const [imageUrl, setImageUrl] = useState("");
+  const [profilePic, setProfilePic] = useState("");
   const [userUserName, setUserUserName] = useState(null);
   const [userDisplayName, setUserDisplayName] = useState(null);
   const [userDescription, setUserDescription] = useState(null);
@@ -42,19 +42,26 @@ export default function UserProfile(props) {
       console.log("userExists value is " + userExists);
     };
     checkUser();
-    if (userExists != false) {
-      const fetchImage = async () => {
-        try {
-          const userId = displayUserId; // Replace with your image name or path
-          const url = await getUserProfilePic(userId);
-          setImageUrl(url);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchImage();
-    }
+    // if (userExists != false) {
+    //   const fetchImage = async () => {
+    //     try {
+    //       const userId = displayUserId; // Replace with your image name or path
+    //       const url = await getUserProfilePic(userId);
+    //       setProfilePic(url);
+    //     } catch (error) {
+    //       console.error("Error fetching data:", error);
+    //     }
+    //   };
+    //   fetchImage();
+    // }
   }, []);
+
+  useEffect(() => {
+    async function metaSetProfilePic() {
+      setProfilePic(await getUserProfilePic(username));
+    }
+    metaSetProfilePic();
+  }, [userExists]);
 
   // function getUserUserName(userArg) {
   //   onSnapshot(doc(db, "users", userArg), (doc) => {
@@ -100,7 +107,7 @@ export default function UserProfile(props) {
           </div>
           <div className="header-section">
             <img src={coverPictureImg} id="header-coverPicture"></img>
-            <img src={imageUrl} id="header-profilePicture"></img>
+            <img src={profilePic} id="header-profilePicture"></img>
             <div class="header-buttons-section">
               {" "}
               <img class="header-button" src={moreInfoIcon}></img>

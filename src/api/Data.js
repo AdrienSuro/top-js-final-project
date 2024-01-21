@@ -58,13 +58,41 @@ export function getTimeline(userId) {
   return;
 }
 
-export function getUserDisplayName(userId) {
-  const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
-    console.log("Current data: ", doc.data());
-    console.log(doc.data().displayName);
-    return doc.data().displayName;
-  });
+export async function getUserDisplayName(id) {
+  const docRef = doc(db, "users", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  // if (docSnap.exists()) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 }
+
+// export async function getUserDisplayName(userId) {
+//   const querySnapshot = await getDocs(collection(db, "users", userId));
+//   querySnapshot.forEach((doc) => {
+//     console.log(doc.data().userId);
+//   });
+// }
+
+// {
+//   let result = null;
+//   const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
+//     console.log("Current data: ", doc.data());
+//     console.log(typeof doc.data().displayName);
+//     result = doc.data().displayName;
+//   });
+//   unsub();
+//   console.log(result);
+//   return result;
+// }
 
 export function getUserUserName(userId) {
   return;
@@ -127,11 +155,25 @@ export async function getUserProfilePic(userId) {
   const defaultUserProfilePicRef = ref(storage, defaultPath);
   try {
     const url = await getDownloadURL(userProfilePicRef);
+    return url;
+  } catch (error) {
+    const defaultUrl = await getDownloadURL(defaultUserProfilePicRef);
+    return defaultUrl;
+  }
+}
+
+export async function getUserCoverPic(userId) {
+  const path = "userCoverPic/" + userId + ".png";
+  const defaultPath = "userCoverPic/default.png";
+  const userCoverPicRef = ref(storage, path);
+  const defaultUserCoverPicRef = ref(storage, defaultPath);
+  try {
+    const url = await getDownloadURL(userCoverPicRef);
     console.log(url);
     return url;
   } catch (error) {
     console.error(error.code);
-    const defaultUrl = await getDownloadURL(defaultUserProfilePicRef);
+    const defaultUrl = await getDownloadURL(defaultUserCoverPicRef);
     return defaultUrl;
   }
 }
@@ -139,9 +181,6 @@ export async function getUserProfilePic(userId) {
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {
-  console.log("inside Data.js");
-  console.log(userObject);
-  // MODIFY "testUser" argument and use variable !!!
   setDoc(doc(db, "users", userObject.userId), {
     userId: userObject.userId,
     displayName: userObject.displayName,

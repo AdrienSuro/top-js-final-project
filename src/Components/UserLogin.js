@@ -14,6 +14,7 @@ import {
   getOwnTweets,
   createNewUser,
   getUserIdWithEmail,
+  getUserDisplayName,
 } from "../api/Data.js";
 
 import {
@@ -99,7 +100,9 @@ export default function User() {
         <hr></hr>
         <button onClick={signOutAndBackToHome}>Sign Out</button>
         <hr></hr>
-        <button onClick={getUserIdWithEmail}>Empty Button 1</button>
+        <button onClick={getUserDisplayName("rodolphe931")}>
+          Empty Button 1
+        </button>
         <hr></hr>
         <button>Empty Button 2</button>
         <hr></hr>

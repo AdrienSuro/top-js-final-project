@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { connectWithEmail, connectWithGoogle } from "../api/Login";
 import { useSelector, useDispatch } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
 import {
   checkExistingUser,
   getOwnTweets,

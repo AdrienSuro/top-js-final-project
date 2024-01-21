@@ -14,14 +14,16 @@ import UserTweets from "./UserTweets";
 import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { checkExistingUser, getUserDisplayName } from "../api/Data";
-import { getUserProfilePic } from "../api/Data";
+import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
 import { selectUserId, selectCurrentUserObject } from "../redux/userSlice.js";
 
 export default function UserProfile(props) {
   const [profilePic, setProfilePic] = useState("");
+  const [coverPic, setCoverPic] = useState("");
+
   const [userUserName, setUserUserName] = useState(null);
-  const [userDisplayName, setUserDisplayName] = useState(null);
+  const [userDisplayName, setUserDisplayName] = useState("test");
   const [userDescription, setUserDescription] = useState(null);
   const [userFollowersLength, setUserFollowersLength] = useState(null);
   const [userFollowingLength, setUserFollowingLength] = useState(null);
@@ -57,10 +59,15 @@ export default function UserProfile(props) {
   }, []);
 
   useEffect(() => {
-    async function metaSetProfilePic() {
+    async function setPictures() {
       setProfilePic(await getUserProfilePic(username));
+      setCoverPic(await getUserCoverPic(username));
     }
-    metaSetProfilePic();
+    async function setUserName() {
+      setUserDisplayName(await getUserDisplayName(username));
+    }
+    setPictures();
+    setUserName();
   }, [userExists]);
 
   // function getUserUserName(userArg) {
@@ -102,18 +109,18 @@ export default function UserProfile(props) {
               &#8592;
             </p>
             {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
-            <p id="header-userName">{displayCurrentUserObject.displayName}</p>
+            <p id="header-userName">{userDisplayName}</p>
             <div id="header-tweetCount">26.8K Tweets</div>
           </div>
           <div className="header-section">
-            <img src={coverPictureImg} id="header-coverPicture"></img>
+            <img src={coverPic} id="header-coverPicture"></img>
             <img src={profilePic} id="header-profilePicture"></img>
-            <div class="header-buttons-section">
+            <div className="header-buttons-section">
               {" "}
-              <img class="header-button" src={moreInfoIcon}></img>
-              <img class="header-button" src={messagesIcon}></img>
+              <img className="header-button" src={moreInfoIcon}></img>
+              <img className="header-button" src={messagesIcon}></img>
               <img
-                class="header-button"
+                className="header-button"
                 src={addNotificationsIcon}
                 //onClick={getUserDisplayName(displayUserId)}
               ></img>

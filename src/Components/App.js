@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../Stylesheets/App.scss";
 import "../Stylesheets/normalize.scss";
-import WriteTweet from "./WriteTweet";
-import TweetList from "./TweetList";
+
 import CreateAccountWithGoogle from "./CreateAccountWithGoogle";
 import CreateAccountWithEmail from "./CreateAccountWithEmail";
 import User from "./UserLogin";
 import SideNavbar from "./SideNavbar";
-import SignUpSteps from "./SignUpSteps";
 import Timeline from "./Timeline";
 import UserProfile from "./UserProfile";
 import LoginPage from "./LoginPage";

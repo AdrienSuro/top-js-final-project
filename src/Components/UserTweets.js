@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-import {
-  collection,
-  onSnapshot,
-  getDocs,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
 import Tweet from "./Tweet";
-import { tweetsCollection, db } from "../api/Firebase";
 import { getOwnTweets } from "../api/Data";
 
 export default function UserTweets(props) {
@@ -28,8 +18,9 @@ export default function UserTweets(props) {
     };
 
     fetchOwnTweets();
-    const interval = setInterval(() => fetchOwnTweets(), 10000);
-    return () => clearInterval(interval);
+    /////Commented out because too data consuming ////
+    // const interval = setInterval(() => fetchOwnTweets(), 10000);
+    // return () => clearInterval(interval);
   });
 
   return (

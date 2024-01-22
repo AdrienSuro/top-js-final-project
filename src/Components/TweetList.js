@@ -38,7 +38,7 @@ export default function TweetList(user) {
     // };
     // fetchData();
     //
-    // cleared interval bc was data consuming
+    ////// cleared interval bc was data consuming ///////
     // const interval = setInterval(() => fetchData(), 10000);
     // return () => clearInterval(interval);
   }, []);

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import SignUpSteps from "./SignUpSteps";
 import twitterLogo from "../icons/main-logo.png";
 import { createNewUser } from "../api/Data";
-import { createUserWithEmail } from "../api/Firebase.js";
 
 export default function CreateAccountWithGoogle(user) {
   const displayUserId = useSelector(selectUserId);

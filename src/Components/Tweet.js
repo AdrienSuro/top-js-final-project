@@ -22,7 +22,7 @@ import {
 import { db, getUserDescription } from "../api/Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
 import { selectUserId } from "../redux/userSlice.js";
-import { getUserProfilePic } from "../api/Data";
+import { getUserDisplayName, getUserProfilePic } from "../api/Data";
 
 function Tweet(props) {
   const [userDisplayName, setUserDisplayName] = useState(null);
@@ -32,6 +32,9 @@ function Tweet(props) {
   useEffect(() => {
     async function metaSetProfilePic() {
       setProfilePic(await getUserProfilePic(props.userId));
+    }
+    async function metaSetUserDisplayName() {
+      setUserDisplayName(await getUserDisplayName(props.userId));
     }
     metaSetProfilePic();
   }, []);

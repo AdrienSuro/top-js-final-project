@@ -62,7 +62,6 @@ export default function SignUpSteps(props) {
                 if (userExists === true) {
                   alert("userId already taken!");
                 }
-                console.log();
               }}
             ></input>
           </div>

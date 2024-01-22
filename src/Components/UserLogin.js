@@ -72,7 +72,6 @@ export default function User() {
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      console.log(user);
       dispatch(toggleIsLoggedIn(true));
       // dispatch(setUserId(user.uid));
     } else {

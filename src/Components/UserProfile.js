@@ -37,11 +37,8 @@ export default function UserProfile(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("inside useEffect in UserProfile");
-    console.log("userExists value is " + userExists);
     const checkUser = async () => {
       setUserExists(await checkExistingUser(username));
-      console.log("userExists value is " + userExists);
     };
     checkUser();
     // if (userExists != false) {

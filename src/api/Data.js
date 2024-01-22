@@ -25,14 +25,16 @@ const storage = getStorage(app);
 
 const storageRef = ref(storage);
 
+export const tweetsCollection = collection(db, "tweets");
+export const usersCollection = collection(db, "users");
+
 // ******* READ ******* //
 
 // Simple query example :
 // const q = query(citiesRef, where("state", "==", "CA"));
 
 export async function getOwnTweets(userId) {
-  const tweetsRef = collection(db, "tweets");
-  const q = query(tweetsRef, where("userName", "==", userId));
+  const q = query(tweetsCollection, where("userName", "==", userId));
   const querySnapshot = await getDocs(q);
   const tweets = [];
   querySnapshot.forEach((doc) => {

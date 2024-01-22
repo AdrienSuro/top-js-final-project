@@ -73,10 +73,8 @@ export default function CreateAccountWithEmail(user) {
         return;
     }
     setStep(step + 1);
-    console.log(userObject);
   }
 
-  // TO DO : renderStep should only return component, no side effects !!!
   function renderStep(handleNext) {
     switch (step) {
       case 1:
@@ -98,13 +96,7 @@ export default function CreateAccountWithEmail(user) {
 
   return (
     <div className="createAccountWrapper">
-      <img
-        src={twitterLogo}
-        id="twitterLogo"
-        onClick={() => {
-          console.log(userObject);
-        }}
-      ></img>
+      <img src={twitterLogo} id="twitterLogo"></img>
       {renderStep(addData)}
     </div>
   );

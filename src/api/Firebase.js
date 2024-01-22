@@ -26,7 +26,6 @@ import { setLoginType } from "../redux/userSlice.js";
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const tweetsCollection = query(collection(db, "tweets"));
 export const auth = getAuth();
 
 auth

@@ -12,6 +12,7 @@ import bookmarksImg from "../icons/bookmark.png";
 import profileImg from "../icons/profile.png";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/userSlice";
+import { getUserDisplayName } from "../api/Data";
 
 export default function SideNavbar() {
   const isLoggedIn = useSelector(selectIsLoggedIn);

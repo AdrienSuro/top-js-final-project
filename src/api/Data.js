@@ -61,21 +61,22 @@ export function getTimeline(userId) {
 }
 
 export async function getUserDisplayName(id) {
-  const docRef = doc(db, "users", id);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
-  // if (docSnap.exists()) {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
+  const q = query(usersCollection, where("userId", "==", id));
+  const docSnap = await getDocs(q);
+  docSnap.forEach((doc) => {
+    console.log(doc.data().userId);
+  });
 }
+//   getDocs(usersCollection)
+//     .then((doc) => {
+//       doc.d
+//     })
+//   const unsubscribe = onSnapshot(tweetsCollection, (snapshot) => {
+//     snapshot.docs.forEach((doc) => {
+//       console.log(doc.data().userId);
+//     });
+//   });
+// }
 
 // export async function getUserDisplayName(userId) {
 //   const querySnapshot = await getDocs(collection(db, "users", userId));

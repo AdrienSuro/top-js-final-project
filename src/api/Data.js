@@ -34,7 +34,7 @@ export const usersCollection = collection(db, "users");
 // const q = query(citiesRef, where("state", "==", "CA"));
 
 export async function getOwnTweets(userId) {
-  const q = query(tweetsCollection, where("userName", "==", userId));
+  const q = query(tweetsCollection, where("userId", "==", userId));
   const querySnapshot = await getDocs(q);
   const tweets = [];
   querySnapshot.forEach((doc) => {

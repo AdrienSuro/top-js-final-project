@@ -21,7 +21,7 @@ export default function UserTweets(props) {
     /////Commented out because too data consuming ////
     // const interval = setInterval(() => fetchOwnTweets(), 10000);
     // return () => clearInterval(interval);
-  });
+  }, []);
 
   return (
     <div>
@@ -29,7 +29,7 @@ export default function UserTweets(props) {
         <Tweet
           key={e.id}
           userId={e.userId}
-          name={e.name}
+          name={"test"}
           content={e.content}
           likes={e.likes}
           retweets={e.retweets}

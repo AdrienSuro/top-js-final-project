@@ -61,11 +61,14 @@ export function getTimeline(userId) {
 }
 
 export async function getUserDisplayName(id) {
+  let result = null;
   const q = query(usersCollection, where("userId", "==", id));
   const docSnap = await getDocs(q);
   docSnap.forEach((doc) => {
-    console.log(doc.data().userId);
+    result = doc.data().userId;
   });
+  console.log(result);
+  return result;
 }
 //   getDocs(usersCollection)
 //     .then((doc) => {

@@ -67,38 +67,19 @@ export async function getUserDisplayName(id) {
   docSnap.forEach((doc) => {
     result = doc.data().userId;
   });
+  return result;
+}
+
+export async function getUserTweetCount(id) {
+  let result = 0;
+  const q = query(usersCollection, where("userId", "==", id));
+  const docSnap = await getDocs(q);
+  docSnap.forEach(() => {
+    result += 1;
+  });
   console.log(result);
   return result;
 }
-//   getDocs(usersCollection)
-//     .then((doc) => {
-//       doc.d
-//     })
-//   const unsubscribe = onSnapshot(tweetsCollection, (snapshot) => {
-//     snapshot.docs.forEach((doc) => {
-//       console.log(doc.data().userId);
-//     });
-//   });
-// }
-
-// export async function getUserDisplayName(userId) {
-//   const querySnapshot = await getDocs(collection(db, "users", userId));
-//   querySnapshot.forEach((doc) => {
-//     console.log(doc.data().userId);
-//   });
-// }
-
-// {
-//   let result = null;
-//   const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
-//     console.log("Current data: ", doc.data());
-//     console.log(typeof doc.data().displayName);
-//     result = doc.data().displayName;
-//   });
-//   unsub();
-//   console.log(result);
-//   return result;
-// }
 
 export function getUserUserName(userId) {
   return;

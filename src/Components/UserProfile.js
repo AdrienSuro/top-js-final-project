@@ -13,7 +13,11 @@ import TweetList from "./TweetList";
 import UserTweets from "./UserTweets";
 import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import { checkExistingUser, getUserDisplayName } from "../api/Data";
+import {
+  checkExistingUser,
+  getUserDisplayName,
+  getUserTweetCount,
+} from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
 import { selectUserId, selectCurrentUserObject } from "../redux/userSlice.js";
@@ -28,6 +32,7 @@ export default function UserProfile(props) {
   const [userFollowersLength, setUserFollowersLength] = useState(null);
   const [userFollowingLength, setUserFollowingLength] = useState(null);
   const [userExists, setUserExists] = useState(false);
+  const [tweetCount, setTweetCount] = useState(0);
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -63,8 +68,12 @@ export default function UserProfile(props) {
     async function setUserName() {
       setUserDisplayName(await getUserDisplayName(username));
     }
+    async function setUserTweetCount() {
+      setTweetCount(await getUserTweetCount(username));
+    }
     setPictures();
     setUserName();
+    setUserTweetCount();
   }, [userExists]);
 
   // function getUserUserName(userArg) {
@@ -92,11 +101,6 @@ export default function UserProfile(props) {
   //   });
   // }
 
-  // function getUserFollowingLength(userArg) {
-  //   onSnapshot(doc(db, "users", userArg), (doc) => {
-  //     setUserFollowingLength(doc.data().following.length);
-  //   });
-  // }
   if (userExists != false) {
     return (
       <div>
@@ -107,7 +111,7 @@ export default function UserProfile(props) {
             </p>
             {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
             <p id="header-userName">{userDisplayName}</p>
-            <div id="header-tweetCount">26.8K Tweets</div>
+            <div id="header-tweetCount">{tweetCount}</div>
           </div>
           <div className="header-section">
             <img src={coverPic} id="header-coverPicture"></img>
@@ -116,11 +120,7 @@ export default function UserProfile(props) {
               {" "}
               <img className="header-button" src={moreInfoIcon}></img>
               <img className="header-button" src={messagesIcon}></img>
-              <img
-                className="header-button"
-                src={addNotificationsIcon}
-                //onClick={getUserDisplayName(displayUserId)}
-              ></img>
+              <img className="header-button" src={addNotificationsIcon}></img>
               <div id="followingButton">Following</div>
             </div>
           </div>

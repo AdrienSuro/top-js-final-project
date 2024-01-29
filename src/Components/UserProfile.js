@@ -15,6 +15,7 @@ import { db } from "../api/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import {
   checkExistingUser,
+  getUserDescription,
   getUserDisplayName,
   getUserTweetCount,
 } from "../api/Data";
@@ -46,18 +47,6 @@ export default function UserProfile(props) {
       setUserExists(await checkExistingUser(username));
     };
     checkUser();
-    // if (userExists != false) {
-    //   const fetchImage = async () => {
-    //     try {
-    //       const userId = displayUserId; // Replace with your image name or path
-    //       const url = await getUserProfilePic(userId);
-    //       setProfilePic(url);
-    //     } catch (error) {
-    //       console.error("Error fetching data:", error);
-    //     }
-    //   };
-    //   fetchImage();
-    // }
   }, []);
 
   useEffect(() => {
@@ -71,9 +60,13 @@ export default function UserProfile(props) {
     async function setUserTweetCount() {
       setTweetCount(await getUserTweetCount(username));
     }
+    async function setUserDescription() {
+      setUserDescription(await getUserDescription(username));
+    }
     setPictures();
     setUserName();
     setUserTweetCount();
+    setUserDescription();
   }, [userExists]);
 
   // function getUserUserName(userArg) {
@@ -127,7 +120,7 @@ export default function UserProfile(props) {
         </div>
         <div className="header-main-wrapper">
           <div id="header-main-userName">{userDisplayName}</div>
-          <div id="header-main-userId">@{userUserName}</div>
+          <div id="header-main-userId">@test user to be modified</div>
           <div id="header-description">{userDescription}</div>
           <div id="header-main-details">
             <div>Science & Technology</div>

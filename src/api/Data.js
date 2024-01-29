@@ -89,8 +89,14 @@ export function getUserLocation(userId) {
   return;
 }
 
-export function getUserDescription(userId) {
-  return;
+export async function getUserDescription(id) {
+  let result = null;
+  const q = query(usersCollection, where("userId", "==", id));
+  const docSnap = await getDocs(q);
+  docSnap.forEach((doc) => {
+    result = doc.data().description;
+  });
+  return result;
 }
 
 export async function returnExistingUser(userName) {

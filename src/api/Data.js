@@ -72,7 +72,7 @@ export async function getUserDisplayName(id) {
 
 export async function getUserTweetCount(id) {
   let result = 0;
-  const q = query(usersCollection, where("userId", "==", id));
+  const q = query(tweetsCollection, where("userId", "==", id));
   const docSnap = await getDocs(q);
   docSnap.forEach(() => {
     result += 1;

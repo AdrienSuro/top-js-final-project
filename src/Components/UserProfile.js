@@ -18,6 +18,8 @@ import {
   getUserDescription,
   getUserDisplayName,
   getUserTweetCount,
+  getUserUserName,
+  getUserLocation,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -34,6 +36,7 @@ export default function UserProfile(props) {
   const [userFollowingLength, setUserFollowingLength] = useState(null);
   const [userExists, setUserExists] = useState(false);
   const [tweetCount, setTweetCount] = useState(0);
+  const [location, setLocation] = useState("test");
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -63,36 +66,15 @@ export default function UserProfile(props) {
     async function setUserDescription() {
       setUserDescription(await getUserDescription(username));
     }
+    async function setUserLocation() {
+      setLocation(await getUserLocation(username));
+    }
     setPictures();
     setUserName();
     setUserTweetCount();
     setUserDescription();
+    setUserLocation();
   }, [userExists]);
-
-  // function getUserUserName(userArg) {
-  //   onSnapshot(doc(db, "users", userArg), (doc) => {
-  //     setUserUserName(doc.data().userArg);
-  //   });
-  // }
-
-  // function getUserDisplayName(userArg) {
-  //   onSnapshot(doc(db, "users", userArg), (doc) => {
-  //     setUserDisplayName(doc.data().displayName);
-  //   });
-  // }
-
-  // function getUserDescription(userArg) {
-  //   onSnapshot(doc(db, "users", userArg), (doc) => {
-  //     setUserDescription(doc.data().description);
-  //   });
-  // }
-
-  // function getUserFollowersLength(userArg) {
-  //   onSnapshot(doc(db, "users", userArg), (doc) => {
-  //     setUserFollowersLength(doc.data().followers.length);
-  //     console.log("using ONSNAPSHOT");
-  //   });
-  // }
 
   if (userExists != false) {
     return (
@@ -120,11 +102,11 @@ export default function UserProfile(props) {
         </div>
         <div className="header-main-wrapper">
           <div id="header-main-userName">{userDisplayName}</div>
-          <div id="header-main-userId">@test user to be modified</div>
+          <div id="header-main-userId">{username}</div>
           <div id="header-description">{userDescription}</div>
           <div id="header-main-details">
             <div>Science & Technology</div>
-            <div>Burgundy</div>
+            <div>{location}</div>
             <div>Joined September 2022</div>
           </div>
           <div id="header-followers-following">

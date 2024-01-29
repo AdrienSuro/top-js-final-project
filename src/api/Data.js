@@ -60,12 +60,22 @@ export function getTimeline(userId) {
   return;
 }
 
+export async function getUserLocation(id) {
+  let result = null;
+  const q = query(usersCollection, where("userId", "==", id));
+  const docSnap = await getDocs(q);
+  docSnap.forEach((doc) => {
+    result = doc.data().location;
+  });
+  return result;
+}
+
 export async function getUserDisplayName(id) {
   let result = null;
   const q = query(usersCollection, where("userId", "==", id));
   const docSnap = await getDocs(q);
   docSnap.forEach((doc) => {
-    result = doc.data().userId;
+    result = doc.data().displayName;
   });
   return result;
 }
@@ -82,10 +92,6 @@ export async function getUserTweetCount(id) {
 }
 
 export function getUserUserName(userId) {
-  return;
-}
-
-export function getUserLocation(userId) {
   return;
 }
 

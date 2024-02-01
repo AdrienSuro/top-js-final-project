@@ -70,6 +70,16 @@ export async function getUserLocation(id) {
   return result;
 }
 
+export async function getTimestamp(id) {
+  let result = null;
+  const q = query(usersCollection, where("userId", "==", id));
+  const docSnap = await getDocs(q);
+  docSnap.forEach((doc) => {
+    result = doc.data().timestamp;
+  });
+  return result;
+}
+
 export async function getUserDisplayName(id) {
   let result = null;
   const q = query(usersCollection, where("userId", "==", id));

@@ -20,6 +20,7 @@ import {
   getUserTweetCount,
   getUserUserName,
   getUserLocation,
+  getTimestamp,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -37,6 +38,7 @@ export default function UserProfile(props) {
   const [userExists, setUserExists] = useState(false);
   const [tweetCount, setTweetCount] = useState(0);
   const [location, setLocation] = useState("test");
+  const [joinedDate, setJoinedDate] = useState("Joined October 2020");
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -69,11 +71,16 @@ export default function UserProfile(props) {
     async function setUserLocation() {
       setLocation(await getUserLocation(username));
     }
+    async function setUserTimestamp() {
+      let temp = await getTimestamp(username);
+      setJoinedDate(temp.toDate());
+    }
     setPictures();
     setUserName();
     setUserTweetCount();
     setUserDescription();
     setUserLocation();
+    setUserTimestamp();
   }, [userExists]);
 
   if (userExists != false) {
@@ -95,7 +102,13 @@ export default function UserProfile(props) {
               {" "}
               <img className="header-button" src={moreInfoIcon}></img>
               <img className="header-button" src={messagesIcon}></img>
-              <img className="header-button" src={addNotificationsIcon}></img>
+              <img
+                className="header-button"
+                src={addNotificationsIcon}
+                onClick={() =>
+                  console.log(typeof joinedDate + " : " + joinedDate)
+                }
+              ></img>
               <div id="followingButton">Following</div>
             </div>
           </div>
@@ -107,7 +120,7 @@ export default function UserProfile(props) {
           <div id="header-main-details">
             <div>Science & Technology</div>
             <div>{location}</div>
-            <div>Joined September 2022</div>
+            {/* <div>{"Joined " + joinedDate.getMonth() + "year"}</div> */}
           </div>
           <div id="header-followers-following">
             <div>

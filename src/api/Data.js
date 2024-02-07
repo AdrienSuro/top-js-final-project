@@ -14,6 +14,9 @@ import {
   getDoc,
   docRef,
   onSnapshot,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import firebaseConfig from "./FirebaseConfig";
 import { initializeApp } from "firebase/app";
@@ -229,6 +232,12 @@ export function addTweet(userName, content) {
     docId: randomIdentifier,
   });
   return;
+}
+
+export async function addFollower(who, to) {
+  await updateDoc(doc(usersCollection, to), {
+    followers: arrayUnion(who),
+  });
 }
 
 export function retweet(userName, reference) {

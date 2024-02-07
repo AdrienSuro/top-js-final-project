@@ -21,6 +21,7 @@ import {
   getUserUserName,
   getUserLocation,
   getTimestamp,
+  addFollower,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -108,7 +109,11 @@ export default function UserProfile(props) {
             <div className="header-buttons-section">
               {" "}
               <img className="header-button" src={moreInfoIcon}></img>
-              <img className="header-button" src={messagesIcon}></img>
+              <img
+                className="header-button"
+                src={messagesIcon}
+                onClick={() => addFollower("rodolphe931", "adrien")}
+              ></img>
               <img
                 className="header-button"
                 src={addNotificationsIcon}
@@ -117,6 +122,7 @@ export default function UserProfile(props) {
                 }
               ></img>
               <div id="followingButton">Following</div>
+              // make this line depending on a variable
             </div>
           </div>
         </div>

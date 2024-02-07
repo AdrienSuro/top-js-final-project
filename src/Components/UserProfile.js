@@ -73,7 +73,14 @@ export default function UserProfile(props) {
     }
     async function setUserTimestamp() {
       let temp = await getTimestamp(username);
-      setJoinedDate(temp.toDate());
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      let date = temp.toDate();
+      setJoinedDate(date.toLocaleDateString("en-GB", options));
     }
     setPictures();
     setUserName();
@@ -93,7 +100,7 @@ export default function UserProfile(props) {
             </p>
             {/* <p id="header-userName">{getUserDisplayName(displayUserId)}</p> */}
             <p id="header-userName">{userDisplayName}</p>
-            <div id="header-tweetCount">{tweetCount}</div>
+            <div id="header-tweetCount">{tweetCount} posts</div>
           </div>
           <div className="header-section">
             <img src={coverPic} id="header-coverPicture"></img>
@@ -115,7 +122,7 @@ export default function UserProfile(props) {
         </div>
         <div className="header-main-wrapper">
           <div id="header-main-userName">{userDisplayName}</div>
-          <div id="header-main-userId">{username}</div>
+          <div id="header-main-userId">@{username}</div>
           <div id="header-description">{userDescription}</div>
           <div id="header-main-details">
             <div>Science & Technology</div>

@@ -138,21 +138,21 @@ export default function UserProfile(props) {
               <img className="header-button" src={moreInfoIcon}></img>
               <img className="header-button" src={messagesIcon}></img>
               <img className="header-button" src={addNotificationsIcon}></img>
-              <div id="followingButton">
+              <div
+                id="followingButton"
+                onMouseEnter={() => {
+                  setFollowingUnfollowButton("Unfollow");
+                }}
+                onMouseLeave={() => {
+                  setFollowingUnfollowButton("Following");
+                }}
+                onClick={() => {
+                  removeFollower(displayUserId, username);
+                  setActiveUserIsFollowing(false);
+                }}
+              >
                 {activeUserIsFollowing ? (
-                  <div
-                    onMouseEnter={() => {
-                      setFollowingUnfollowButton("Unfollow");
-                    }}
-                    onMouseLeave={() => {
-                      setFollowingUnfollowButton("Following");
-                    }}
-                    onClick={() => {
-                      removeFollower(displayUserId, username);
-                    }}
-                  >
-                    {followingUnfollowButton}
-                  </div>
+                  <div>{followingUnfollowButton}</div>
                 ) : (
                   <div
                     onClick={() => {

@@ -338,6 +338,7 @@
 }
 .header-section .header-buttons-section #followingButton:hover {
   background-color: rgb(247, 247, 247);
+  color: red;
 }
 
 .header-main-wrapper #header-main-userName {

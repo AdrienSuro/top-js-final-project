@@ -25,6 +25,7 @@ import {
   returnUserFollowersLength,
   returnUserFollowingLength,
   returnUserIsFollowing,
+  removeFollower,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -44,6 +45,8 @@ export default function UserProfile(props) {
   const [location, setLocation] = useState("test");
   const [joinedDate, setJoinedDate] = useState(null);
   const [activeUserIsFollowing, setActiveUserIsFollowing] = useState(false);
+  const [followingUnfollowButton, setFollowingUnfollowButton] =
+    useState("Following");
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -133,15 +136,23 @@ export default function UserProfile(props) {
             <div className="header-buttons-section">
               {" "}
               <img className="header-button" src={moreInfoIcon}></img>
-              <img
-                className="header-button"
-                src={messagesIcon}
-                onClick={() => addFollower("rodolphe931", "adrien")}
-              ></img>
+              <img className="header-button" src={messagesIcon}></img>
               <img className="header-button" src={addNotificationsIcon}></img>
               <div id="followingButton">
                 {activeUserIsFollowing ? (
-                  <div>Following</div>
+                  <div
+                    onMouseEnter={() => {
+                      setFollowingUnfollowButton("Unfollow");
+                    }}
+                    onMouseLeave={() => {
+                      setFollowingUnfollowButton("Following");
+                    }}
+                    onClick={() => {
+                      removeFollower(displayUserId, username);
+                    }}
+                  >
+                    {followingUnfollowButton}
+                  </div>
                 ) : (
                   <div
                     onClick={() => {

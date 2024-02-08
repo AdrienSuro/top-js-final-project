@@ -283,6 +283,15 @@ export async function addFollower(who, to) {
   });
 }
 
+export async function removeFollower(who, to) {
+  await updateDoc(doc(usersCollection, to), {
+    followers: arrayRemove(who),
+  });
+  await updateDoc(doc(usersCollection, who), {
+    following: arrayRemove(to),
+  });
+}
+
 export function retweet(userName, reference) {
   //userName will be taken locally, from the userSlice
   //reference will be taken from the actual tweet

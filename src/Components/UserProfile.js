@@ -66,7 +66,7 @@ export default function UserProfile(props) {
     async function setUserTweetCount() {
       setTweetCount(await getUserTweetCount(username));
     }
-    async function setUserDescription() {
+    async function setDescription() {
       setUserDescription(await getUserDescription(username));
     }
     async function setUserLocation() {
@@ -80,13 +80,15 @@ export default function UserProfile(props) {
         month: "long",
         day: "numeric",
       };
-      let date = temp.toDate();
-      setJoinedDate(date.toLocaleDateString("en-GB", options));
+      let fullDate = temp.toDate().toLocaleDateString("en-GB", options);
+      let splitDate = fullDate.split(" ");
+      let shortDate = splitDate[2] + " " + splitDate[3];
+      setJoinedDate(shortDate);
     }
     setPictures();
     setUserName();
     setUserTweetCount();
-    setUserDescription();
+    setDescription();
     setUserLocation();
     setUserTimestamp();
   }, [userExists]);
@@ -122,7 +124,7 @@ export default function UserProfile(props) {
                 }
               ></img>
               <div id="followingButton">Following</div>
-              // make this line depending on a variable
+              {/* //make this line depending on a variable */}
             </div>
           </div>
         </div>
@@ -133,7 +135,7 @@ export default function UserProfile(props) {
           <div id="header-main-details">
             <div>Science & Technology</div>
             <div>{location}</div>
-            {/* <div>{"Joined " + joinedDate.getMonth() + "year"}</div> */}
+            <div>Joined {joinedDate}</div>
           </div>
           <div id="header-followers-following">
             <div>

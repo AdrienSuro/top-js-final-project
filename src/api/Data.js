@@ -100,7 +100,6 @@ export async function getUserTweetCount(id) {
   docSnap.forEach(() => {
     result += 1;
   });
-  console.log(result);
   return result;
 }
 
@@ -128,9 +127,24 @@ export async function returnUserFollowingLength(userId) {
   if (docSnap.exists()) {
     result = docSnap.data().following.length;
   } else {
-    // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+  return result;
+}
+
+export async function returnUserIsFollowing(username, activeUser) {
+  let result = false;
+  if (activeUser) {
+    const docRef = doc(usersCollection, activeUser);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      let followingArray = docSnap.data().following;
+      result = followingArray.includes(username);
+    } else {
+      console.log("No such document!");
+    }
+  }
+
   return result;
 }
 
@@ -141,7 +155,6 @@ export async function getUserDescription(id) {
   docSnap.forEach((doc) => {
     result = doc.data().description;
   });
-  console.log("docSnap is : " + typeof docSnap + " : " + docSnap);
   return result;
 }
 
@@ -264,6 +277,9 @@ export function addTweet(userName, content) {
 export async function addFollower(who, to) {
   await updateDoc(doc(usersCollection, to), {
     followers: arrayUnion(who),
+  });
+  await updateDoc(doc(usersCollection, who), {
+    following: arrayUnion(to),
   });
 }
 

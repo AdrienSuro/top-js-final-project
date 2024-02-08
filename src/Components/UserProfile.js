@@ -24,6 +24,7 @@ import {
   addFollower,
   returnUserFollowersLength,
   returnUserFollowingLength,
+  returnUserIsFollowing,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -96,8 +97,11 @@ export default function UserProfile(props) {
       setUserFollowingLength(await returnUserFollowingLength(username));
     }
 
-    async function getUserIsFollowing() {
-      setActiveUserIsFollowing(null);
+    async function getUserIsFollowing(username, displayUserId) {
+      if (displayUserId !== null) {
+        let result = await returnUserIsFollowing(username, displayUserId);
+        setActiveUserIsFollowing(result);
+      }
     }
 
     setPictures();
@@ -108,7 +112,7 @@ export default function UserProfile(props) {
     setUserTimestamp();
     getUserFollowersLength();
     getUserFollowingLength();
-    getUserIsFollowing();
+    getUserIsFollowing(username, displayUserId);
   }, [userExists]);
 
   if (userExists != false) {
@@ -135,11 +139,21 @@ export default function UserProfile(props) {
                 onClick={() => addFollower("rodolphe931", "adrien")}
               ></img>
               <img className="header-button" src={addNotificationsIcon}></img>
-              <div
-                id="followingButton"
-                onClick={() => returnUserFollowersLength(username)}
-              >
-                Following
+              <div id="followingButton">
+                {activeUserIsFollowing ? (
+                  <div>Following</div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      if (displayUserId !== null) {
+                        addFollower(displayUserId, username);
+                        setActiveUserIsFollowing(true);
+                      }
+                    }}
+                  >
+                    Follow
+                  </div>
+                )}
               </div>
               {/* //make this line depending on a variable */}
             </div>

@@ -108,6 +108,32 @@ export function getUserUserName(userId) {
   return;
 }
 
+export async function returnUserFollowersLength(userId) {
+  let result = null;
+  const docRef = doc(usersCollection, userId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    result = docSnap.data().followers.length;
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return result;
+}
+
+export async function returnUserFollowingLength(userId) {
+  let result = null;
+  const docRef = doc(usersCollection, userId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    result = docSnap.data().following.length;
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return result;
+}
+
 export async function getUserDescription(id) {
   let result = null;
   const q = query(usersCollection, where("userId", "==", id));
@@ -115,6 +141,7 @@ export async function getUserDescription(id) {
   docSnap.forEach((doc) => {
     result = doc.data().description;
   });
+  console.log("docSnap is : " + typeof docSnap + " : " + docSnap);
   return result;
 }
 

@@ -22,6 +22,8 @@ import {
   getUserLocation,
   getTimestamp,
   addFollower,
+  returnUserFollowersLength,
+  returnUserFollowingLength,
 } from "../api/Data";
 import { getUserProfilePic, getUserCoverPic } from "../api/Data";
 
@@ -39,7 +41,8 @@ export default function UserProfile(props) {
   const [userExists, setUserExists] = useState(false);
   const [tweetCount, setTweetCount] = useState(0);
   const [location, setLocation] = useState("test");
-  const [joinedDate, setJoinedDate] = useState("Joined October 2020");
+  const [joinedDate, setJoinedDate] = useState(null);
+  const [activeUserIsFollowing, setActiveUserIsFollowing] = useState(false);
 
   const displayUserId = useSelector(selectUserId);
   const displayCurrentUserObject = useSelector(selectCurrentUserObject);
@@ -85,12 +88,27 @@ export default function UserProfile(props) {
       let shortDate = splitDate[2] + " " + splitDate[3];
       setJoinedDate(shortDate);
     }
+    async function getUserFollowersLength() {
+      setUserFollowersLength(await returnUserFollowersLength(username));
+    }
+
+    async function getUserFollowingLength() {
+      setUserFollowingLength(await returnUserFollowingLength(username));
+    }
+
+    async function getUserIsFollowing() {
+      setActiveUserIsFollowing(null);
+    }
+
     setPictures();
     setUserName();
     setUserTweetCount();
     setDescription();
     setUserLocation();
     setUserTimestamp();
+    getUserFollowersLength();
+    getUserFollowingLength();
+    getUserIsFollowing();
   }, [userExists]);
 
   if (userExists != false) {
@@ -116,14 +134,13 @@ export default function UserProfile(props) {
                 src={messagesIcon}
                 onClick={() => addFollower("rodolphe931", "adrien")}
               ></img>
-              <img
-                className="header-button"
-                src={addNotificationsIcon}
-                onClick={() =>
-                  console.log(typeof joinedDate + " : " + joinedDate)
-                }
-              ></img>
-              <div id="followingButton">Following</div>
+              <img className="header-button" src={addNotificationsIcon}></img>
+              <div
+                id="followingButton"
+                onClick={() => returnUserFollowersLength(username)}
+              >
+                Following
+              </div>
               {/* //make this line depending on a variable */}
             </div>
           </div>

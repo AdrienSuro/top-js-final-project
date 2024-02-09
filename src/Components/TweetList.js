@@ -8,56 +8,53 @@ import {
   where,
 } from "firebase/firestore";
 import Tweet from "./Tweet";
-import { db } from "../api/Firebase";
-import { tweetsCollection, usersCollection } from "../api/Data";
+import {
+  returnForYouTweets,
+  tweetsCollection,
+  returnFollowingTweets,
+  usersCollection,
+} from "../api/Data";
 
-export default function TweetList(user) {
+export default function TweetList(props) {
   const [allTweets, setAllTweets] = useState([]);
-  // Update this in order to get tweets from all the users that the active user follows
+  const [forYouTweets, setForYouTweets] = useState([]);
+  const [followingTweets, setFollowingTweets] = useState([]);
+
+  let following = props.following;
+
   useEffect(() => {
-    onSnapshot(tweetsCollection, (snapshot) => {
-      const tweets = [];
-      snapshot.forEach((doc) => {
-        tweets.push(doc.data());
-      });
-      tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-      setAllTweets(tweets);
-    });
-    ///////
-    // const fetchData = async () => {
-    //   const allTweets = collection(db, "tweets");
-    //   const q = query(allTweets);
-    //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //     const tweets = [];
-    //     querySnapshot.forEach((doc) => {
-    //       tweets.push(doc.data());
-    //     });
-    //     tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-    //     setAllTweets(tweets);
-    //   });
-    // };
-    // fetchData();
-    //
-    ////// cleared interval bc was data consuming ///////
-    // const interval = setInterval(() => fetchData(), 10000);
-    // return () => clearInterval(interval);
+    async function getForYouTweets() {
+      console.log(await returnForYouTweets());
+      setForYouTweets(await returnForYouTweets());
+    }
+    async function getFollowingTweets() {
+      setFollowingTweets(await returnFollowingTweets());
+    }
+
+    getForYouTweets();
+    getFollowingTweets();
   }, []);
 
-  return (
-    <div>
-      {allTweets.map((e, index) => (
-        <Tweet
-          key={index}
-          userId={e.userId}
-          content={e.content}
-          likes={e.likes}
-          retweets={e.retweets}
-          comments={e.comments}
-          stats={e.stats}
-          timestamp={e.timestamp}
-          docId={e.docId}
-        />
-      ))}
-    </div>
-  );
+  if (following === false) {
+    console.log(forYouTweets);
+    return (
+      <div>
+        {forYouTweets.map((e, index) => (
+          <Tweet
+            key={index}
+            userId={e.userId}
+            content={e.content}
+            likes={e.likes}
+            retweets={e.retweets}
+            comments={e.comments}
+            stats={e.stats}
+            timestamp={e.timestamp}
+            docId={e.docId}
+          />
+        ))}
+      </div>
+    );
+  } else {
+    console.log("Trying to show following tweets");
+  }
 }

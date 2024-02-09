@@ -230,6 +230,22 @@ export async function getUserCoverPic(userId) {
   }
 }
 
+export async function returnForYouTweets(userId) {
+  onSnapshot(tweetsCollection, (snapshot) => {
+    let tweets = [];
+    snapshot.forEach((doc) => {
+      tweets.push(doc.data());
+    });
+    tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
+    console.log(tweets);
+    return tweets;
+  });
+}
+
+export async function returnFollowingTweets(userId) {
+  console.log("function coming soon");
+}
+
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {

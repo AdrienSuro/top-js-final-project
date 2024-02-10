@@ -83,6 +83,17 @@ export async function getTimestamp(id) {
   return result;
 }
 
+// currently returns all tweets. In the future, will return a selection of
+// tweets based on some algorithm.
+export async function returnForYouTweets() {
+  let tweets = [];
+  const querySnapshot = await getDocs(tweetsCollection);
+  querySnapshot.forEach((doc) => {
+    tweets.push(doc.data());
+  });
+  return tweets;
+}
+
 export async function getUserDisplayName(id) {
   let result = null;
   const q = query(usersCollection, where("userId", "==", id));
@@ -228,18 +239,6 @@ export async function getUserCoverPic(userId) {
     const defaultUrl = await getDownloadURL(defaultUserCoverPicRef);
     return defaultUrl;
   }
-}
-
-export async function returnForYouTweets(userId) {
-  onSnapshot(tweetsCollection, (snapshot) => {
-    let tweets = [];
-    snapshot.forEach((doc) => {
-      tweets.push(doc.data());
-    });
-    tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
-    console.log(tweets);
-    return tweets;
-  });
 }
 
 export async function returnFollowingTweets(userId) {

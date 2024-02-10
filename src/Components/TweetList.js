@@ -24,8 +24,8 @@ export default function TweetList(props) {
 
   useEffect(() => {
     async function getForYouTweets() {
-      console.log(await returnForYouTweets());
-      setForYouTweets(await returnForYouTweets());
+      let tweets = await returnForYouTweets();
+      setForYouTweets(tweets);
     }
     async function getFollowingTweets() {
       setFollowingTweets(await returnFollowingTweets());
@@ -39,6 +39,13 @@ export default function TweetList(props) {
     console.log(forYouTweets);
     return (
       <div>
+        <h1
+          onClick={() => {
+            console.log(forYouTweets);
+          }}
+        >
+          Test me
+        </h1>
         {forYouTweets.map((e, index) => (
           <Tweet
             key={index}

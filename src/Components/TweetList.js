@@ -52,8 +52,8 @@ export default function TweetList(props) {
             userId={e.userId}
             content={e.content}
             likes={e.likes}
-            retweets={e.retweets}
-            comments={e.comments}
+            retweetsCount={e.retweetsCount}
+            commentsCount={e.commentsCount}
             stats={e.stats}
             timestamp={e.timestamp}
             docId={e.docId}

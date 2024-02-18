@@ -261,6 +261,35 @@ export function createNewUser(userObject) {
   });
 }
 
+export function writeTweet(content, userEmail, userId) {
+  let stringExample = "I'm a string with a hashtag #react";
+
+  let checkHashtags = function (tweet) {
+    let hashtags = [];
+    let subStrings = tweet.split(" ");
+    subStrings.forEach((e) => {
+      if (e.startsWith("#")) {
+        hashtags.push(e);
+      }
+    });
+    return hashtags;
+  };
+
+  let randomIdentifier = uuidv4();
+  setDoc(doc(db, "tweets", randomIdentifier), {
+    content: content,
+    userEmail: userEmail,
+    userId: userId,
+    timestamp: new Date(),
+    commentsCount: 0,
+    retweetsCount: 0,
+    likesCount: 0,
+    statsCount: Math.floor(Math.random() * 999),
+    docId: randomIdentifier,
+    hashtags: checkHashtags(content),
+  });
+}
+
 export function changeUserDescription(userName, newDescription) {
   return;
 }

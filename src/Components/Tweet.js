@@ -88,14 +88,14 @@ function Tweet(props) {
           <div id="commentIcon">
             <CommentSVG id="commentSVG" />
           </div>
-          <span id="commentSpan">{props.comments}</span>
+          <span id="commentSpan">{props.commentsCount}</span>
           <div id="retweetIcon">
             <RetweetSVG
               id="retweetSVG"
               onClick={() => incrementRetweets(props.docId)}
             />
           </div>
-          <span id="retweetSpan">{props.retweets}</span>
+          <span id="retweetSpan">{props.retweetsCount}</span>
           <div id="heartIcon">
             <HeartSVG
               id="heartSVG"

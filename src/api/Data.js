@@ -91,6 +91,8 @@ export async function returnForYouTweets() {
   querySnapshot.forEach((doc) => {
     tweets.push(doc.data());
   });
+  tweets.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
+
   return tweets;
 }
 
@@ -245,6 +247,17 @@ export async function returnFollowingTweets(userId) {
   console.log("function coming soon");
 }
 
+export function checkHashtags(tweet) {
+  let hashtags = [];
+  let subStrings = tweet.split(" ");
+  subStrings.forEach((e) => {
+    if (e.startsWith("#")) {
+      hashtags.push(e);
+    }
+  });
+  return hashtags;
+}
+
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {
@@ -262,19 +275,6 @@ export function createNewUser(userObject) {
 }
 
 export function writeTweet(content, userEmail, userId) {
-  let stringExample = "I'm a string with a hashtag #react";
-
-  let checkHashtags = function (tweet) {
-    let hashtags = [];
-    let subStrings = tweet.split(" ");
-    subStrings.forEach((e) => {
-      if (e.startsWith("#")) {
-        hashtags.push(e);
-      }
-    });
-    return hashtags;
-  };
-
   let randomIdentifier = uuidv4();
   setDoc(doc(db, "tweets", randomIdentifier), {
     content: content,

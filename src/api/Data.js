@@ -259,20 +259,30 @@ export function checkHashtags(tweet) {
 }
 
 export function formattingHashtags(tweet) {
-  let transformedArray = []; //should contain arrays with strings corresponding to the parts empty of hashtags
-  let hashtags = []; //the return statement should loop over the array
+  let transformedArray = ["", "", ""];
+  let hashtags = [];
   let subStrings = tweet.split(" ");
-  subStrings.forEach((e) => {
-    if (e.startsWith("#")) {
-      transformedArray.push("<span class={emojify}>");
-      transformedArray.push(e);
-      transformedArray.push("<span/>");
+
+  for (let i = 0; i < subStrings.length; ++i) {
+    if (subStrings[i].startsWith("#")) {
+      hashtags.push(subStrings[i]);
     } else {
-      transformedArray.push(e);
+      if (hashtags.length === 0) {
+        transformedArray[0] += subStrings[i] + " ";
+      } else if (hashtags.length === 1) {
+        transformedArray[1] += subStrings[i] + " ";
+      } else if (hashtags.length === 2) {
+        transformedArray[2] += subStrings[i] + " ";
+      }
     }
-  });
-  let transformedString = transformedArray.join(" ");
-  return transformedString + <span style={{ color: "blue" }}></span>;
+  }
+
+  return (
+    <div>
+      {transformedArray[0]}
+      <span style={{ color: "blue" }}> {hashtags[0]} </span>
+    </div>
+  );
 }
 
 // ******* WRITE ******* //

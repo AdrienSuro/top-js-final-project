@@ -86,12 +86,7 @@ function Tweet(props) {
           <p className="tweetTime">· {getDate()}</p>
         </div>
         <div className="tweetContent">
-          {/* <p>{props.content}</p> */}
           <p>{formattingHashtags(props.content)}</p>
-          <p>
-            This is a tweet with a hashtag. Written in{" "}
-            <span style={{ color: "blue" }}>#react</span>. For the best.
-          </p>
         </div>
         <div className="tweetDetails">
           <div id="commentIcon">

@@ -258,6 +258,23 @@ export function checkHashtags(tweet) {
   return hashtags;
 }
 
+export function formattingHashtags(tweet) {
+  let transformedArray = []; //should contain arrays with strings corresponding to the parts empty of hashtags
+  let hashtags = []; //the return statement should loop over the array
+  let subStrings = tweet.split(" ");
+  subStrings.forEach((e) => {
+    if (e.startsWith("#")) {
+      transformedArray.push("<span class={emojify}>");
+      transformedArray.push(e);
+      transformedArray.push("<span/>");
+    } else {
+      transformedArray.push(e);
+    }
+  });
+  let transformedString = transformedArray.join(" ");
+  return transformedString + <span style={{ color: "blue" }}></span>;
+}
+
 // ******* WRITE ******* //
 
 export function createNewUser(userObject) {

@@ -22,7 +22,11 @@ import {
 import { db, getUserDescription } from "../api/Firebase";
 import { Link, BrowserRouter } from "react-router-dom";
 import { selectUserId } from "../redux/userSlice.js";
-import { getUserDisplayName, getUserProfilePic } from "../api/Data";
+import {
+  formattingHashtags,
+  getUserDisplayName,
+  getUserProfilePic,
+} from "../api/Data";
 
 function Tweet(props) {
   const [userDisplayName, setUserDisplayName] = useState(null);
@@ -82,7 +86,12 @@ function Tweet(props) {
           <p className="tweetTime">· {getDate()}</p>
         </div>
         <div className="tweetContent">
-          <p>{props.content}</p>
+          {/* <p>{props.content}</p> */}
+          <p>{formattingHashtags(props.content)}</p>
+          <p>
+            This is a tweet with a hashtag. Written in{" "}
+            <span style={{ color: "blue" }}>#react</span>. For the best.
+          </p>
         </div>
         <div className="tweetDetails">
           <div id="commentIcon">
